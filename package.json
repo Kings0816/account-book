@@ -5,7 +5,7 @@
     "author": "jhLim97 <wnsgur2749@naver.com>",
     "license": "MIT",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest --env=jsdom",
         "build": "webpack",
         "dev": "webpack serve"
     },
@@ -15,6 +15,9 @@
         "@babel/plugin-proposal-class-properties": "^7.16.7",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
+        "@testing-library/jest-dom": "^5.16.1",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.5.0",
         "babel-loader": "^8.2.3",
         "core-js": "3",
         "css-loader": "^6.5.1",
@@ -23,6 +26,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.28.0",
         "html-webpack-plugin": "^5.5.0",
+        "jest": "^27.4.7",
         "prettier": "^2.5.1",
         "sass": "^1.49.0",
         "sass-loader": "^12.4.0",
