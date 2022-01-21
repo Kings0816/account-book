@@ -24,3 +24,6 @@ yarn add eslint eslint-config-prettier eslint-plugin-prettier prettier -D
 
 // React 관련 패키지 추가
 yarn add react react-dom react-router-dom
+
+// React babel, eslint 관련 패키지 추가
+yarn add @babel/preset-react eslint-plugin-react -D
