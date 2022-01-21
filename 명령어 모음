@@ -1,2 +1,7 @@
+// 기본세팅 및 웹팩설치
 yarn init
 yarn add webpack webpack-cli -D
+
+// 바벨설정
+yarn add babel-loader @babel/core @babel/preset-env @babel/cli @babel/plugin-proposal-class-properties -D
+yarn add core-js@3 -D
