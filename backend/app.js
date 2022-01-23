@@ -4,6 +4,7 @@ import logger from 'morgan';
 
 import userRouter from './routes/user.js';
 import transactionRouter from './routes/transaction.js';
+import categoryRouter from './routes/category.js';
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use(cookieParser());
 
 app.use('/api/user', userRouter);
 app.use('/api/transactions', transactionRouter);
+app.use('/api/categories', categoryRouter);
 
 export default app;

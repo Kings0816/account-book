@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 
+import '../pre-start.js';
 import app from '../app.js';
 import debugFrame from 'debug';
 const debug = debugFrame('backend:server');
