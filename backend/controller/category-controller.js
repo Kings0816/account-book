@@ -4,7 +4,6 @@ const getCategories = async (req, res) => {
     try {
         const result = await CategoryService.getCategories();
         // TODO 에러 유무에 따라 분기처리 하기
-        console.log(result);
         res.status(200).json({
             data: result.data,
         });
