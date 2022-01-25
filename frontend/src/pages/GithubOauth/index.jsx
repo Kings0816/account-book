@@ -8,7 +8,7 @@ const GithubOauth = () => {
     const fetchLogin = async (code) => {
         const result = await postLogin(code);
         if (result) {
-            sessionStorage.setItem('userJwt', result);
+            sessionStorage.setItem('userJwt', result.userJwt);
 
             const mainPage = '/';
             navigate(mainPage);

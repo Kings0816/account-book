@@ -1,7 +1,8 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import pool from '../database/connection.js';
 
-const makeJwt = ({ id, login }) => {
+const makeJwt = (id, login) => {
     const payload = {
         id,
         username: login,
@@ -18,6 +19,19 @@ const makeJwt = ({ id, login }) => {
     return userJwt;
 };
 
+const getUser = async (login) => {
+    const sql = 'SELECT email, nickname FROM user WHERE nickname = ?';
+    const [user] = await pool.query(sql, [login]);
+    return user;
+};
+
+const addUser = async (login, email) => {
+    const sql = 'INSERT INTO user(email, nickname) VALUES(?,?)';
+    const _email = email != null ? email : '미공개';
+    await pool.query(sql, [_email, login]);
+    return await getUser(login);
+};
+
 const proccedLogin = async (code) => {
     const tokenUrl = process.env.TOKEN_URL + `&code=${code}`;
 
@@ -32,9 +46,17 @@ const proccedLogin = async (code) => {
         },
     });
 
-    const userJwt = makeJwt(githubUserInfo.data);
+    const { id, login, email } = githubUserInfo.data;
+    const userJwt = makeJwt(id, login);
+    const user = await getUser(login);
+    if (user.length === 0) {
+        await addUser(login, email);
+    }
 
-    return userJwt;
+    return {
+        userJwt,
+        nickname: login,
+    };
 };
 
 const logout = () => {
