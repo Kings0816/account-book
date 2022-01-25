@@ -1,15 +1,16 @@
 import UserService from '../service/user-service.js';
 
-const login = (req, res) => {
+const login = async (req, res) => {
     try {
-        const result = UserService.proccedLogin();
-        // TODO 에러 유무에 따라 분기처리 하기
+        const { code } = req.body;
+        const result = await UserService.proccedLogin(code);
+
         res.status(200).json({
-            data: result.data,
+            data: result,
         });
     } catch (e) {
-        res.status(500).json({
-            data: '로그인 처리 중 서버에서 에러가 발생했습니다.',
+        res.status(400).json({
+            message: e.message,
         });
     }
 };
@@ -22,7 +23,7 @@ const logout = (req, res) => {
             data: result.data,
         });
     } catch (e) {
-        res.status(500).json({
+        res.status(400).json({
             data: '로그아웃 처리 중 서버에서 오류가 발생했습니다.',
         });
     }
