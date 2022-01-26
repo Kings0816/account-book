@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+
 const Login = () => {
     const requestLogin = () => {
         const codeRequestUrl = process.env.CODE_REQUEST_URL;
@@ -21,7 +23,8 @@ export default Login;
 
 const Wrapper = styled.div`
     width: 400px;
-    height: 63vh;
+    max-width: 100%;
+    height: 67vh;
     margin: 17vh auto;
 
     display: flex;
@@ -32,6 +35,12 @@ const Wrapper = styled.div`
     border-radius: 3px;
     box-sizing: border-box;
     box-shadow: ${({ theme }) => theme.shadow.thick};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        border-radius: 0px;
+        box-sizing: none;
+        box-shadow: none;
+    }
 `;
 
 const Description = styled.div`
