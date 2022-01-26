@@ -1,7 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import Header from '../../components/Header';
 
 const Main = () => {
-    return <div>메인(월별 내역 페이지) 페이지 입니다.</div>;
+    return (
+        <Wrapper>
+            <Header />
+        </Wrapper>
+    );
 };
 
 export default Main;
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`;
