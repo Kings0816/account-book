@@ -4,20 +4,23 @@ import styled from 'styled-components';
 
 import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
+import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
 
 const Header = () => {
     return (
         <Wrapper>
-            <Title>JH Account Book</Title>
-            <DateBox>
-                <ArrowButton>
-                    <img src={previous} />
-                </ArrowButton>
-                <Date>2022년 01월</Date>
-                <ArrowButton>
-                    <img src={next} />
-                </ArrowButton>
-            </DateBox>
+            <Status>
+                <Title>JH Account Book</Title>
+                <DateBox>
+                    <ArrowButton>
+                        <img src={previous} />
+                    </ArrowButton>
+                    <Date>2022년 01월</Date>
+                    <ArrowButton>
+                        <img src={next} />
+                    </ArrowButton>
+                </DateBox>
+            </Status>
             <PageBox>
                 <PageTarget to="/">내역</PageTarget>
                 <PageTarget to="/calendar">달력</PageTarget>
@@ -31,6 +34,7 @@ export default Header;
 
 const Wrapper = styled.div`
     width: 100vw;
+    min-width: 462px;
     height: 100px;
 
     display: flex;
@@ -43,6 +47,19 @@ const Wrapper = styled.div`
     box-shadow: ${({ theme }) => theme.shadow.pale};
 
     background-color: ${({ theme }) => theme.color.mint};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+`;
+
+const Status = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
 `;
 
 const Title = styled.h1`
@@ -81,6 +98,10 @@ const PageBox = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        margin-left: 0px;
+    }
 `;
 
 const PageTarget = styled(Link)`
