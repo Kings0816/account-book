@@ -132,6 +132,16 @@ const GlobalStyle = createGlobalStyle`
     textarea:focus {
         outline: none;
     }
+
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    
+    input {
+        border: none;
+    }
 `;
 
 export default GlobalStyle;
