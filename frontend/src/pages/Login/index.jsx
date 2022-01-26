@@ -9,7 +9,7 @@ const Login = () => {
 
     return (
         <Wrapper>
-            <Description>Welcome</Description>
+            <Description>JH Account Book</Description>
             <LoginButton type="submit" onClick={requestLogin}>
                 Github로 로그인
             </LoginButton>
