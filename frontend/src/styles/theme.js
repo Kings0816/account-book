@@ -1,6 +1,6 @@
 const fontSize = {
-    large: '3rem',
-    medium: '2rem',
+    large: '2rem',
+    medium: '1.5rem',
     small: '1.3rem',
     default: '1rem',
 };

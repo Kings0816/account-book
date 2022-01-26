@@ -9,18 +9,16 @@ import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
 const Header = () => {
     return (
         <Wrapper>
-            <Status>
-                <Title>JH Account Book</Title>
-                <DateBox>
-                    <ArrowButton>
-                        <img src={previous} />
-                    </ArrowButton>
-                    <Date>2022년 01월</Date>
-                    <ArrowButton>
-                        <img src={next} />
-                    </ArrowButton>
-                </DateBox>
-            </Status>
+            <Title>JH Account Book</Title>
+            <DateBox>
+                <ArrowButton>
+                    <img src={previous} />
+                </ArrowButton>
+                <Date>2022년 01월</Date>
+                <ArrowButton>
+                    <img src={next} />
+                </ArrowButton>
+            </DateBox>
             <PageBox>
                 <PageTarget to="/">내역</PageTarget>
                 <PageTarget to="/calendar">달력</PageTarget>
@@ -34,7 +32,7 @@ export default Header;
 
 const Wrapper = styled.div`
     width: 100vw;
-    min-width: 462px;
+    min-width: 169px;
     height: 100px;
 
     display: flex;
@@ -55,13 +53,6 @@ const Wrapper = styled.div`
     }
 `;
 
-const Status = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-`;
-
 const Title = styled.h1`
     margin: 0px 15px;
 
@@ -70,6 +61,10 @@ const Title = styled.h1`
     font-size: ${({ theme }) => theme.fontSize.medium};
 
     color: ${({ theme }) => theme.color.white};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        display: none;
+    }
 `;
 
 const DateBox = styled.div`
