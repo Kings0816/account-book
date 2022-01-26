@@ -29,29 +29,23 @@ const Wrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
 
-    border: 1px solid #d7d7d7;
-    box-sizing: border-box;
     border-radius: 3px;
-    box-shadow: rgb(0 0 0 / 33%) 0px 10px 25px;
+    box-sizing: border-box;
+    box-shadow: ${({ theme }) => theme.shadow.thick};
 `;
 
 const Description = styled.div`
-    font-size: 3rem;
     font-weight: bold;
+    font-size: ${({ theme }) => theme.fontSize.large};
 `;
 
 const LoginButton = styled.button`
     width: 70%;
     height: 15%;
 
-    border: none;
     border-radius: 3px;
-    background-color: rgb(6, 214, 160);
+    background-color: ${({ theme }) => theme.color.mint};
 
-    font-size: 1.3rem;
     font-weight: bold;
-
-    &:hover {
-        cursor: pointer;
-    }
+    font-size: ${({ theme }) => theme.fontSize.small};
 `;
