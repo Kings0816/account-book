@@ -1,4 +1,5 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/GlobalStyle';
@@ -7,12 +8,12 @@ import Router from './Router';
 
 const App = () => {
     return (
-        <>
+        <RecoilRoot>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Router />
             </ThemeProvider>
-        </>
+        </RecoilRoot>
     );
 };
 

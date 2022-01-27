@@ -1,31 +1,54 @@
 import React from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { dateState } from '../../recoil/date/atom';
+import { shapedDateState } from '../../recoil/date/selector';
 
 import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
 import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
 
-const Header = () => {
+const Header = ({ current }) => {
+    const setDate = useSetRecoilState(dateState);
+    const shapedDate = useRecoilValue(shapedDateState);
+
+    const changeDate = (sign) => {
+        const value = sign === '+' ? 1 : -1;
+        setDate((prev) => ({ ...prev, month: prev.month + value }));
+    };
+
     return (
         <Wrapper>
             <Title>JH Account Book</Title>
             <DateBox>
                 <ArrowButton>
-                    <img src={previous} />
+                    <img src={previous} onClick={() => changeDate('-')} />
                 </ArrowButton>
-                <Date>2022년 01월</Date>
+                <Date>{shapedDate}</Date>
                 <ArrowButton>
-                    <img src={next} />
+                    <img src={next} onClick={() => changeDate('+')} />
                 </ArrowButton>
             </DateBox>
             <PageBox>
-                <PageTarget to="/">내역</PageTarget>
-                <PageTarget to="/calendar">달력</PageTarget>
-                <PageTarget to="/statistics">통계</PageTarget>
+                <PageTarget to="/" isSelected={current === 'main'}>
+                    내역
+                </PageTarget>
+                <PageTarget to="/calendar" isSelected={current === 'calendar'}>
+                    달력
+                </PageTarget>
+                <PageTarget to="/statistics" isSelected={current === 'statistics'}>
+                    통계
+                </PageTarget>
             </PageBox>
         </Wrapper>
     );
+};
+
+Header.propTypes = {
+    current: PropTypes.string.isRequired,
 };
 
 export default Header;
@@ -61,10 +84,6 @@ const Title = styled.h1`
     font-size: ${({ theme }) => theme.fontSize.medium};
 
     color: ${({ theme }) => theme.color.white};
-
-    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
-        display: none;
-    }
 `;
 
 const DateBox = styled.div`
@@ -106,7 +125,9 @@ const PageTarget = styled(Link)`
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSize.small};
 
-    color: ${({ theme }) => theme.color.black};
+    color: ${({ theme }) =>
+        (props) =>
+            props.isSelected ? theme.color.white : theme.color.black};
 
     &:hover {
         cursor: pointer;
