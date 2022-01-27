@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -6,7 +7,7 @@ import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
 import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
 
-const Header = () => {
+const Header = ({ current }) => {
     return (
         <Wrapper>
             <Title>JH Account Book</Title>
@@ -20,12 +21,22 @@ const Header = () => {
                 </ArrowButton>
             </DateBox>
             <PageBox>
-                <PageTarget to="/">내역</PageTarget>
-                <PageTarget to="/calendar">달력</PageTarget>
-                <PageTarget to="/statistics">통계</PageTarget>
+                <PageTarget to="/" isSelected={current === 'main'}>
+                    내역
+                </PageTarget>
+                <PageTarget to="/calendar" isSelected={current === 'calendar'}>
+                    달력
+                </PageTarget>
+                <PageTarget to="/statistics" isSelected={current === 'statistics'}>
+                    통계
+                </PageTarget>
             </PageBox>
         </Wrapper>
     );
+};
+
+Header.propTypes = {
+    current: PropTypes.string.isRequired,
 };
 
 export default Header;
@@ -102,7 +113,9 @@ const PageTarget = styled(Link)`
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSize.small};
 
-    color: ${({ theme }) => theme.color.black};
+    color: ${({ theme }) =>
+        (props) =>
+            props.isSelected ? theme.color.white : theme.color.black};
 
     &:hover {
         cursor: pointer;
