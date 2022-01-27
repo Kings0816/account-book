@@ -1,21 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import Header from '../../components/Header';
+import Transactions from '../../components/Transactions';
 
 const Main = () => {
     return (
-        <Wrapper>
+        <>
             <Header current={'main'} />
-        </Wrapper>
+            <Transactions />
+        </>
     );
 };
 
 export default Main;
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-`;
