@@ -61,10 +61,6 @@ const Title = styled.h1`
     font-size: ${({ theme }) => theme.fontSize.medium};
 
     color: ${({ theme }) => theme.color.white};
-
-    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
-        display: none;
-    }
 `;
 
 const DateBox = styled.div`
