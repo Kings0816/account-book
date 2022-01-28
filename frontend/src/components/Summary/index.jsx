@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
 
 const Summary = () => {
+    // TODO 체크박스 전역 상태관리 필요할듯함
     return (
         <SummaryContainer>
             <SummaryBox color={'gray'}>
