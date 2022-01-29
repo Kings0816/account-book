@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Transaction = ({ transaction }) => {
     return (

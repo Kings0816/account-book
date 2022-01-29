@@ -5,20 +5,16 @@ import { nanoid } from 'nanoid';
 
 import Transaction from '../Transaction';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
-import { WEEK_DAY } from '../../utils/week';
+import { calculateIncome, calculateExpenditure } from '../../utils/common/calculate-cost';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
+import { WEEK_DAY } from '../../utils/constant/week';
 
 const DailyTransaction = ({ year, month, day, transactions }) => {
     const week = new Date(year, month - 1, day).getDay();
     const weekDay = WEEK_DAY[week];
 
-    const dailyIncome = transactions
-        .filter((transaction) => transaction.sign === '+')
-        .reduce((acc, transaction) => acc + parseInt(transaction.cost), 0);
-
-    const dailyExpenditure = transactions
-        .filter((transaction) => transaction.sign === '-')
-        .reduce((acc, transaction) => acc + parseInt(transaction.cost), 0);
+    const dailyIncome = calculateIncome(transactions);
+    const dailyExpenditure = calculateExpenditure(transactions);
 
     const dailyTransactions = transactions.map((transaction) => (
         <Transaction key={nanoid()} transaction={transaction} />
@@ -45,8 +41,8 @@ const DailyTransaction = ({ year, month, day, transactions }) => {
 };
 
 DailyTransaction.propTypes = {
-    year: PropTypes.string.isRequired,
-    month: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
     day: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
 };

@@ -1,23 +1,22 @@
 import React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { dateState } from '../../recoil/date/atom';
 import { shapedDateState } from '../../recoil/date/selector';
 
 import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Header = ({ current }) => {
-    const setDate = useSetRecoilState(dateState);
-    const shapedDate = useRecoilValue(shapedDateState);
+    const [shapedDate, setShapedDate] = useRecoilState(shapedDateState);
 
     const changeDate = (sign) => {
-        const value = sign === '+' ? 1 : -1;
-        setDate((prev) => ({ ...prev, month: prev.month + value }));
+        const [NEXT, PREV] = [1, -1];
+        const value = sign === '+' ? NEXT : PREV;
+        setShapedDate(value);
     };
 
     return (

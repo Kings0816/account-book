@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
 import DailyTransaction from '../DailyTransaction';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
-import { entireTransaction } from '../../dummy/transaction';
+import { dateState } from '../../recoil/date/atom';
+import { getTransactionsInDateState } from '../../recoil/transaction/selector';
+
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Transactions = () => {
-    // TODO 이러한 상태에 대한 가공하는 부분은 recoil의 selector를 활용해보자!
-    const currentDate = '2022-01';
-    const [year, month] = currentDate.split('-');
-    const rawTransactions = entireTransaction[currentDate];
+    const { year, month } = useRecoilValue(dateState);
+    const rawTransactions = useRecoilValue(getTransactionsInDateState);
+
     const shapedTransactions = Object.entries(rawTransactions).map(([day, transactions]) => (
         <DailyTransaction
             key={nanoid()}
