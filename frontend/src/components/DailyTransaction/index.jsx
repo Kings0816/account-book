@@ -45,8 +45,8 @@ const DailyTransaction = ({ year, month, day, transactions }) => {
 };
 
 DailyTransaction.propTypes = {
-    year: PropTypes.string.isRequired,
-    month: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
     day: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
 };
