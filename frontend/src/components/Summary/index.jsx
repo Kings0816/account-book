@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+
+import { getTransactionsInDateState } from '../../recoil/transaction/selector';
 
 import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
-import { entireTransaction } from '../../dummy/transaction';
 
 const Summary = () => {
-    const currentDate = '2022-01';
-    const rawTransactions = entireTransaction[currentDate];
+    const rawTransactions = useRecoilValue(getTransactionsInDateState);
 
     const transactionCount = Object.values(rawTransactions).reduce(
         (acc, transaction) => acc + transaction.length,
