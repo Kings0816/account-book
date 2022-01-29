@@ -9,9 +9,12 @@ const fontSize = {
 const color = {
     mint: '#06d6a0',
     blue: '#0990d6',
-    gray: '#808080',
     white: '#FFFFFF',
     black: '#000000',
+
+    gray: '#808080',
+    brigtenL1Gray: '#d7d7d7',
+    brigtenL2Gray: '#f5f5f5',
 };
 
 const shadow = {
