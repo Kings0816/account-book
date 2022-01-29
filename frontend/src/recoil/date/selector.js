@@ -6,11 +6,15 @@ export const shapedDateState = selector({
     key: 'shapedDateState',
     get: ({ get }) => {
         const { year, month } = get(dateState);
+        return `${year}년 ${month}월`;
+    },
+    set: ({ get, set }, newValue) => {
+        const { year, month } = get(dateState);
 
-        const nowDate = new Date(year, month);
+        const nowDate = new Date(year, month - 1 + newValue);
         const convertedYear = nowDate.getFullYear();
         const convertedMonth = nowDate.getMonth() + 1;
 
-        return `${convertedYear}년 ${convertedMonth}월`;
+        set(dateState, { year: convertedYear, month: convertedMonth });
     },
 });
