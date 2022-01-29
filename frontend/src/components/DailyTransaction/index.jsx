@@ -8,7 +8,7 @@ import Transaction from '../Transaction';
 import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
 import { WEEK_DAY } from '../../utils/week';
 
-const MonthTransaction = ({ year, month, day, transactions }) => {
+const DailyTransaction = ({ year, month, day, transactions }) => {
     const week = new Date(year, month - 1, day).getDay();
     const weekDay = WEEK_DAY[week];
 
@@ -44,14 +44,14 @@ const MonthTransaction = ({ year, month, day, transactions }) => {
     );
 };
 
-MonthTransaction.propTypes = {
+DailyTransaction.propTypes = {
     year: PropTypes.string.isRequired,
     month: PropTypes.string.isRequired,
     day: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
 };
 
-export default MonthTransaction;
+export default DailyTransaction;
 
 // TODO div 태그로 사용할 지 아니면 Transaction의 Wrapper와 유사하니 공통요소 추출할 지 체크
 const DailyInfo = styled.div`
