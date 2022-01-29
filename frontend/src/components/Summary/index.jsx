@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 
 import { getTransactionsInDateState } from '../../recoil/transaction/selector';
 
+import { calculateIncome, calculateExpenditure } from '../../utils/common/calculate-cost';
 import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Summary = () => {
@@ -16,16 +17,12 @@ const Summary = () => {
 
     let monthIncome = 0;
     Object.values(rawTransactions).forEach((rawTransaction) => {
-        monthIncome += rawTransaction
-            .filter((transaction) => transaction.sign === '+')
-            .reduce((acc, transaction) => acc + parseInt(transaction.cost), 0);
+        monthIncome += calculateIncome(rawTransaction);
     });
 
     let monthExpenditure = 0;
     Object.values(rawTransactions).forEach((rawTransaction) => {
-        monthExpenditure += rawTransaction
-            .filter((transaction) => transaction.sign === '-')
-            .reduce((acc, transaction) => acc + parseInt(transaction.cost), 0);
+        monthExpenditure += calculateExpenditure(rawTransaction);
     });
 
     // TODO 체크박스 전역 상태관리 필요할듯함 + label 안에 input 넣는 식으로 변경?
