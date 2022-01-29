@@ -2,28 +2,51 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { entireTransaction } from '../../dummy/transaction';
 
 const Summary = () => {
-    // TODO 체크박스 전역 상태관리 필요할듯함
+    const currentDate = '2022-01';
+    const rawTransactions = entireTransaction[currentDate];
+
+    const transactionCount = Object.values(rawTransactions).reduce(
+        (acc, transaction) => acc + transaction.length,
+        0,
+    );
+
+    let monthIncome = 0;
+    Object.values(rawTransactions).forEach((rawTransaction) => {
+        monthIncome += rawTransaction
+            .filter((transaction) => transaction.sign === '+')
+            .reduce((acc, transaction) => acc + parseInt(transaction.cost), 0);
+    });
+
+    let monthExpenditure = 0;
+    Object.values(rawTransactions).forEach((rawTransaction) => {
+        monthExpenditure += rawTransaction
+            .filter((transaction) => transaction.sign === '-')
+            .reduce((acc, transaction) => acc + parseInt(transaction.cost), 0);
+    });
+
+    // TODO 체크박스 전역 상태관리 필요할듯함 + label 안에 input 넣는 식으로 변경?
     return (
         <SummaryContainer>
             <SummaryBox color={'gray'}>
                 <span>
-                    <input type="checkbox" checked /> 총 이체
+                    <input type="checkbox" defaultChecked /> 총 이체
                 </span>
-                <span>7건</span>
+                <span>{transactionCount}건</span>
             </SummaryBox>
             <SummaryBox color={'blue'}>
                 <span>
-                    <input type="checkbox" checked /> 수입
+                    <input type="checkbox" defaultChecked /> 수입
                 </span>
-                <span>3,215,710원</span>
+                <span>{parseInt(monthIncome).toLocaleString('ko-KR')}원</span>
             </SummaryBox>
             <SummaryBox color={'mint'}>
                 <span>
-                    <input type="checkbox" checked /> 지출
+                    <input type="checkbox" defaultChecked /> 지출
                 </span>
-                <span>1,578,600원</span>
+                <span>{parseInt(monthExpenditure).toLocaleString('ko-KR')}원</span>
             </SummaryBox>
         </SummaryContainer>
     );
