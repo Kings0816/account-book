@@ -1,5 +1,5 @@
 export const entireTransaction = {
-    '2022-01': {
+    '2022-1': {
         9: [
             {
                 category: '카페/간식',
@@ -14,10 +14,10 @@ export const entireTransaction = {
             {
                 category: '카페/간식',
                 color: 'mint',
-                content: '딸기 스무디',
+                content: '아이스 아메리카노',
                 method: '토스',
                 sign: '-',
-                cost: '5900',
+                cost: '3700',
             },
             {
                 category: '식비',
@@ -108,6 +108,36 @@ export const entireTransaction = {
                 method: '토스',
                 sign: '-',
                 cost: '170000',
+            },
+        ],
+    },
+    '2022-2': {
+        9: [
+            {
+                category: '월급',
+                color: 'mint',
+                content: '월급 들어왔다아@!',
+                method: '카카오페이',
+                sign: '+',
+                cost: '3880000',
+            },
+        ],
+        17: [
+            {
+                category: '카페/간식',
+                color: 'mint',
+                content: '아이스 아메리카노',
+                method: '토스',
+                sign: '-',
+                cost: '3700',
+            },
+            {
+                category: '식비',
+                color: 'mint',
+                content: '돈까스 & 제육볶음',
+                method: '카카오페이',
+                sign: '-',
+                cost: '19000',
             },
         ],
     },
