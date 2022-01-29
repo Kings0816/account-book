@@ -140,6 +140,7 @@ const GlobalStyle = createGlobalStyle`
     }
     
     input {
+        margin: 0;
         border: none;
     }
 `;
