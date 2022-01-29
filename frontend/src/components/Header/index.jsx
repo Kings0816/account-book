@@ -8,7 +8,7 @@ import { shapedDateState } from '../../recoil/date/selector';
 
 import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Header = ({ current }) => {
     const [shapedDate, setShapedDate] = useRecoilState(shapedDateState);

@@ -8,7 +8,7 @@ import DailyTransaction from '../DailyTransaction';
 import { dateState } from '../../recoil/date/atom';
 import { getTransactionsInDateState } from '../../recoil/transaction/selector';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Transactions = () => {
     const { year, month } = useRecoilValue(dateState);

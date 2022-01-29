@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Summary from '../../components/Summary';
 import Transactions from '../../components/Transactions';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Main = () => {
     return (

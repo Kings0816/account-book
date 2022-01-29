@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 
 import { getTransactionsInDateState } from '../../recoil/transaction/selector';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const Summary = () => {
     const rawTransactions = useRecoilValue(getTransactionsInDateState);

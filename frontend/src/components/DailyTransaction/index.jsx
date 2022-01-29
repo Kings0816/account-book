@@ -5,8 +5,8 @@ import { nanoid } from 'nanoid';
 
 import Transaction from '../Transaction';
 
-import { MAX_MOBILE_DEVICE } from '../../utils/device-size';
-import { WEEK_DAY } from '../../utils/week';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
+import { WEEK_DAY } from '../../utils/constant/week';
 
 const DailyTransaction = ({ year, month, day, transactions }) => {
     const week = new Date(year, month - 1, day).getDay();
