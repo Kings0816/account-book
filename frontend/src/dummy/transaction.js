@@ -38,12 +38,12 @@ export const entireTransaction = {
                 cost: '5700',
             },
             {
-                category: '카페/간식',
+                category: '용돈',
                 color: 'mint',
-                content: '딸기 스무디',
+                content: '명절 보너스',
                 method: '토스',
-                sign: '-',
-                cost: '5900',
+                sign: '+',
+                cost: '300000',
             },
             {
                 category: '식비',
