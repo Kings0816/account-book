@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import Header from '../../components/Header';
 import Summary from '../../components/Summary';
@@ -11,8 +11,12 @@ const Main = () => {
         <>
             <Header current={'main'} />
             <MainWrapper>
-                <Summary />
-                <Transactions />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Summary />
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Transactions />
+                </Suspense>
             </MainWrapper>
         </>
     );
