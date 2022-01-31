@@ -1,9 +1,6 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-
-import { checkState } from '../../recoil/check/atom';
 
 import Transaction from '../Transaction';
 
@@ -13,28 +10,18 @@ import { WEEK_DAY } from '../../utils/constant/week';
 import { DailyInfo } from './style';
 
 const DailyTransaction = ({ date, transactions }) => {
-    const check = useRecoilValue(checkState);
-
     const [year, month, day] = date.split('-');
     const week = new Date(year, month, day).getDay();
     const weekDay = WEEK_DAY[week];
 
-    let filterdTransactions = !check.income
-        ? transactions.filter((transaction) => transaction.sign !== '+')
-        : transactions;
+    const dailyIncome = calculateIncome(transactions);
+    const dailyExpenditure = calculateExpenditure(transactions);
 
-    filterdTransactions = !check.expenditure
-        ? filterdTransactions.filter((transaction) => transaction.sign !== '-')
-        : filterdTransactions;
-
-    const dailyIncome = calculateIncome(filterdTransactions);
-    const dailyExpenditure = calculateExpenditure(filterdTransactions);
-
-    const dailyTransactions = filterdTransactions.map((transaction) => (
+    const dailyTransactions = transactions.map((transaction) => (
         <Transaction key={nanoid()} transaction={transaction} />
     ));
 
-    if (filterdTransactions.length === 0) return null;
+    if (transactions.length === 0) return null;
 
     return (
         <>
