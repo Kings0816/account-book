@@ -1,11 +1,11 @@
 import { useRecoilValue } from 'recoil';
 
-import { getTransactionsInDateState } from '../recoil/transaction/selector';
+import { transactionsInDateState } from '../recoil/transaction/selector';
 
 import { calculateIncome, calculateExpenditure } from '../utils/common/calculate-cost';
 
 export const useTransactionSummary = () => {
-    const rawTransactions = useRecoilValue(getTransactionsInDateState);
+    const rawTransactions = useRecoilValue(transactionsInDateState);
 
     const transactionCount = Object.values(rawTransactions).reduce(
         (acc, transaction) => acc + transaction.length,

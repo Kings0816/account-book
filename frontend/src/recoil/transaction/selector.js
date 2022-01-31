@@ -3,8 +3,8 @@ import { selector } from 'recoil';
 import { transactionState } from './atom';
 import { dateState } from '../date/atom';
 
-export const getTransactionsInDateState = selector({
-    key: 'getTransactionsInDateState',
+export const transactionsInDateState = selector({
+    key: 'transactionsInDateState',
     get: ({ get }) => {
         const { year, month } = get(dateState);
         const transactions = get(transactionState);
