@@ -1,15 +1,17 @@
 import TransactionService from '../service/transaction-service.js';
 
-const getTransactions = (req, res) => {
+const getTransactions = async (req, res) => {
     try {
-        const result = TransactionService.getTransactions();
-        // TODO 에러 유무에 따라 분기처리 하기
+        const { year, month, nickname } = req.query;
+        const result = await TransactionService.getTransactions(year, month, nickname);
+
         res.status(200).json({
-            data: result.data,
+            data: result,
         });
     } catch (e) {
-        res.status(500).json({
-            data: '거래내역을 가져오는 중 서버에서 오류가 발생했습니다.',
+        console.log(e.message);
+        res.status(400).json({
+            message: e.message,
         });
     }
 };
