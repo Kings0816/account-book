@@ -12,7 +12,7 @@ export const MainWrapper = styled.div`
     align-items: flex-start;
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
-        width: 100%;
+        width: 100vw;
 
         display: flex;
         flex-direction: column;
