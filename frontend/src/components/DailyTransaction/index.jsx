@@ -12,10 +12,11 @@ import { WEEK_DAY } from '../../utils/constant/week';
 
 import { DailyInfo } from './style';
 
-const DailyTransaction = ({ year, month, day, transactions }) => {
+const DailyTransaction = ({ date, transactions }) => {
     const check = useRecoilValue(checkState);
 
-    const week = new Date(year, month - 1, day).getDay();
+    const [year, month, day] = date.split('-');
+    const week = new Date(year, month, day).getDay();
     const weekDay = WEEK_DAY[week];
 
     let filterdTransactions = !check.income
@@ -56,9 +57,7 @@ const DailyTransaction = ({ year, month, day, transactions }) => {
 };
 
 DailyTransaction.propTypes = {
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    day: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
     transactions: PropTypes.array.isRequired,
 };
 
