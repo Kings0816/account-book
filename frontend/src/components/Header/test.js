@@ -10,7 +10,6 @@ import Header from '.';
 import { BrowserRouter } from 'react-router-dom';
 
 const AllTheProviders = ({ children }) => {
-    console.log(children);
     return (
         <RecoilRoot>
             <ThemeProvider theme={theme}>
