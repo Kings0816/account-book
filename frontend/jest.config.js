@@ -4,4 +4,5 @@ module.exports = {
         '^.+\\.svg$': 'jest-svg-transformer',
     },
     setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
+    verbose: true,
 };
