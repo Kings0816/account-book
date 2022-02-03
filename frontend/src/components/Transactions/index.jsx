@@ -10,16 +10,7 @@ import { transactionsInDateState } from '../../recoil/date/selector';
 import { TransactionsContainer } from './style';
 
 const Transactions = () => {
-    const check = useRecoilValue(checkState);
-    const rawTransactions = useRecoilValue(transactionsInDateState);
-
-    let filterdTransactions = !check.income
-        ? rawTransactions.filter((transaction) => transaction.sign !== '+')
-        : rawTransactions;
-
-    filterdTransactions = !check.expenditure
-        ? filterdTransactions.filter((transaction) => transaction.sign !== '-')
-        : filterdTransactions;
+    const filterdTransactions = useFilterdTransactions();
 
     const dailyTransactions = new Map();
 
@@ -44,3 +35,18 @@ const Transactions = () => {
 };
 
 export default Transactions;
+
+const useFilterdTransactions = () => {
+    const check = useRecoilValue(checkState);
+    const rawTransactions = useRecoilValue(transactionsInDateState);
+
+    let filterdTransactions = !check.income
+        ? rawTransactions.filter((transaction) => transaction.sign !== '+')
+        : rawTransactions;
+
+    filterdTransactions = !check.expenditure
+        ? filterdTransactions.filter((transaction) => transaction.sign !== '-')
+        : filterdTransactions;
+
+    return filterdTransactions;
+};
