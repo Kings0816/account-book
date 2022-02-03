@@ -41,4 +41,12 @@ describe('공통 헤더 컴포넌트 테스트', () => {
 
         expect(dateStrong).toHaveTextContent(`${year}년 ${month}월`);
     });
+
+    it('내역, 달력, 통계로 이동할 수 있는 Link 요소가 3개 표시된다.', () => {
+        customRender(<Header current="main" />);
+
+        const arrowButtons = screen.getAllByRole('link');
+
+        expect(arrowButtons).toHaveLength(3);
+    });
 });
