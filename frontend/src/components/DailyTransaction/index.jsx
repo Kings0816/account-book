@@ -24,7 +24,7 @@ const DailyTransaction = ({ date, transactions }) => {
     return (
         <>
             <DailyInfo>
-                <span>
+                <span data-testid="date">
                     {month}월 {day}일 {weekDay}
                 </span>
                 <div>
