@@ -22,12 +22,12 @@ const Header = ({ current }) => {
         <Wrapper>
             <Title>JH Account Book</Title>
             <DateBox>
-                <ArrowButton aria-label="change-month">
-                    <img src={previous} onClick={() => changeDate('-')} />
+                <ArrowButton aria-label="prev-month" onClick={() => changeDate('-')}>
+                    <img src={previous} />
                 </ArrowButton>
-                <Date>{shapedDate}</Date>
-                <ArrowButton aria-label="change-month">
-                    <img src={next} onClick={() => changeDate('+')} />
+                <Date data-testid="date">{shapedDate}</Date>
+                <ArrowButton aria-label="next-month" onClick={() => changeDate('+')}>
+                    <img src={next} />
                 </ArrowButton>
             </DateBox>
             <PageBox>
