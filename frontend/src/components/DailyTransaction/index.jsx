@@ -4,15 +4,13 @@ import { nanoid } from 'nanoid';
 
 import Transaction from '../Transaction';
 
+import { dayInfo } from '../../utils/common/day-info';
 import { calculateIncome, calculateExpenditure } from '../../utils/common/calculate-cost';
-import { WEEK_DAY } from '../../utils/constant/week';
 
 import { DailyInfo } from './style';
 
 const DailyTransaction = ({ date, transactions }) => {
-    const [year, month, day] = date.split('-');
-    const week = new Date(year, month, day).getDay();
-    const weekDay = WEEK_DAY[week];
+    const { month, day, weekDay } = dayInfo(date);
 
     const dailyIncome = calculateIncome(transactions);
     const dailyExpenditure = calculateExpenditure(transactions);
