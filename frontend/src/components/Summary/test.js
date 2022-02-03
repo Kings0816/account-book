@@ -29,4 +29,28 @@ describe('메인 화면(지출입 내역) Summary 컴포넌트 테스트', () =>
 
         expect(checkBoxes).toHaveLength(3);
     });
+
+    it('현재 날짜에 해당하는 총 이체 건수가 정상적으로 표시된다.', async () => {
+        customRender(<Summary />);
+
+        const totalCountSpan = await screen.findByTestId('totalCount');
+
+        expect(totalCountSpan).toHaveTextContent('14');
+    });
+
+    it('현재 날짜에 해당하는 수입이 정상적으로 표시된다.', async () => {
+        customRender(<Summary />);
+
+        const incomeSpan = await screen.findByTestId('income');
+
+        expect(incomeSpan).toHaveTextContent('300,000');
+    });
+
+    it('현재 날짜에 해당하는 지출이 정상적으로 표시된다.', async () => {
+        customRender(<Summary />);
+
+        const expenditureSpan = await screen.findByTestId('expenditure');
+
+        expect(expenditureSpan).toHaveTextContent('259,200');
+    });
 });
