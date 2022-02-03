@@ -31,4 +31,14 @@ describe('공통 헤더 컴포넌트 테스트', () => {
 
         expect(arrowButtons).toHaveLength(2);
     });
+
+    it('초기 렌더링 시 날짜는 현재 날짜의 년, 월이 표시된다.', () => {
+        customRender(<Header current="main" />);
+
+        const year = new Date().getFullYear();
+        const month = new Date().getMonth() + 1;
+        const dateStrong = screen.getByTestId('date');
+
+        expect(dateStrong).toHaveTextContent(`${year}년 ${month}월`);
+    });
 });
