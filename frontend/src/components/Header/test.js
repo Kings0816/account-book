@@ -49,4 +49,34 @@ describe('공통 헤더 컴포넌트 테스트', () => {
 
         expect(arrowButtons).toHaveLength(3);
     });
+
+    it('이전 달로 이동하는 Arrow 버튼 클릭 시 날짜는 이전 달로 표시된다.', () => {
+        customRender(<Header current="main" />);
+
+        const dateStrong = screen.getByTestId('date');
+        const [year, month] = dateStrong.textContent.split(/[^0-9]+/g);
+
+        const prevButton = screen.getByRole('button', { name: 'prev-month' });
+        fireEvent.click(prevButton);
+
+        const [changedYear, changedMonth] = dateStrong.textContent.split(/[^0-9]+/g);
+
+        expect(new Date(changedYear, changedMonth)).toEqual(new Date(year, parseInt(month) - 1));
+    });
+
+    it('다음 달로 이동하는 Arrow 버튼 클릭 시 날짜는 다음 달로 표시된다.', () => {
+        customRender(<Header current="main" />);
+
+        const dateStrong = screen.getByTestId('date');
+        const [year, month] = dateStrong.textContent.split(/[^0-9]+/g);
+
+        const nextButton = screen.getByRole('button', { name: 'next-month' });
+        fireEvent.click(nextButton);
+
+        const [changedYear, changedMonth] = dateStrong.textContent.split(/[^0-9]+/g);
+
+        expect(new Date(changedYear, changedMonth)).toEqual(new Date(year, parseInt(month) + 1));
+    });
+
+    // TODO 각 페이지(3개)로 이동하는 라우터 테스트 작성하기
 });
