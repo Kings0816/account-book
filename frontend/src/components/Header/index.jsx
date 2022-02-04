@@ -1,33 +1,24 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
 import PropTypes from 'prop-types';
 
-import { shapedDateState } from '../../recoil/date/selector';
-
+import { useShapedDate } from './hooks';
 import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
-
 import { Wrapper, Title, DateBox, ArrowButton, Date, PageBox, PageTarget } from './style';
 
 const Header = ({ current }) => {
-    const [shapedDate, setShapedDate] = useRecoilState(shapedDateState);
-
-    const changeDate = (sign) => {
-        const [NEXT, PREV] = [1, -1];
-        const value = sign === '+' ? NEXT : PREV;
-        setShapedDate(value);
-    };
+    const [shapedDate, changeDate] = useShapedDate();
 
     return (
         <Wrapper>
             <Title>JH Account Book</Title>
             <DateBox>
-                <ArrowButton>
-                    <img src={previous} onClick={() => changeDate('-')} />
+                <ArrowButton aria-label="prev-month" onClick={() => changeDate('-')}>
+                    <img src={previous} />
                 </ArrowButton>
-                <Date>{shapedDate}</Date>
-                <ArrowButton>
-                    <img src={next} onClick={() => changeDate('+')} />
+                <Date data-testid="date">{shapedDate}</Date>
+                <ArrowButton aria-label="next-month" onClick={() => changeDate('+')}>
+                    <img src={next} />
                 </ArrowButton>
             </DateBox>
             <PageBox>

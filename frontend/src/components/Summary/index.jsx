@@ -18,38 +18,43 @@ const Summary = () => {
                 <span>
                     <input
                         type="checkbox"
+                        id="totalCount"
                         checked={check.totalCount}
                         onChange={() =>
                             setCheck((prev) => ({ ...prev, totalCount: !prev.totalCount }))
                         }
                     />{' '}
-                    총 이체
+                    <label htmlFor="totalCount">총 이체</label>
                 </span>
-                <span>{transactionCount}건</span>
+                <span data-testid="totalCount">{transactionCount}건</span>
             </SummaryBox>
             <SummaryBox color={'blue'}>
                 <span>
                     <input
                         type="checkbox"
+                        id="income"
                         checked={check.income}
                         onChange={() => setCheck((prev) => ({ ...prev, income: !prev.income }))}
                     />{' '}
-                    수입
+                    <label htmlFor="income">수입</label>
                 </span>
-                <span>{parseInt(monthIncome).toLocaleString('ko-KR')}원</span>
+                <span data-testid="income">{parseInt(monthIncome).toLocaleString('ko-KR')}원</span>
             </SummaryBox>
             <SummaryBox color={'mint'}>
                 <span>
                     <input
                         type="checkbox"
+                        id="expenditure"
                         checked={check.expenditure}
                         onChange={() =>
                             setCheck((prev) => ({ ...prev, expenditure: !prev.expenditure }))
                         }
                     />{' '}
-                    지출
+                    <label htmlFor="expenditure">지출</label>
                 </span>
-                <span>{parseInt(monthExpenditure).toLocaleString('ko-KR')}원</span>
+                <span data-testid="expenditure">
+                    {parseInt(monthExpenditure).toLocaleString('ko-KR')}원
+                </span>
             </SummaryBox>
         </SummaryContainer>
     );

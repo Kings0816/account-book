@@ -3,23 +3,13 @@ import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
 import DailyTransaction from '../DailyTransaction';
-
+import { useFilterdTransactions } from './hooks';
 import { checkState } from '../../recoil/check/atom';
-import { transactionsInDateState } from '../../recoil/date/selector';
-
 import { TransactionsContainer } from './style';
 
 const Transactions = () => {
     const check = useRecoilValue(checkState);
-    const rawTransactions = useRecoilValue(transactionsInDateState);
-
-    let filterdTransactions = !check.income
-        ? rawTransactions.filter((transaction) => transaction.sign !== '+')
-        : rawTransactions;
-
-    filterdTransactions = !check.expenditure
-        ? filterdTransactions.filter((transaction) => transaction.sign !== '-')
-        : filterdTransactions;
+    const filterdTransactions = useFilterdTransactions(check);
 
     const dailyTransactions = new Map();
 
