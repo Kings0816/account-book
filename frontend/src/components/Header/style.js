@@ -77,7 +77,7 @@ export const PageTarget = styled(Link)`
 
     color: ${({ theme }) =>
         (props) =>
-            props.isSelected ? theme.color.white : theme.color.black};
+            props.selected ? theme.color.white : theme.color.black};
 
     &:hover {
         cursor: pointer;
