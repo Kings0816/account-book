@@ -1,7 +1,7 @@
 import { selector } from 'recoil';
 
 import { dateState } from './atom';
-
+import { convertDate } from '../../utils/common/convert-date';
 import { getTransactionsInDate } from '../../lib/transaction';
 
 export const shapedDateState = selector({
@@ -12,11 +12,7 @@ export const shapedDateState = selector({
     },
     set: ({ get, set }, newValue) => {
         const { year, month } = get(dateState);
-
-        const nowDate = new Date(year, month - 1 + newValue);
-        const convertedYear = nowDate.getFullYear();
-        const convertedMonth = nowDate.getMonth() + 1;
-
+        const { convertedYear, convertedMonth } = convertDate(year, month + newValue);
         set(dateState, { year: convertedYear, month: convertedMonth });
     },
 });
