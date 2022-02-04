@@ -4,13 +4,14 @@ import { ThemeProvider } from 'styled-components';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+import Transactions from '.';
 import { checkState } from '../../recoil/check/atom';
 import theme from '../../styles/theme';
-import Transactions from '.';
+import { transactions } from '../../mocks/transactions';
 
-const TOTAL_COUNT = 14;
-const INCOME_COUNT = 1;
-const EXPENDITURE_COUNT = 13;
+const TOTAL_COUNT = transactions.length;
+const INCOME_COUNT = transactions.filter((transaction) => transaction.sign === '+').length;
+const EXPENDITURE_COUNT = transactions.filter((transaction) => transaction.sign === '-').length;
 
 describe('해당 날짜(월 단위)의 모든 거래내역을 표시하는 Transactions 컴포넌트 테스트', () => {
     const initializeState =
