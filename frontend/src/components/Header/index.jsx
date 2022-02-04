@@ -1,22 +1,13 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
 import PropTypes from 'prop-types';
 
-import { shapedDateState } from '../../recoil/date/selector';
-
+import { useShapedDate } from './hooks';
 import previous from '../../../public/assets/previous-button.svg';
 import next from '../../../public/assets/next-button.svg';
-
 import { Wrapper, Title, DateBox, ArrowButton, Date, PageBox, PageTarget } from './style';
 
 const Header = ({ current }) => {
-    const [shapedDate, setShapedDate] = useRecoilState(shapedDateState);
-
-    const changeDate = (sign) => {
-        const [NEXT, PREV] = [1, -1];
-        const value = sign === '+' ? NEXT : PREV;
-        setShapedDate(value);
-    };
+    const [shapedDate, changeDate] = useShapedDate();
 
     return (
         <Wrapper>
