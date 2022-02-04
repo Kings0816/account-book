@@ -126,3 +126,35 @@ export const transactions = [
         date: '2022-01-28',
     },
 ];
+
+export const transactionsWithDate = {
+    '2022-1': [
+        {
+            category: '카페/간식',
+            color: '#D092E2',
+            content: '녹차 스무디',
+            method: '현금',
+            sign: '-',
+            cost: '5700',
+            date: '2022-01-28',
+        },
+        {
+            category: '카페/간식',
+            color: '#D092E2',
+            content: '허니브레드',
+            method: '현금',
+            sign: '-',
+            cost: '5300',
+            date: '2022-01-28',
+        },
+        {
+            category: '카페/간식',
+            color: '#D092E2',
+            content: '민트초코라떼',
+            method: '현금',
+            sign: '-',
+            cost: '5200',
+            date: '2022-01-28',
+        },
+    ],
+};
