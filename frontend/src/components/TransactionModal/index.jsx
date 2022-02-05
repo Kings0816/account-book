@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { modalState } from '../../recoil/modal/atom';
 import back from '../../../public/assets/back-button.svg';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const TransactionModal = () => {
     const [modal, setModal] = useRecoilState(modalState);
@@ -113,6 +114,18 @@ const Card = styled.form`
 
     background-color: ${({ theme }) => theme.color.white};
     box-shadow: ${({ theme }) => theme.shadow.thick};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        transform: none;
+
+        justify-content: space-evenly;
+
+        box-shadow: none;
+    }
 `;
 
 const Element = styled.div`
@@ -123,6 +136,13 @@ const Element = styled.div`
     flex-direction: column;
 
     font-weight: bold;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 80vw;
+        height: 12vh;
+
+        justify-content: center;
+    }
 `;
 
 const BackImg = styled.img`
@@ -136,6 +156,10 @@ const Input = styled.input`
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
     border-radius: 10px;
     background: ${({ theme }) => theme.color.whiteSmoke};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        height: 80%;
+    }
 `;
 
 const ButtonContainer = styled.div`
@@ -145,6 +169,11 @@ const ButtonContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 80vw;
+        height: 12vh;
+    }
 `;
 
 const DecisionButton = styled.button`
