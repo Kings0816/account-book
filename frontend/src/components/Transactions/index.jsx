@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
 import DailyTransaction from '../DailyTransaction';
+import TransactionModal from '../TransactionModal';
 import { useFilterdTransactions } from './hooks';
 import { checkState } from '../../recoil/check/atom';
 import { TransactionsContainer } from './style';
@@ -30,7 +31,12 @@ const Transactions = () => {
             />
         ));
 
-    return <TransactionsContainer>{shapedTransactions}</TransactionsContainer>;
+    return (
+        <>
+            <TransactionsContainer>{shapedTransactions}</TransactionsContainer>
+            <TransactionModal />
+        </>
+    );
 };
 
 export default Transactions;
