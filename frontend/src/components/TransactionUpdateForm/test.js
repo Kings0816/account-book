@@ -34,11 +34,11 @@ describe('TransactionUpateForm 테스트', () => {
         const updateButton = screen.getByRole('button', { name: '수정' });
 
         expect(backButton).toBeInTheDocument();
-        expect(dateInput).toBeInTheDocument();
-        expect(categoryInput).toBeInTheDocument();
-        expect(contentInput).toBeInTheDocument();
-        expect(methodInput).toBeInTheDocument();
-        expect(costInput).toBeInTheDocument();
+        expect(dateInput.value).toEqual(TEST_DATA['date']);
+        expect(categoryInput.value).toEqual(TEST_DATA['category']);
+        expect(contentInput.value).toEqual(TEST_DATA['content']);
+        expect(methodInput.value).toEqual(TEST_DATA['method']);
+        expect(costInput.value).toEqual(TEST_DATA['cost']);
         expect(deleteButton).toBeInTheDocument();
         expect(updateButton).toBeInTheDocument();
     });
