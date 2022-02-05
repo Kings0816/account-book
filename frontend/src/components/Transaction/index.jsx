@@ -1,20 +1,12 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+
 import PropTypes from 'prop-types';
 
-import { modalState } from '../../recoil/modal/atom';
+import { useCurrentModal } from './hooks';
 import { Wrapper, OuterBox, Category, InnerBox, Content, Method, Cost } from './style';
 
 const Transaction = ({ transaction }) => {
-    const setCurrentModal = useSetRecoilState(modalState);
-
-    const changeModalState = () => {
-        const state = {
-            current: 'transaction',
-            props: transaction,
-        };
-        setCurrentModal(state);
-    };
+    const [changeModalState] = useCurrentModal(transaction);
 
     return (
         <Wrapper onClick={changeModalState}>
