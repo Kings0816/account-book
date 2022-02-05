@@ -5,7 +5,7 @@ import { Wrapper, Element, BackImg, Input, ButtonContainer, DecisionButton } fro
 
 const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
     return (
-        <Wrapper>
+        <Wrapper aria-label="transactionUpdate">
             <Element>
                 <button onClick={onCancle}>
                     <BackImg src={back} />

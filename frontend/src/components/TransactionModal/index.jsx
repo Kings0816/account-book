@@ -14,12 +14,12 @@ const TransactionModal = () => {
 
     if (modal.props == null) return null;
     return (
-        <Wrapper active={modal.current === 'transaction'}>
-            <BackgroundDim />
+        <Wrapper active={modal.current === 'transaction'} data-testid="modal">
+            <BackgroundDim data-testid="dim" />
             <TransactionUpdateForm
                 modal={modal}
-                onUpdate={''}
-                onDelete={''}
+                onUpdate={() => null}
+                onDelete={() => null}
                 onCancle={closeModal}
             />
         </Wrapper>
