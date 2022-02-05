@@ -79,13 +79,13 @@ export const Content = styled.span`
     width: 70%;
     padding-left: 10px;
 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 100%;
         max-width: 100%;
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 `;
 
@@ -93,6 +93,10 @@ export const Method = styled.span`
     width: 30%;
 
     color: ${({ theme }) => theme.color.gray};
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 100%;
@@ -106,14 +110,13 @@ export const Cost = styled.span`
     width: 25%;
 
     text-align: right;
-
     font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         max-width: 100px;
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 `;
