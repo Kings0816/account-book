@@ -58,4 +58,20 @@ describe('TransactionUpateForm 테스트', () => {
         fireEvent.click(backButton);
         expect(onCancle).toHaveBeenCalled();
     });
+
+    it('삭제 버튼을 누르면 onDelete 함수가 호출된다.', () => {
+        const onDelete = jest.fn();
+        render(
+            <TransactionUpdateForm
+                transaction={TEST_DATA}
+                onUpdate={null}
+                onDelete={onDelete}
+                onCancle={null}
+            />,
+        );
+
+        const deleteButton = screen.getByRole('button', { name: '삭제' });
+        fireEvent.click(deleteButton);
+        expect(onDelete).toHaveBeenCalled();
+    });
 });
