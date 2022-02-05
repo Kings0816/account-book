@@ -1,16 +1,11 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
 
 import TransactionUpdateForm from '../TransactionUpdateForm';
-import { modalState } from '../../recoil/modal/atom';
+import { useModal } from './hooks';
 import { Wrapper, BackgroundDim } from './style';
 
 const TransactionModal = () => {
-    const [modal, setModal] = useRecoilState(modalState);
-
-    const closeModal = () => {
-        setModal({ current: null, props: null });
-    };
+    const [modal, closeModal] = useModal();
 
     if (modal.props == null) return null;
     return (
