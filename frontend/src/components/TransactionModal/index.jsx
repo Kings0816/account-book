@@ -1,18 +1,27 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
-import TransactionForm from '../TransactionForm';
+import TransactionUpdateForm from '../TransactionUpdateForm';
 import { modalState } from '../../recoil/modal/atom';
 import { Wrapper, BackgroundDim } from './style';
 
 const TransactionModal = () => {
-    const modal = useRecoilValue(modalState);
+    const [modal, setModal] = useRecoilState(modalState);
+
+    const closeModal = () => {
+        setModal({ current: null, props: null });
+    };
 
     if (modal.props == null) return null;
     return (
         <Wrapper active={modal.current === 'transaction'}>
             <BackgroundDim />
-            <TransactionForm />
+            <TransactionUpdateForm
+                modal={modal}
+                onUpdate={''}
+                onDelete={''}
+                onCancle={closeModal}
+            />
         </Wrapper>
     );
 };

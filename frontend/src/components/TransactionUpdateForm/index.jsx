@@ -1,17 +1,13 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
 
-import { modalState } from '../../recoil/modal/atom';
 import back from '../../../public/assets/back-button.svg';
 import { Wrapper, Element, BackImg, Input, ButtonContainer, DecisionButton } from './style';
 
-const TransactionForm = () => {
-    const [modal, setModal] = useRecoilState(modalState);
-
+const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
     return (
         <Wrapper>
             <Element>
-                <button onClick={() => setModal({ current: null, props: null })}>
+                <button onClick={onCancle}>
                     <BackImg src={back} />
                 </button>
             </Element>
@@ -66,11 +62,15 @@ const TransactionForm = () => {
                 />
             </Element>
             <ButtonContainer>
-                <DecisionButton type="delete">삭제</DecisionButton>
-                <DecisionButton type="submit">수정</DecisionButton>
+                <DecisionButton type="delete" onClick={onDelete}>
+                    삭제
+                </DecisionButton>
+                <DecisionButton type="update" onClick={onUpdate}>
+                    수정
+                </DecisionButton>
             </ButtonContainer>
         </Wrapper>
     );
 };
 
-export default TransactionForm;
+export default TransactionUpdateForm;
