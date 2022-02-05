@@ -134,6 +134,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     button {
+        padding: 0px;
         border: none;
         background: none;
         cursor: pointer;
