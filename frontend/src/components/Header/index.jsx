@@ -22,13 +22,13 @@ const Header = ({ current }) => {
                 </ArrowButton>
             </DateBox>
             <PageBox>
-                <PageTarget to="/" isSelected={current === 'main'}>
+                <PageTarget to="/" selected={current === 'main'}>
                     내역
                 </PageTarget>
-                <PageTarget to="/calendar" isSelected={current === 'calendar'}>
+                <PageTarget to="/calendar" selected={current === 'calendar'}>
                     달력
                 </PageTarget>
-                <PageTarget to="/statistics" isSelected={current === 'statistics'}>
+                <PageTarget to="/statistics" selected={current === 'statistics'}>
                     통계
                 </PageTarget>
             </PageBox>

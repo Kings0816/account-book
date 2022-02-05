@@ -37,7 +37,7 @@ export const Title = styled.h1`
 `;
 
 export const DateBox = styled.div`
-    margin-top: 7px;
+    margin: 7px 0px 0px 0px;
 
     display: flex;
     flex-direction: row;
@@ -48,10 +48,12 @@ export const DateBox = styled.div`
 `;
 
 export const ArrowButton = styled.button`
-    margin-top: 3px;
+    margin: 3px 0px 0px 15px;
 `;
 
 export const Date = styled.strong`
+    margin-left: 15px;
+
     font-weight: bold;
     color: ${({ theme }) => theme.color.white};
 `;
@@ -77,7 +79,7 @@ export const PageTarget = styled(Link)`
 
     color: ${({ theme }) =>
         (props) =>
-            props.isSelected ? theme.color.white : theme.color.black};
+            props.selected ? theme.color.white : theme.color.black};
 
     &:hover {
         cursor: pointer;
