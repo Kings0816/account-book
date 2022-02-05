@@ -12,7 +12,7 @@ const TransactionModal = () => {
         <Wrapper active={modal.current === 'transaction'} data-testid="modal">
             <BackgroundDim data-testid="dim" />
             <TransactionUpdateForm
-                modal={modal}
+                transaction={modal.props}
                 onUpdate={() => null}
                 onDelete={() => null}
                 onCancle={closeModal}

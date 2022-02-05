@@ -3,7 +3,7 @@ import React from 'react';
 import back from '../../../public/assets/back-button.svg';
 import { Wrapper, Element, BackImg, Input, ButtonContainer, DecisionButton } from './style';
 
-const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
+const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
     return (
         <Wrapper aria-label="transactionUpdate">
             <Element>
@@ -18,7 +18,7 @@ const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
                     id="date"
                     placeholder="YYYY-MM-DD"
                     autoComplete="off"
-                    defaultValue={modal.props.date}
+                    defaultValue={transaction.date}
                 />
             </Element>
             <Element>
@@ -28,7 +28,7 @@ const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
                     id="category"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={modal.props.category}
+                    defaultValue={transaction.category}
                 />
             </Element>
             <Element>
@@ -38,7 +38,7 @@ const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
                     id="content"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={modal.props.content}
+                    defaultValue={transaction.content}
                 />
             </Element>
             <Element>
@@ -48,7 +48,7 @@ const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
                     id="method"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={modal.props.method}
+                    defaultValue={transaction.method}
                 />
             </Element>
             <Element>
@@ -58,7 +58,7 @@ const TransactionUpdateForm = ({ modal, onUpdate, onDelete, onCancle }) => {
                     id="cost"
                     placeholder="숫자만 기입하세요.(ex 3000)"
                     autoComplete="off"
-                    defaultValue={modal.props.cost}
+                    defaultValue={transaction.cost}
                 />
             </Element>
             <ButtonContainer>
