@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '../../test-utils';
+import { render, screen, fireEvent } from '../../test-utils';
 
 import TransactionUpdateForm from '.';
 
@@ -41,5 +41,21 @@ describe('TransactionUpateForm 테스트', () => {
         expect(costInput.value).toEqual(TEST_DATA['cost']);
         expect(deleteButton).toBeInTheDocument();
         expect(updateButton).toBeInTheDocument();
+    });
+
+    it('뒤로가기 버튼을 누르면 onCancle 함수가 호출된다.', () => {
+        const onCancle = jest.fn();
+        render(
+            <TransactionUpdateForm
+                transaction={TEST_DATA}
+                onUpdate={null}
+                onDelete={null}
+                onCancle={onCancle}
+            />,
+        );
+
+        const backButton = screen.getByRole('button', { name: 'back' });
+        fireEvent.click(backButton);
+        expect(onCancle).toHaveBeenCalled();
     });
 });
