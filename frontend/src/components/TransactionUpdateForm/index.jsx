@@ -7,7 +7,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
     return (
         <Wrapper aria-label="transactionUpdate">
             <Element>
-                <button aria-label="back" onClick={onCancle}>
+                <button type="button" aria-label="back" onClick={onCancle}>
                     <BackImg src={back} />
                 </button>
             </Element>
@@ -62,10 +62,10 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
             </Element>
             <ButtonContainer>
-                <DecisionButton type="delete" onClick={onDelete}>
+                <DecisionButton type="submit" action="delete" onClick={onDelete}>
                     삭제
                 </DecisionButton>
-                <DecisionButton type="update" onClick={onUpdate}>
+                <DecisionButton type="submit" action="update" onClick={onUpdate}>
                     수정
                 </DecisionButton>
             </ButtonContainer>

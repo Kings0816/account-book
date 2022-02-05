@@ -84,5 +84,5 @@ export const ButtonContainer = styled.div`
 export const DecisionButton = styled.button`
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSize.default};
-    color: ${(props) => (props.type === 'update' ? '#0990d6' : '#ff000f')};
+    color: ${(props) => (props.action === 'update' ? '#0990d6' : '#ff000f')};
 `;
