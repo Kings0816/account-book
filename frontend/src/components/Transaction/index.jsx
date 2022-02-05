@@ -11,13 +11,15 @@ const Transaction = ({ transaction }) => {
     return (
         <Wrapper onClick={changeModalState}>
             <OuterBox>
-                <Category>{transaction.category}</Category>
+                <Category data-testid="category">{transaction.category}</Category>
                 <InnerBox>
-                    <Content>{transaction.content}</Content>
-                    <Method>{transaction.method}</Method>
+                    <Content data-testid="content">{transaction.content}</Content>
+                    <Method data-testid="method">{transaction.method}</Method>
                 </InnerBox>
             </OuterBox>
-            <Cost>{transaction.sign + parseInt(transaction.cost).toLocaleString('ko-KR')}원</Cost>
+            <Cost data-testid="cost">
+                {transaction.sign + parseInt(transaction.cost).toLocaleString('ko-KR')}원
+            </Cost>
         </Wrapper>
     );
 };
