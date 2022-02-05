@@ -5,10 +5,8 @@ import TransactionUpdateForm from '.';
 
 const TEST_DATA = {
     category: '카페/간식',
-    color: '#D092E2',
     content: '녹차 스무디',
     method: '현금',
-    sign: '-',
     cost: '5700',
     date: '2022-01-28',
 };
@@ -73,5 +71,21 @@ describe('TransactionUpateForm 테스트', () => {
         const deleteButton = screen.getByRole('button', { name: '삭제' });
         fireEvent.click(deleteButton);
         expect(onDelete).toHaveBeenCalled();
+    });
+
+    it('수정 버튼을 누르면 form 데이터를 기반으로 onUpdate 함수가 호출된다.', () => {
+        const onUpdate = jest.fn();
+        render(
+            <TransactionUpdateForm
+                transaction={TEST_DATA}
+                onUpdate={onUpdate}
+                onDelete={null}
+                onCancle={null}
+            />,
+        );
+
+        const updateButton = screen.getByRole('button', { name: '수정' });
+        fireEvent.click(updateButton);
+        expect(onUpdate).toHaveBeenCalledWith(TEST_DATA);
     });
 });

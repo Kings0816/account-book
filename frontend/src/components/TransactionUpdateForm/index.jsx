@@ -4,8 +4,26 @@ import back from '../../../public/assets/back-button.svg';
 import { Wrapper, Element, BackImg, Input, ButtonContainer, DecisionButton } from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
+    const shapedForm = (elements) => {
+        const data = {};
+        Array.from(elements).forEach((element) => {
+            if (element.value) {
+                data[element.id] = element.value;
+            }
+        });
+        return data;
+    };
+
+    const handleUpdateSubmit = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const data = shapedForm(form.elements);
+        onUpdate(data);
+    };
+
     return (
-        <Wrapper aria-label="transactionUpdate">
+        <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
             <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>
                     <BackImg src={back} />
@@ -62,10 +80,10 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
             </Element>
             <ButtonContainer>
-                <DecisionButton type="submit" action="delete" onClick={onDelete}>
+                <DecisionButton type="button" action="delete" onClick={onDelete}>
                     삭제
                 </DecisionButton>
-                <DecisionButton type="submit" action="update" onClick={onUpdate}>
+                <DecisionButton type="submit" action="update">
                     수정
                 </DecisionButton>
             </ButtonContainer>
