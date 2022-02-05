@@ -1,31 +1,25 @@
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+
 import PropTypes from 'prop-types';
 
-import { modalState } from '../../recoil/modal/atom';
+import { useCurrentModal } from './hooks';
 import { Wrapper, OuterBox, Category, InnerBox, Content, Method, Cost } from './style';
 
 const Transaction = ({ transaction }) => {
-    const setCurrentModal = useSetRecoilState(modalState);
-
-    const changeModalState = () => {
-        const state = {
-            current: 'transaction',
-            props: transaction,
-        };
-        setCurrentModal(state);
-    };
+    const [changeModalState] = useCurrentModal(transaction);
 
     return (
         <Wrapper onClick={changeModalState}>
             <OuterBox>
-                <Category>{transaction.category}</Category>
+                <Category data-testid="category">{transaction.category}</Category>
                 <InnerBox>
-                    <Content>{transaction.content}</Content>
-                    <Method>{transaction.method}</Method>
+                    <Content data-testid="content">{transaction.content}</Content>
+                    <Method data-testid="method">{transaction.method}</Method>
                 </InnerBox>
             </OuterBox>
-            <Cost>{transaction.sign + parseInt(transaction.cost).toLocaleString('ko-KR')}원</Cost>
+            <Cost data-testid="cost">
+                {transaction.sign + parseInt(transaction.cost).toLocaleString('ko-KR')}원
+            </Cost>
         </Wrapper>
     );
 };
