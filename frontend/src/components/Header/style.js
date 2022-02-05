@@ -5,7 +5,7 @@ import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 export const Wrapper = styled.div`
     width: 100vw;
-    min-width: 169px;
+    min-width: 228px;
     height: 100px;
 
     display: flex;

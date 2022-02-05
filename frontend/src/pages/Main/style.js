@@ -5,6 +5,7 @@ import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 export const MainWrapper = styled.div`
     width: calc(100vw - 15px);
     height: calc(100vh - 125px);
+    min-width: 228px;
 
     display: flex;
     flex-direction: row;

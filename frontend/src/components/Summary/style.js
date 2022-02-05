@@ -44,6 +44,10 @@ export const SummaryBox = styled.div`
         ({ theme }) =>
             theme.color[props.color]};
 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         margin: 0px;
 
