@@ -8,6 +8,7 @@ export const Wrapper = styled.form`
 
     width: 700px;
     height: 500px;
+    min-width: 228px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -33,6 +34,34 @@ export const Wrapper = styled.form`
     }
 `;
 
+export const CostType = styled.div`
+    width: 250px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 80vw;
+        height: 8vh;
+    }
+`;
+
+export const TypeButton = styled.button`
+    margin: 0px 5px 5px 0px;
+    width: 57px;
+    height: 37px;
+
+    font-weight: bold;
+    border: 2px solid
+        ${({ theme }) =>
+            (props) =>
+                props.active ? theme.color.mint : theme.color.brigtenL1Gray};
+    color: ${({ theme }) =>
+        (props) =>
+            props.active ? theme.color.mint : theme.color.brigtenL1Gray};
+`;
+
 export const Element = styled.div`
     margin-bottom: 10px;
     width: 250px;
@@ -44,7 +73,7 @@ export const Element = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: 12vh;
+        height: 11vh;
 
         justify-content: center;
     }
@@ -68,7 +97,6 @@ export const Input = styled.input`
 `;
 
 export const ButtonContainer = styled.div`
-    padding-left: 0px;
     width: 250px;
 
     display: flex;
@@ -77,7 +105,7 @@ export const ButtonContainer = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: 12vh;
+        height: 11vh;
     }
 `;
 

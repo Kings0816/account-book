@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import back from '../../../public/assets/back-button.svg';
-import { Wrapper, Element, BackImg, Input, ButtonContainer, DecisionButton } from './style';
+import {
+    Wrapper,
+    CostType,
+    TypeButton,
+    Element,
+    BackImg,
+    Input,
+    ButtonContainer,
+    DecisionButton,
+} from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
+    const initCostType = transaction.sign === '+' ? 'income' : 'expenditure';
+    const [costType, setCostType] = useState(initCostType);
+
     const shapedForm = (elements) => {
         const data = {};
         Array.from(elements).forEach((element) => {
@@ -18,7 +30,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         e.preventDefault();
 
         const form = e.target;
-        const data = shapedForm(form.elements);
+        const sign = costType === 'income' ? '+' : '-';
+        const data = { ...shapedForm(form.elements), sign };
         onUpdate(data);
     };
 
@@ -29,6 +42,24 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     <BackImg src={back} />
                 </button>
             </Element>
+            <CostType>
+                <TypeButton
+                    type="button"
+                    aria-label="income"
+                    active={costType === 'income'}
+                    onClick={() => setCostType('income')}
+                >
+                    수입
+                </TypeButton>
+                <TypeButton
+                    type="button"
+                    aria-label="expenditure"
+                    active={costType === 'expenditure'}
+                    onClick={() => setCostType('expenditure')}
+                >
+                    지출
+                </TypeButton>
+            </CostType>
             <Element>
                 <label htmlFor="date">날짜</label>
                 <Input
