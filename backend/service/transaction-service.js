@@ -9,7 +9,7 @@ const getUserId = async (nickname) => {
 const getTransactions = async (year, month, nickname) => {
     const [userId] = await getUserId(nickname);
     const sql = `
-        SELECT category.name AS category, color, content, method.name AS method, transaction.sign AS sign, cost, DATE_FORMAT(date, '%Y-%m-%d') AS date 
+        SELECT transaction.id AS id, category.name AS category, color, content, method.name AS method, transaction.sign AS sign, cost, DATE_FORMAT(date, '%Y-%m-%d') AS date 
         FROM transaction 
         LEFT JOIN method ON transaction.mid = method.id 
         LEFT JOIN category ON transaction.cid = category.id 
