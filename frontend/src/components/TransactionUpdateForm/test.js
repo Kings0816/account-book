@@ -9,6 +9,7 @@ const TEST_DATA = {
     method: '현금',
     cost: '5700',
     date: '2022-01-28',
+    sign: '-',
 };
 
 describe('TransactionUpateForm 테스트', () => {
@@ -23,6 +24,8 @@ describe('TransactionUpateForm 테스트', () => {
         );
 
         const backButton = screen.getByRole('button', { name: 'back' });
+        const incomeButton = screen.getByRole('button', { name: 'income' });
+        const expenditureButton = screen.getByRole('button', { name: 'expenditure' });
         const dateInput = screen.getByLabelText('날짜');
         const categoryInput = screen.getByLabelText('카테고리');
         const contentInput = screen.getByLabelText('내용');
@@ -32,6 +35,8 @@ describe('TransactionUpateForm 테스트', () => {
         const updateButton = screen.getByRole('button', { name: '수정' });
 
         expect(backButton).toBeInTheDocument();
+        expect(incomeButton).toBeInTheDocument();
+        expect(expenditureButton).toBeInTheDocument();
         expect(dateInput.value).toEqual(TEST_DATA['date']);
         expect(categoryInput.value).toEqual(TEST_DATA['category']);
         expect(contentInput.value).toEqual(TEST_DATA['content']);
