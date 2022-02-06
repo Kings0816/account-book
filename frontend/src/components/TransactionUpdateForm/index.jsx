@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import back from '../../../public/assets/back-button.svg';
+import deleteImg from '../../../public/assets/delete-button.svg';
 import {
     Wrapper,
     CostType,
@@ -13,26 +15,48 @@ import {
 } from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
-    const initCostType = transaction.sign === '+' ? 'income' : 'expenditure';
-    const [costType, setCostType] = useState(initCostType);
-
-    const shapedForm = (elements) => {
-        const data = {};
-        Array.from(elements).forEach((element) => {
-            if (element.value) {
-                data[element.id] = element.value;
-            }
-        });
-        return data;
-    };
+    const [activeDropdown, setActiveDropdown] = useState(false);
+    const [inputs, setInputs] = useState(transaction);
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
 
-        const form = e.target;
-        const sign = costType === 'income' ? '+' : '-';
-        const data = { ...shapedForm(form.elements), sign };
+        const data = inputs;
         onUpdate(data);
+    };
+
+    const changeActiveToggle = () => {
+        setActiveDropdown((prev) => !prev);
+    };
+
+    const changeSign = (sign) => {
+        setInputs((prev) => ({ ...prev, sign }));
+    };
+
+    const changeDate = (e) => {
+        setInputs((prev) => ({ ...prev, date: e.target.value }));
+    };
+
+    const changeCategory = (e) => {
+        setInputs((prev) => ({ ...prev, category: e.target.innerText }));
+        changeActiveToggle();
+    };
+
+    const changeContent = (e) => {
+        setInputs((prev) => ({ ...prev, content: e.target.value }));
+    };
+
+    const changeMethod = (e) => {
+        setInputs((prev) => ({ ...prev, method: e.target.value }));
+    };
+
+    const changeCost = (e) => {
+        setInputs((prev) => ({ ...prev, cost: e.target.value }));
+    };
+
+    const deleteCategory = (e) => {
+        e.stopPropagation();
+        console.log('삭제하기');
     };
 
     return (
@@ -46,16 +70,16 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 <TypeButton
                     type="button"
                     aria-label="income"
-                    active={costType === 'income'}
-                    onClick={() => setCostType('income')}
+                    active={inputs.sign === '+'}
+                    onClick={() => changeSign('+')}
                 >
                     수입
                 </TypeButton>
                 <TypeButton
                     type="button"
                     aria-label="expenditure"
-                    active={costType === 'expenditure'}
-                    onClick={() => setCostType('expenditure')}
+                    active={inputs.sign === '-'}
+                    onClick={() => changeSign('-')}
                 >
                     지출
                 </TypeButton>
@@ -67,7 +91,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="date"
                     placeholder="YYYY-MM-DD"
                     autoComplete="off"
-                    defaultValue={transaction.date}
+                    value={inputs.date}
+                    onChange={changeDate}
                 />
             </Element>
             <Element>
@@ -77,8 +102,31 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="category"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={transaction.category}
+                    readOnly
+                    value={inputs.category}
+                    onClick={changeActiveToggle}
                 />
+                <DropdownContainer active={activeDropdown}>
+                    <Item onClick={changeCategory}>
+                        <span>일상/생활</span>
+                        <img src={deleteImg} onClick={deleteCategory} />
+                    </Item>
+                    <Item onClick={changeCategory}>
+                        <span>식비</span>
+                        <img src={deleteImg} onClick={deleteCategory} />
+                    </Item>
+                    <Item onClick={changeCategory}>
+                        <span>카페</span>
+                        <img src={deleteImg} onClick={deleteCategory} />
+                    </Item>
+                    <Item onClick={changeCategory}>
+                        <span>교통</span>
+                        <img src={deleteImg} onClick={deleteCategory} />
+                    </Item>
+                    <Item>
+                        <span>추가하기</span>
+                    </Item>
+                </DropdownContainer>
             </Element>
             <Element>
                 <label htmlFor="content">내용</label>
@@ -87,7 +135,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="content"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={transaction.content}
+                    value={inputs.content}
+                    onChange={changeContent}
                 />
             </Element>
             <Element>
@@ -97,7 +146,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="method"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={transaction.method}
+                    value={inputs.method}
+                    onChange={changeMethod}
                 />
             </Element>
             <Element>
@@ -107,7 +157,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="cost"
                     placeholder="숫자만 기입하세요.(ex 3000)"
                     autoComplete="off"
-                    defaultValue={transaction.cost}
+                    value={inputs.cost}
+                    onChange={changeCost}
                 />
             </Element>
             <ButtonContainer>
@@ -123,3 +174,41 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
 };
 
 export default TransactionUpdateForm;
+
+const DropdownContainer = styled.ul`
+    z-index: 3;
+    margin-top: 60px;
+    position: absolute;
+    width: 250px;
+
+    visibility: ${(props) => (props.active ? 'none' : 'hidden')};
+
+    border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    background-color: ${({ theme }) => theme.color.white};
+    box-shadow: ${({ theme }) => theme.shadow.pale};
+`;
+
+const Item = styled.li`
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 90%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #d7d7d7;
+    font-weight: normal;
+
+    &:last-child {
+        border-bottom: none;
+        font-weight: bold;
+    }
+
+    &:hover {
+        transform: scale(1.01);
+        background: ${({ theme }) => theme.color.brigtenL2Gray};
+        cursor: pointer;
+    }
+`;
