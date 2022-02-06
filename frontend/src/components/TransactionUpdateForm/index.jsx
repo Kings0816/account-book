@@ -15,7 +15,8 @@ import {
 } from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
-    const [activeDropdown, setActiveDropdown] = useState(false);
+    const [activeCategory, setActiveCategory] = useState(false);
+    const [activeMethod, setActiveMethod] = useState(false);
     const [inputs, setInputs] = useState(transaction);
 
     const handleUpdateSubmit = (e) => {
@@ -25,8 +26,12 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         onUpdate(data);
     };
 
-    const changeActiveToggle = () => {
-        setActiveDropdown((prev) => !prev);
+    const categoryActiveToggle = () => {
+        setActiveCategory((prev) => !prev);
+    };
+
+    const methodActiveToggle = () => {
+        setActiveMethod((prev) => !prev);
     };
 
     const changeSign = (sign) => {
@@ -39,7 +44,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
 
     const changeCategory = (e) => {
         setInputs((prev) => ({ ...prev, category: e.target.innerText }));
-        changeActiveToggle();
+        categoryActiveToggle();
     };
 
     const changeContent = (e) => {
@@ -47,7 +52,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
     };
 
     const changeMethod = (e) => {
-        setInputs((prev) => ({ ...prev, method: e.target.value }));
+        setInputs((prev) => ({ ...prev, method: e.target.innerText }));
+        methodActiveToggle();
     };
 
     const changeCost = (e) => {
@@ -104,9 +110,9 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     autoComplete="off"
                     readOnly
                     value={inputs.category}
-                    onClick={changeActiveToggle}
+                    onClick={categoryActiveToggle}
                 />
-                <DropdownContainer active={activeDropdown}>
+                <DropdownContainer active={activeCategory}>
                     <Item onClick={changeCategory}>
                         <span>일상/생활</span>
                         <img src={deleteImg} onClick={deleteCategory} />
@@ -124,7 +130,9 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                         <img src={deleteImg} onClick={deleteCategory} />
                     </Item>
                     <Item>
-                        <span>추가하기</span>
+                        <button type="button" aria-label="addCategory">
+                            추가하기
+                        </button>
                     </Item>
                 </DropdownContainer>
             </Element>
@@ -146,9 +154,21 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="method"
                     placeholder="입력하세요."
                     autoComplete="off"
+                    readOnly
                     value={inputs.method}
-                    onChange={changeMethod}
+                    onClick={methodActiveToggle}
                 />
+                <DropdownContainer active={activeMethod}>
+                    <Item onClick={changeMethod}>
+                        <span>카카오페이</span>
+                    </Item>
+                    <Item onClick={changeMethod}>
+                        <span>현금</span>
+                    </Item>
+                    <Item onClick={changeMethod}>
+                        <span>토스</span>
+                    </Item>
+                </DropdownContainer>
             </Element>
             <Element>
                 <label htmlFor="cost">금액</label>
@@ -201,7 +221,7 @@ const Item = styled.li`
     border-bottom: 1px solid #d7d7d7;
     font-weight: normal;
 
-    &:last-child {
+    & > button {
         border-bottom: none;
         font-weight: bold;
     }
