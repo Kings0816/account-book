@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
+import Dropdown from '../Dropdown';
 import back from '../../../public/assets/back-button.svg';
-import deleteImg from '../../../public/assets/delete-button.svg';
 import {
     Wrapper,
     CostType,
@@ -13,6 +12,19 @@ import {
     ButtonContainer,
     DecisionButton,
 } from './style';
+
+const categoryDummy = [
+    { id: 1, name: '일상/생활', color: '#817DCE', sign: '-' },
+    { id: 2, name: '식비', color: '#817DCE', sign: '-' },
+    { id: 3, name: '카페', color: '#817DCE', sign: '-' },
+    { id: 4, name: '교통', color: '#817DCE', sign: '-' },
+];
+
+const methodDummy = [
+    { id: 1, name: '카카오페이' },
+    { id: 2, name: '현금' },
+    { id: 3, name: '토스' },
+];
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
     const [activeCategory, setActiveCategory] = useState(false);
@@ -65,6 +77,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         console.log('삭제하기');
     };
 
+    // TODO 입력폼들은 별도의 컴포넌트 만들어서 재활용 하기
     return (
         <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
             <Element>
@@ -112,29 +125,13 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     value={inputs.category}
                     onClick={categoryActiveToggle}
                 />
-                <DropdownContainer active={activeCategory}>
-                    <Item onClick={changeCategory}>
-                        <span>일상/생활</span>
-                        <img src={deleteImg} onClick={deleteCategory} />
-                    </Item>
-                    <Item onClick={changeCategory}>
-                        <span>식비</span>
-                        <img src={deleteImg} onClick={deleteCategory} />
-                    </Item>
-                    <Item onClick={changeCategory}>
-                        <span>카페</span>
-                        <img src={deleteImg} onClick={deleteCategory} />
-                    </Item>
-                    <Item onClick={changeCategory}>
-                        <span>교통</span>
-                        <img src={deleteImg} onClick={deleteCategory} />
-                    </Item>
-                    <Item>
-                        <button type="button" aria-label="addCategory">
-                            추가하기
-                        </button>
-                    </Item>
-                </DropdownContainer>
+                <Dropdown
+                    data={categoryDummy}
+                    active={activeCategory}
+                    changeHandler={changeCategory}
+                    deleteHandler={deleteCategory}
+                    createHandler={() => console.log('생성로직')}
+                />
             </Element>
             <Element>
                 <label htmlFor="content">내용</label>
@@ -158,17 +155,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     value={inputs.method}
                     onClick={methodActiveToggle}
                 />
-                <DropdownContainer active={activeMethod}>
-                    <Item onClick={changeMethod}>
-                        <span>카카오페이</span>
-                    </Item>
-                    <Item onClick={changeMethod}>
-                        <span>현금</span>
-                    </Item>
-                    <Item onClick={changeMethod}>
-                        <span>토스</span>
-                    </Item>
-                </DropdownContainer>
+                <Dropdown data={methodDummy} active={activeMethod} changeHandler={changeMethod} />
             </Element>
             <Element>
                 <label htmlFor="cost">금액</label>
@@ -194,41 +181,3 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
 };
 
 export default TransactionUpdateForm;
-
-const DropdownContainer = styled.ul`
-    z-index: 3;
-    margin-top: 60px;
-    position: absolute;
-    width: 250px;
-
-    visibility: ${(props) => (props.active ? 'none' : 'hidden')};
-
-    border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
-    background-color: ${({ theme }) => theme.color.white};
-    box-shadow: ${({ theme }) => theme.shadow.pale};
-`;
-
-const Item = styled.li`
-    margin: 0 auto;
-    padding: 10px 0;
-    width: 90%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    border-bottom: 1px solid #d7d7d7;
-    font-weight: normal;
-
-    & > button {
-        border-bottom: none;
-        font-weight: bold;
-    }
-
-    &:hover {
-        transform: scale(1.01);
-        background: ${({ theme }) => theme.color.brigtenL2Gray};
-        cursor: pointer;
-    }
-`;
