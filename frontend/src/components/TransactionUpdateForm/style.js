@@ -88,7 +88,7 @@ export const Input = styled.input`
     padding: 10px;
 
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
-    border-radius: 10px;
+    border-radius: 5px;
     background: ${({ theme }) => theme.color.whiteSmoke};
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
