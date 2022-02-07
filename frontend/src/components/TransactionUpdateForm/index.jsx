@@ -22,12 +22,6 @@ const categoryDummy = [
     { id: 4, name: '교통', color: '#817DCE', sign: '-' },
 ];
 
-const methodDummy = [
-    { id: 1, name: '카카오페이' },
-    { id: 2, name: '현금' },
-    { id: 3, name: '토스' },
-];
-
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
     const [activeCategory, setActiveCategory] = useState(false);
     const [activeMethod, setActiveMethod] = useState(false);
