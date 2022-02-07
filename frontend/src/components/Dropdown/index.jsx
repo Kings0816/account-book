@@ -8,7 +8,7 @@ const Dropdown = ({ name, data, active, changeHandler, deleteHandler, createHand
     const items = data.map((_data) => (
         <Item key={nanoid()} onClick={changeHandler}>
             <span>{_data.name}</span>
-            {deleteHandler && <img src={deleteImg} onClick={deleteHandler} />}
+            {deleteHandler && <img src={deleteImg} onClick={deleteHandler} alt="delete" />}
         </Item>
     ));
 
