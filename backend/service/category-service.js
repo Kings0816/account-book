@@ -11,7 +11,6 @@ const getCategories = async () => {
         };
         return result;
     } catch (e) {
-        console.log(e);
         return {
             status: 'error',
         };

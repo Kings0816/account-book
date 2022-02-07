@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import Dropdown from '../Dropdown';
+import { methodState } from '../../recoil/method/atom';
 import back from '../../../public/assets/back-button.svg';
 import {
     Wrapper,
@@ -20,16 +22,12 @@ const categoryDummy = [
     { id: 4, name: '교통', color: '#817DCE', sign: '-' },
 ];
 
-const methodDummy = [
-    { id: 1, name: '카카오페이' },
-    { id: 2, name: '현금' },
-    { id: 3, name: '토스' },
-];
-
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
     const [activeCategory, setActiveCategory] = useState(false);
     const [activeMethod, setActiveMethod] = useState(false);
     const [inputs, setInputs] = useState(transaction);
+
+    const methods = useRecoilValue(methodState);
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
@@ -157,7 +155,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
                 <Dropdown
                     name="method"
-                    data={methodDummy}
+                    data={methods}
                     active={activeMethod}
                     changeHandler={changeMethod}
                 />

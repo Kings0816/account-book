@@ -9,7 +9,6 @@ const getTransactions = async (req, res) => {
             data: result,
         });
     } catch (e) {
-        console.log(e.message);
         res.status(400).json({
             message: e.message,
         });
