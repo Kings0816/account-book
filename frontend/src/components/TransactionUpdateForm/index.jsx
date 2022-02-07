@@ -77,7 +77,6 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         console.log('삭제하기');
     };
 
-    // TODO 입력폼들은 별도의 컴포넌트 만들어서 재활용 하기
     return (
         <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
             <Element>
@@ -126,6 +125,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     onClick={categoryActiveToggle}
                 />
                 <Dropdown
+                    name="category"
                     data={categoryDummy}
                     active={activeCategory}
                     changeHandler={changeCategory}
@@ -155,7 +155,12 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     value={inputs.method}
                     onClick={methodActiveToggle}
                 />
-                <Dropdown data={methodDummy} active={activeMethod} changeHandler={changeMethod} />
+                <Dropdown
+                    name="method"
+                    data={methodDummy}
+                    active={activeMethod}
+                    changeHandler={changeMethod}
+                />
             </Element>
             <Element>
                 <label htmlFor="cost">금액</label>

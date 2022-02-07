@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import deleteImg from '../../../public/assets/delete-button.svg';
 import { Wrapper, Item } from './style';
 
-const Dropdown = ({ data, active, changeHandler, deleteHandler, createHandler }) => {
+const Dropdown = ({ name, data, active, changeHandler, deleteHandler, createHandler }) => {
     const items = data.map((_data) => (
         <Item key={nanoid()} onClick={changeHandler}>
             <span>{_data.name}</span>
@@ -13,7 +13,7 @@ const Dropdown = ({ data, active, changeHandler, deleteHandler, createHandler })
     ));
 
     return (
-        <Wrapper active={active}>
+        <Wrapper active={active} name={name}>
             {items}
             {createHandler && (
                 <Item>

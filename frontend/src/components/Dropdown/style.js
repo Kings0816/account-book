@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
+
 export const Wrapper = styled.ul`
     z-index: 3;
     margin-top: 60px;
@@ -11,6 +13,12 @@ export const Wrapper = styled.ul`
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
     background-color: ${({ theme }) => theme.color.white};
     box-shadow: ${({ theme }) => theme.shadow.pale};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        margin-top: ${(props) => (props.name === 'category' ? '47vh' : '73.3vh')};
+        width: 80vw;
+        top: 0;
+    }
 `;
 
 export const Item = styled.li`
@@ -35,5 +43,9 @@ export const Item = styled.li`
         transform: scale(1.01);
         background: ${({ theme }) => theme.color.brigtenL2Gray};
         cursor: pointer;
+    }
+
+    &:last-child {
+        border-bottom: none;
     }
 `;
