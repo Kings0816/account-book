@@ -1,25 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import Dropdown from '../Dropdown';
 import back from '../../../public/assets/back-button.svg';
-import { Wrapper, Element, BackImg, Input, ButtonContainer, DecisionButton } from './style';
+import {
+    Wrapper,
+    CostType,
+    TypeButton,
+    Element,
+    BackImg,
+    Input,
+    ButtonContainer,
+    DecisionButton,
+} from './style';
+
+const categoryDummy = [
+    { id: 1, name: '일상/생활', color: '#817DCE', sign: '-' },
+    { id: 2, name: '식비', color: '#817DCE', sign: '-' },
+    { id: 3, name: '카페', color: '#817DCE', sign: '-' },
+    { id: 4, name: '교통', color: '#817DCE', sign: '-' },
+];
+
+const methodDummy = [
+    { id: 1, name: '카카오페이' },
+    { id: 2, name: '현금' },
+    { id: 3, name: '토스' },
+];
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
-    const shapedForm = (elements) => {
-        const data = {};
-        Array.from(elements).forEach((element) => {
-            if (element.value) {
-                data[element.id] = element.value;
-            }
-        });
-        return data;
-    };
+    const [activeCategory, setActiveCategory] = useState(false);
+    const [activeMethod, setActiveMethod] = useState(false);
+    const [inputs, setInputs] = useState(transaction);
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
 
-        const form = e.target;
-        const data = shapedForm(form.elements);
+        const data = inputs;
         onUpdate(data);
+    };
+
+    const categoryActiveToggle = () => {
+        setActiveCategory((prev) => !prev);
+    };
+
+    const methodActiveToggle = () => {
+        setActiveMethod((prev) => !prev);
+    };
+
+    const changeSign = (sign) => {
+        setInputs((prev) => ({ ...prev, sign }));
+    };
+
+    const changeDate = (e) => {
+        setInputs((prev) => ({ ...prev, date: e.target.value }));
+    };
+
+    const changeCategory = (e) => {
+        setInputs((prev) => ({ ...prev, category: e.target.innerText }));
+        categoryActiveToggle();
+    };
+
+    const changeContent = (e) => {
+        setInputs((prev) => ({ ...prev, content: e.target.value }));
+    };
+
+    const changeMethod = (e) => {
+        setInputs((prev) => ({ ...prev, method: e.target.innerText }));
+        methodActiveToggle();
+    };
+
+    const changeCost = (e) => {
+        setInputs((prev) => ({ ...prev, cost: e.target.value }));
+    };
+
+    const deleteCategory = (e) => {
+        e.stopPropagation();
+        console.log('삭제하기');
     };
 
     return (
@@ -29,6 +84,24 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     <BackImg src={back} />
                 </button>
             </Element>
+            <CostType>
+                <TypeButton
+                    type="button"
+                    aria-label="income"
+                    active={inputs.sign === '+'}
+                    onClick={() => changeSign('+')}
+                >
+                    수입
+                </TypeButton>
+                <TypeButton
+                    type="button"
+                    aria-label="expenditure"
+                    active={inputs.sign === '-'}
+                    onClick={() => changeSign('-')}
+                >
+                    지출
+                </TypeButton>
+            </CostType>
             <Element>
                 <label htmlFor="date">날짜</label>
                 <Input
@@ -36,7 +109,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="date"
                     placeholder="YYYY-MM-DD"
                     autoComplete="off"
-                    defaultValue={transaction.date}
+                    value={inputs.date}
+                    onChange={changeDate}
                 />
             </Element>
             <Element>
@@ -46,7 +120,17 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="category"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={transaction.category}
+                    readOnly
+                    value={inputs.category}
+                    onClick={categoryActiveToggle}
+                />
+                <Dropdown
+                    name="category"
+                    data={categoryDummy}
+                    active={activeCategory}
+                    changeHandler={changeCategory}
+                    deleteHandler={deleteCategory}
+                    createHandler={() => console.log('생성로직')}
                 />
             </Element>
             <Element>
@@ -56,7 +140,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="content"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={transaction.content}
+                    value={inputs.content}
+                    onChange={changeContent}
                 />
             </Element>
             <Element>
@@ -66,7 +151,15 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="method"
                     placeholder="입력하세요."
                     autoComplete="off"
-                    defaultValue={transaction.method}
+                    readOnly
+                    value={inputs.method}
+                    onClick={methodActiveToggle}
+                />
+                <Dropdown
+                    name="method"
+                    data={methodDummy}
+                    active={activeMethod}
+                    changeHandler={changeMethod}
                 />
             </Element>
             <Element>
@@ -76,7 +169,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     id="cost"
                     placeholder="숫자만 기입하세요.(ex 3000)"
                     autoComplete="off"
-                    defaultValue={transaction.cost}
+                    value={inputs.cost}
+                    onChange={changeCost}
                 />
             </Element>
             <ButtonContainer>
