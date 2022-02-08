@@ -1,13 +1,8 @@
 import pool from '../database/connection.js';
-
-const getUserId = async (nickname) => {
-    const sql = `SELECT id FROM user WHERE nickname = '${nickname}'`;
-    const [row] = await pool.query(sql);
-    return row;
-};
+import UserService from './user-service.js';
 
 const getTransactions = async (year, month, nickname) => {
-    const [userId] = await getUserId(nickname);
+    const [userId] = await UserService.getUserId(nickname);
     const sql = `
         SELECT transaction.id AS id, category.name AS category, color, content, method.name AS method, transaction.sign AS sign, cost, DATE_FORMAT(date, '%Y-%m-%d') AS date 
         FROM transaction 
