@@ -15,6 +15,21 @@ const getCategories = async (req, res) => {
     }
 };
 
+const addCategory = async (req, res) => {
+    try {
+        const { nickname } = req.query;
+        const result = await CategoryService.addCategory(nickname);
+
+        res.status(200).json({
+            data: result.data,
+        });
+    } catch (e) {
+        res.status(400).json({
+            message: e.message,
+        });
+    }
+};
+
 const deleteCategory = async (req, res) => {
     try {
         const { id } = req.query;
@@ -30,5 +45,6 @@ const deleteCategory = async (req, res) => {
 
 export default {
     getCategories,
+    addCategory,
     deleteCategory,
 };
