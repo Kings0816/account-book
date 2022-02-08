@@ -1,15 +1,14 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 
-import { useCurrentModal } from './hooks';
+import { useModal } from '../../hooks/useModal';
 import { Wrapper, OuterBox, Category, InnerBox, Content, Method, Cost } from './style';
 
 const Transaction = ({ transaction }) => {
-    const [changeModalState] = useCurrentModal(transaction);
+    const { openModal } = useModal();
 
     return (
-        <Wrapper onClick={changeModalState}>
+        <Wrapper onClick={() => openModal('transaction', transaction)}>
             <OuterBox>
                 <Category data-testid="category">{transaction.category}</Category>
                 <InnerBox>
