@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 
 import Dropdown from '../Dropdown';
 import { methodState } from '../../recoil/method/atom';
+import { categoryState } from '../../recoil/category/atom';
 import back from '../../../public/assets/back-button.svg';
 import {
     Wrapper,
@@ -15,19 +16,13 @@ import {
     DecisionButton,
 } from './style';
 
-const categoryDummy = [
-    { id: 1, name: '일상/생활', color: '#817DCE', sign: '-' },
-    { id: 2, name: '식비', color: '#817DCE', sign: '-' },
-    { id: 3, name: '카페', color: '#817DCE', sign: '-' },
-    { id: 4, name: '교통', color: '#817DCE', sign: '-' },
-];
-
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
     const [activeCategory, setActiveCategory] = useState(false);
     const [activeMethod, setActiveMethod] = useState(false);
     const [inputs, setInputs] = useState(transaction);
 
     const methods = useRecoilValue(methodState);
+    const categories = useRecoilValue(categoryState);
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
@@ -124,7 +119,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
                 <Dropdown
                     name="category"
-                    data={categoryDummy}
+                    data={categories}
                     active={activeCategory}
                     changeHandler={changeCategory}
                     deleteHandler={deleteCategory}
