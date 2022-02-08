@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import React from 'react';
 
 import Dropdown from '../Dropdown';
-import { methodState } from '../../recoil/method/atom';
-import { categoryState } from '../../recoil/category/atom';
-import { deleteCategory } from '../../lib/category';
+import { useUpdateForm } from './hooks';
 import back from '../../../public/assets/back-button.svg';
 import {
     Wrapper,
@@ -18,59 +15,24 @@ import {
 } from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
-    const [activeCategory, setActiveCategory] = useState(false);
-    const [activeMethod, setActiveMethod] = useState(false);
-    const [inputs, setInputs] = useState(transaction);
-
-    const methods = useRecoilValue(methodState);
-    const [categories, setCategories] = useRecoilState(categoryState);
-
-    const handleUpdateSubmit = (e) => {
-        e.preventDefault();
-
-        const data = inputs;
-        onUpdate(data);
-    };
-
-    const categoryActiveToggle = () => {
-        setActiveCategory((prev) => !prev);
-    };
-
-    const methodActiveToggle = () => {
-        setActiveMethod((prev) => !prev);
-    };
-
-    const changeSign = (sign) => {
-        setInputs((prev) => ({ ...prev, sign }));
-    };
-
-    const changeDate = (e) => {
-        setInputs((prev) => ({ ...prev, date: e.target.value }));
-    };
-
-    const changeCategory = (e) => {
-        setInputs((prev) => ({ ...prev, category: e.target.innerText }));
-        categoryActiveToggle();
-    };
-
-    const changeContent = (e) => {
-        setInputs((prev) => ({ ...prev, content: e.target.value }));
-    };
-
-    const changeMethod = (e) => {
-        setInputs((prev) => ({ ...prev, method: e.target.innerText }));
-        methodActiveToggle();
-    };
-
-    const changeCost = (e) => {
-        setInputs((prev) => ({ ...prev, cost: e.target.value }));
-    };
-
-    const removeCategory = async (id, e) => {
-        e.stopPropagation();
-        const complete = await deleteCategory(id);
-        complete && setCategories((prev) => prev.filter((_prev) => _prev.id !== id));
-    };
+    const [
+        activeCategory,
+        activeMethod,
+        inputs,
+        methods,
+        categories,
+        handleUpdateSubmit,
+        categoryActiveToggle,
+        methodActiveToggle,
+        changeSign,
+        changeDate,
+        changeCategory,
+        changeContent,
+        changeMethod,
+        changeCost,
+        removeCategory,
+        addCategory,
+    ] = useUpdateForm(transaction, onUpdate);
 
     return (
         <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
@@ -125,7 +87,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     active={activeCategory}
                     changeHandler={changeCategory}
                     deleteHandler={removeCategory}
-                    createHandler={() => console.log('생성로직')}
+                    createHandler={addCategory}
                 />
             </Element>
             <Element>
