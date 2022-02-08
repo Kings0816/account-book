@@ -16,6 +16,23 @@ export const getCategories = async () => {
     }
 };
 
+export const createCategory = async (name, color, sign) => {
+    try {
+        const nickname = sessionStorage.getItem('nickname');
+        const response = await instance.post(`/`, {
+            nickname,
+            name,
+            color,
+            sign,
+        });
+
+        return response.data;
+    } catch (e) {
+        // TODO 에러 발생 알림창 띄우기
+        console.log(e);
+    }
+};
+
 export const deleteCategory = async (id) => {
     try {
         const result = await instance.delete(`?id=${id}`);
