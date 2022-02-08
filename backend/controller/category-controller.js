@@ -15,6 +15,20 @@ const getCategories = async (req, res) => {
     }
 };
 
+const deleteCategory = async (req, res) => {
+    try {
+        const { id } = req.query;
+        await CategoryService.deleteCategory(id);
+
+        res.status(200).end();
+    } catch (e) {
+        res.status(400).json({
+            message: e.message,
+        });
+    }
+};
+
 export default {
     getCategories,
+    deleteCategory,
 };

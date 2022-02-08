@@ -11,6 +11,13 @@ const getCategories = async (nickname) => {
     return row;
 };
 
+const deleteCategory = async (id) => {
+    const sql = `DELETE FROM account_book.category WHERE id = ?`;
+    await pool.query(sql, [id]);
+    return;
+};
+
 export default {
     getCategories,
+    deleteCategory,
 };
