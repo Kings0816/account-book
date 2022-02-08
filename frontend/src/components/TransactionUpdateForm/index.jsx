@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import Dropdown from '../Dropdown';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
+import { deleteCategory } from '../../lib/category';
 import back from '../../../public/assets/back-button.svg';
 import {
     Wrapper,
@@ -22,7 +23,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
     const [inputs, setInputs] = useState(transaction);
 
     const methods = useRecoilValue(methodState);
-    const categories = useRecoilValue(categoryState);
+    const [categories, setCategories] = useRecoilState(categoryState);
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
@@ -65,9 +66,10 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         setInputs((prev) => ({ ...prev, cost: e.target.value }));
     };
 
-    const deleteCategory = (e) => {
+    const removeCategory = async (id, e) => {
         e.stopPropagation();
-        console.log('삭제하기');
+        const complete = await deleteCategory(id);
+        complete && setCategories((prev) => prev.filter((_prev) => _prev.id !== id));
     };
 
     return (
@@ -122,7 +124,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     data={categories}
                     active={activeCategory}
                     changeHandler={changeCategory}
-                    deleteHandler={deleteCategory}
+                    deleteHandler={removeCategory}
                     createHandler={() => console.log('생성로직')}
                 />
             </Element>
