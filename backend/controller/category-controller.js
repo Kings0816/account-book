@@ -17,14 +17,16 @@ const getCategories = async (req, res) => {
 
 const addCategory = async (req, res) => {
     try {
-        const { nickname } = req.query;
-        const result = await CategoryService.addCategory(nickname);
+        const { nickname, name, color, sign } = req.body;
+        const result = await CategoryService.addCategory(nickname, name, color, sign);
 
         res.status(200).json({
             data: result.data,
         });
     } catch (e) {
-        res.status(400).json({
+        const { message } = e;
+        const statusCode = message === '이미 존재하는 카테고리 입니다.' ? 409 : 400;
+        res.status(statusCode).json({
             message: e.message,
         });
     }
