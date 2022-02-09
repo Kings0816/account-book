@@ -132,7 +132,11 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
             </Element>
             <ButtonContainer>
-                <DecisionButton type="button" action="delete" onClick={onDelete}>
+                <DecisionButton
+                    type="button"
+                    action="delete"
+                    onClick={() => onDelete(transaction.id, transaction.date)}
+                >
                     삭제
                 </DecisionButton>
                 <DecisionButton type="submit" action="update">

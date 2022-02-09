@@ -15,44 +15,61 @@ const getTransactions = async (req, res) => {
     }
 };
 
-const addTransaction = (req, res) => {
+const addTransaction = async (req, res) => {
     try {
-        const result = TransactionService.addTransaction();
-        // TODO 에러 유무에 따라 분기처리 하기
+        const { nickname, mid, cid, content, cost, sign, date } = req.body;
+        const result = await TransactionService.addTransaction(
+            nickname,
+            mid,
+            cid,
+            content,
+            cost,
+            sign,
+            date,
+        );
+
         res.status(200).json({
-            data: result.data,
+            data: result,
         });
     } catch (e) {
-        res.status(500).json({
-            data: '거래내역을 추가하는 중 서버에서 오류가 발생했습니다.',
+        res.status(400).json({
+            message: e.message,
         });
     }
 };
 
-const updateTransaction = (req, res) => {
+const updateTransaction = async (req, res) => {
     try {
-        const result = TransactionService.updateTransaction();
-        // TODO 에러 유무에 따라 분기처리 하기
+        const { id, mid, cid, content, cost, sign, date } = req.body;
+        const result = await TransactionService.updateTransaction(
+            id,
+            mid,
+            cid,
+            content,
+            cost,
+            sign,
+            date,
+        );
+
         res.status(200).json({
-            data: result.data,
+            data: result,
         });
     } catch (e) {
-        res.status(500).json({
-            data: '거래내역을 업데이트하는 중 서버에서 오류가 발생했습니다.',
+        res.status(400).json({
+            message: e.message,
         });
     }
 };
 
-const deleteTransaction = (req, res) => {
+const deleteTransaction = async (req, res) => {
     try {
-        const result = TransactionService.deleteTransaction();
-        // TODO 에러 유무에 따라 분기처리 하기
-        res.status(200).json({
-            data: result.data,
-        });
+        const { id } = req.query;
+        await TransactionService.deleteTransaction(id);
+
+        res.status(200).end();
     } catch (e) {
-        res.status(500).json({
-            data: '거래내역을 삭제하는 중 서버에서 오류가 발생했습니다.',
+        res.status(400).json({
+            message: e.message,
         });
     }
 };
