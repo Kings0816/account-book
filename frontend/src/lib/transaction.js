@@ -15,3 +15,22 @@ export const getTransactionsInDate = async (year, month) => {
         console.log(e);
     }
 };
+
+export const createTransaction = async (mid, cid, content, cost, sign, date) => {
+    try {
+        const nickname = sessionStorage.getItem('nickname');
+        const response = await instance.post(`/`, {
+            nickname,
+            mid,
+            cid,
+            content,
+            cost,
+            sign,
+            date,
+        });
+        return response.data.data;
+    } catch (e) {
+        // TODO 에러 발생 알림창 띄우기
+        console.log(e);
+    }
+};
