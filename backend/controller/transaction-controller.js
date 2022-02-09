@@ -15,16 +15,25 @@ const getTransactions = async (req, res) => {
     }
 };
 
-const addTransaction = (req, res) => {
+const addTransaction = async (req, res) => {
     try {
-        const result = TransactionService.addTransaction();
-        // TODO 에러 유무에 따라 분기처리 하기
+        const { nickname, mid, cid, content, cost, sign, date } = req.body;
+        const result = await TransactionService.addTransaction(
+            nickname,
+            mid,
+            cid,
+            content,
+            cost,
+            sign,
+            date,
+        );
+
         res.status(200).json({
-            data: result.data,
+            data: result,
         });
     } catch (e) {
-        res.status(500).json({
-            data: '거래내역을 추가하는 중 서버에서 오류가 발생했습니다.',
+        res.status(400).json({
+            message: e.message,
         });
     }
 };
