@@ -15,7 +15,7 @@ const Dropdown = ({ name, data, active, changeHandler, deleteHandler, createHand
     ));
 
     return (
-        <Wrapper active={active} name={name}>
+        <Wrapper active={active} aria-label={name}>
             {items}
             {createHandler && (
                 <Item>

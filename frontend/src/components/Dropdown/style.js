@@ -10,7 +10,7 @@ export const Wrapper = styled.ul`
     max-height: 120px;
     overflow-y: scroll;
 
-    visibility: ${(props) => (props.active ? 'none' : 'hidden')};
+    visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
 
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
     background-color: ${({ theme }) => theme.color.white};
