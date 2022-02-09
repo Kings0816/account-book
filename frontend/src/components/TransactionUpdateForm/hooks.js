@@ -20,7 +20,9 @@ export const useUpdateForm = (transaction, onUpdate) => {
         e.preventDefault();
 
         const data = inputs;
-        onUpdate(data);
+        const [methodInfo] = methods.filter((method) => method.name === data.method);
+        const [categoryInfo] = categories.filter((category) => category.name === data.category);
+        onUpdate({ ...data, mid: methodInfo.id, cid: categoryInfo.id });
     };
 
     const categoryActiveToggle = () => {
