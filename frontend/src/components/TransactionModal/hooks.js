@@ -1,13 +1,16 @@
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
-import { modalState } from '../../recoil/modal/atom';
+import { categoryState } from '../../recoil/category/atom';
+import { createCategory } from '../../lib/category';
 
-export const useModal = () => {
-    const [modal, setModal] = useRecoilState(modalState);
+export const useCategory = (closeModal) => {
+    const setCategories = useSetRecoilState(categoryState);
 
-    const closeModal = () => {
-        setModal({ current: null, props: null });
+    const addCategory = async (category) => {
+        const newCategory = await createCategory(category.name, category.color, category.sign);
+        newCategory && setCategories(newCategory);
+        closeModal('createCategory');
     };
 
-    return [modal, closeModal];
+    return { addCategory };
 };

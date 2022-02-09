@@ -20,10 +20,12 @@ const TEST_DATA = {
 
 describe('TransactionModal 컴포넌트 테스트', () => {
     const initializeState = ({ set }) => {
-        set(modalState, {
-            current: 'transaction',
-            props: TEST_DATA,
-        });
+        set(modalState, [
+            {
+                name: 'transaction',
+                props: TEST_DATA,
+            },
+        ]);
     };
 
     it('배경 Dim, 입력 폼이 표시된다.', () => {

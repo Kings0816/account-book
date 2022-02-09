@@ -8,12 +8,14 @@ const Dropdown = ({ name, data, active, changeHandler, deleteHandler, createHand
     const items = data.map((_data) => (
         <Item key={nanoid()} onClick={changeHandler}>
             <span>{_data.name}</span>
-            {deleteHandler && <img src={deleteImg} onClick={deleteHandler} alt="delete" />}
+            {deleteHandler && (
+                <img src={deleteImg} onClick={(e) => deleteHandler(_data.id, e)} alt="delete" />
+            )}
         </Item>
     ));
 
     return (
-        <Wrapper active={active} name={name}>
+        <Wrapper active={active} aria-label={name}>
             {items}
             {createHandler && (
                 <Item>

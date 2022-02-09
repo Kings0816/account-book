@@ -1,21 +1,33 @@
 import React from 'react';
 
 import TransactionUpdateForm from '../TransactionUpdateForm';
-import { useModal } from './hooks';
+import CategoryForm from '../CategoryCreateForm';
+import { useModal } from '../../hooks/useModal';
+import { useCategory } from './hooks';
 import { Wrapper, BackgroundDim } from './style';
 
 const TransactionModal = () => {
-    const [modal, closeModal] = useModal();
+    const { isOpen, closeModal, getOpenModalByName } = useModal();
+    const { addCategory } = useCategory(closeModal);
 
-    if (modal.props == null) return null;
+    const transactionModal = getOpenModalByName('transaction');
+    const categoryModal = getOpenModalByName('createCategory');
+    if (transactionModal == null) return null;
+
     return (
-        <Wrapper active={modal.current === 'transaction'} data-testid="modal">
+        <Wrapper active={transactionModal != null} data-testid="modal">
             <BackgroundDim data-testid="dim" />
             <TransactionUpdateForm
-                transaction={modal.props}
+                transaction={transactionModal.props}
                 onUpdate={() => null}
                 onDelete={() => null}
-                onCancle={closeModal}
+                onCancle={() => closeModal('transaction')}
+            />
+            <CategoryForm
+                active={isOpen('createCategory')}
+                category={categoryModal?.props}
+                onCreate={addCategory}
+                onCancle={() => closeModal('createCategory')}
             />
         </Wrapper>
     );

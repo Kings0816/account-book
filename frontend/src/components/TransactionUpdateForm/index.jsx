@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import React from 'react';
 
 import Dropdown from '../Dropdown';
-import { methodState } from '../../recoil/method/atom';
+import { useUpdateForm } from './hooks';
 import back from '../../../public/assets/back-button.svg';
 import {
     Wrapper,
@@ -15,65 +14,26 @@ import {
     DecisionButton,
 } from './style';
 
-const categoryDummy = [
-    { id: 1, name: '일상/생활', color: '#817DCE', sign: '-' },
-    { id: 2, name: '식비', color: '#817DCE', sign: '-' },
-    { id: 3, name: '카페', color: '#817DCE', sign: '-' },
-    { id: 4, name: '교통', color: '#817DCE', sign: '-' },
-];
-
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
-    const [activeCategory, setActiveCategory] = useState(false);
-    const [activeMethod, setActiveMethod] = useState(false);
-    const [inputs, setInputs] = useState(transaction);
-
-    const methods = useRecoilValue(methodState);
-
-    const handleUpdateSubmit = (e) => {
-        e.preventDefault();
-
-        const data = inputs;
-        onUpdate(data);
-    };
-
-    const categoryActiveToggle = () => {
-        setActiveCategory((prev) => !prev);
-    };
-
-    const methodActiveToggle = () => {
-        setActiveMethod((prev) => !prev);
-    };
-
-    const changeSign = (sign) => {
-        setInputs((prev) => ({ ...prev, sign }));
-    };
-
-    const changeDate = (e) => {
-        setInputs((prev) => ({ ...prev, date: e.target.value }));
-    };
-
-    const changeCategory = (e) => {
-        setInputs((prev) => ({ ...prev, category: e.target.innerText }));
-        categoryActiveToggle();
-    };
-
-    const changeContent = (e) => {
-        setInputs((prev) => ({ ...prev, content: e.target.value }));
-    };
-
-    const changeMethod = (e) => {
-        setInputs((prev) => ({ ...prev, method: e.target.innerText }));
-        methodActiveToggle();
-    };
-
-    const changeCost = (e) => {
-        setInputs((prev) => ({ ...prev, cost: e.target.value }));
-    };
-
-    const deleteCategory = (e) => {
-        e.stopPropagation();
-        console.log('삭제하기');
-    };
+    const [
+        activeCategory,
+        activeMethod,
+        inputs,
+        methods,
+        categories,
+        handleUpdateSubmit,
+        categoryActiveToggle,
+        methodActiveToggle,
+        changeSign,
+        changeDate,
+        changeCategory,
+        changeContent,
+        changeMethod,
+        changeCost,
+        removeCategory,
+        openCategoryCreateModal,
+        addCategory,
+    ] = useUpdateForm(transaction, onUpdate);
 
     return (
         <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
@@ -124,11 +84,11 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
                 <Dropdown
                     name="category"
-                    data={categoryDummy}
+                    data={categories}
                     active={activeCategory}
                     changeHandler={changeCategory}
-                    deleteHandler={deleteCategory}
-                    createHandler={() => console.log('생성로직')}
+                    deleteHandler={removeCategory}
+                    createHandler={openCategoryCreateModal}
                 />
             </Element>
             <Element>

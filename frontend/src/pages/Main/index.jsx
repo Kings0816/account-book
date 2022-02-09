@@ -1,16 +1,17 @@
 import React, { Suspense, useEffect } from 'react';
 
-import { usefetchMethods } from './hooks';
+import { usefetchMethodAndCategory } from './hooks';
 import Header from '../../components/Header';
 import Summary from '../../components/Summary';
 import Transactions from '../../components/Transactions';
 import { MainWrapper } from './style';
 
 const Main = () => {
-    const [fetchMethods] = usefetchMethods();
+    const [fetchMethod, fetchCategory] = usefetchMethodAndCategory();
 
     useEffect(() => {
-        fetchMethods();
+        fetchMethod();
+        fetchCategory();
     }, []);
 
     return (

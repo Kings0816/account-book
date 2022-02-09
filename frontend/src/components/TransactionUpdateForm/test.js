@@ -93,4 +93,42 @@ describe('TransactionUpateForm 테스트', () => {
         fireEvent.click(updateButton);
         expect(onUpdate).toHaveBeenCalledWith(TEST_DATA);
     });
+
+    it('카테고리 input을 누르면 카테고리 Dropdown이 표시된다.', () => {
+        render(
+            <TransactionUpdateForm
+                transaction={TEST_DATA}
+                onUpdate={null}
+                onDelete={null}
+                onCancle={null}
+            />,
+        );
+        const categoryDropdown = screen.queryByRole('list', { name: 'category' });
+        expect(categoryDropdown).not.toBeInTheDocument();
+
+        const categoryInput = screen.getByLabelText('카테고리');
+        fireEvent.click(categoryInput);
+
+        const visibleCategoryDropdown = screen.getByRole('list', { name: 'category' });
+        expect(visibleCategoryDropdown).toBeInTheDocument();
+    });
+
+    it('결제수단 input을 누르면 결제수단 Dropdown이 표시된다.', () => {
+        render(
+            <TransactionUpdateForm
+                transaction={TEST_DATA}
+                onUpdate={null}
+                onDelete={null}
+                onCancle={null}
+            />,
+        );
+        const methodDropdown = screen.queryByRole('list', { name: 'method' });
+        expect(methodDropdown).not.toBeInTheDocument();
+
+        const methodInput = screen.getByLabelText('결제수단');
+        fireEvent.click(methodInput);
+
+        const visibleMethodDropdown = screen.getByRole('list', { name: 'method' });
+        expect(visibleMethodDropdown).toBeInTheDocument();
+    });
 });

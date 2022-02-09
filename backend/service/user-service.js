@@ -2,6 +2,12 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import pool from '../database/connection.js';
 
+const getUserId = async (nickname) => {
+    const sql = `SELECT id FROM user WHERE nickname = '${nickname}'`;
+    const [row] = await pool.query(sql);
+    return row;
+};
+
 const makeJwt = (id, login) => {
     const payload = {
         id,
@@ -71,4 +77,5 @@ const logout = () => {
 export default {
     proccedLogin,
     logout,
+    getUserId,
 };
