@@ -34,3 +34,21 @@ export const createTransaction = async (mid, cid, content, cost, sign, date) => 
         console.log(e);
     }
 };
+
+export const updateTransaction = async (id, mid, cid, content, cost, sign, date) => {
+    try {
+        const response = await instance.patch(`/`, {
+            id,
+            mid,
+            cid,
+            content,
+            cost,
+            sign,
+            date,
+        });
+        return response.data.data;
+    } catch (e) {
+        // TODO 에러 발생 알림창 띄우기
+        console.log(e);
+    }
+};
