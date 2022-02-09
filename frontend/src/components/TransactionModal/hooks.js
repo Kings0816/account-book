@@ -6,8 +6,8 @@ import { createCategory } from '../../lib/category';
 export const useCategory = (closeModal) => {
     const setCategories = useSetRecoilState(categoryState);
 
-    const addCategory = async (name, color, sign) => {
-        const newCategory = await createCategory(name, color, sign);
+    const addCategory = async (category) => {
+        const newCategory = await createCategory(category.name, category.color, category.sign);
         newCategory && setCategories(newCategory);
         closeModal('createCategory');
     };

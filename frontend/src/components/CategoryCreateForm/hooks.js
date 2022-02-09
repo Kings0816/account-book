@@ -29,7 +29,7 @@ export const useSumbit = (onCreate) => {
 
         const { elements } = e.target;
         const data = shapedForm(elements);
-        onCreate(data.name, data.color, sign);
+        onCreate({ ...data, sign });
     };
 
     return { handleUpdateSubmit };
