@@ -52,3 +52,14 @@ export const updateTransaction = async (id, mid, cid, content, cost, sign, date)
         console.log(e);
     }
 };
+
+export const deleteTransaction = async (id) => {
+    try {
+        const result = await instance.delete(`?id=${id}`);
+        const COMPLETE = result.status === 200;
+        return COMPLETE;
+    } catch (e) {
+        // TODO 에러 발생 알림창 띄우기
+        console.log(e);
+    }
+};
