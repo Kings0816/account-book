@@ -1,5 +1,6 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
 import { createCategory } from '../../lib/category';
 import { updateTransaction, deleteTransaction } from '../../lib/transaction';
@@ -17,11 +18,24 @@ export const useCategory = (closeModal) => {
 };
 
 export const useTransactionHandler = () => {
-    const changeTransaction = async ({ id, mid, cid, content, cost, sign, date }) => {
+    const methods = useRecoilValue(methodState);
+    const categories = useRecoilValue(categoryState);
+
+    const changeTransaction = async ({ id, method, category, content, cost, sign, date }) => {
         const [year, month, _] = date.split('-');
         const transactionDate = `${year}-${month.replace(/(^0)+/i, '')}`;
 
-        const result = await updateTransaction(id, mid, cid, content, cost, sign, date);
+        const [methodInfo] = methods.filter((_method) => _method.name === method);
+        const [categoryInfo] = categories.filter((_category) => _category.name === category);
+        const result = await updateTransaction(
+            id,
+            methodInfo.id,
+            categoryInfo.id,
+            content,
+            cost,
+            sign,
+            date,
+        );
         if (!result) return;
 
         const transactionsInDate = JSON.parse(sessionStorage.getItem(transactionDate));

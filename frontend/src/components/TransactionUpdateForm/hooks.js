@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useModal } from '../../hooks/useModal';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
-import { createCategory, deleteCategory } from '../../lib/category';
+import { deleteCategory } from '../../lib/category';
 
 export const useUpdateForm = (transaction, onUpdate) => {
     const [activeCategory, setActiveCategory] = useState(false);
@@ -18,11 +18,7 @@ export const useUpdateForm = (transaction, onUpdate) => {
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
-
-        const data = inputs;
-        const [methodInfo] = methods.filter((method) => method.name === data.method);
-        const [categoryInfo] = categories.filter((category) => category.name === data.category);
-        onUpdate({ ...data, mid: methodInfo.id, cid: categoryInfo.id });
+        onUpdate(inputs);
     };
 
     const categoryActiveToggle = () => {
