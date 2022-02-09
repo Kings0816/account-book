@@ -36,19 +36,15 @@ const addTransaction = async (nickname, mid, cid, content, cost, sign, date) => 
     return addedTransaction;
 };
 
-const updateTransaction = () => {
-    try {
-        // TODO 거래내역을 업데이트하는 로직 처리하기
-        const result = {
-            status: 'success',
-            data: '거래내역을 업데이트하는 로직 테스트 중입니다.',
-        };
-        return result;
-    } catch (e) {
-        return {
-            status: 'error',
-        };
-    }
+const updateTransaction = async (id, mid, cid, content, cost, sign, date) => {
+    const sql = `
+        UPDATE transaction 
+        SET mid = ?, cid = ?, content = ?, cost = ?, sign = ?, date = ?
+        WHERE id = ?`;
+    await pool.query(sql, [mid, cid, content, cost, sign, date, id]);
+
+    const [updatedTransaction] = await getTransactionById(id);
+    return updatedTransaction;
 };
 
 const deleteTransaction = () => {
