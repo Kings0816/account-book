@@ -26,9 +26,9 @@ export const createCategory = async (name, color, sign) => {
             sign,
         });
 
-        return response.data;
+        return response.data.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
+        // TODO 에러 발생 알림창 띄우기(409인 경우 중복된 name이라고 띄우기)
         console.log(e);
     }
 };

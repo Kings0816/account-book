@@ -21,7 +21,7 @@ const addCategory = async (req, res) => {
         const result = await CategoryService.addCategory(nickname, name, color, sign);
 
         res.status(200).json({
-            data: result.data,
+            data: result,
         });
     } catch (e) {
         const { message } = e;
