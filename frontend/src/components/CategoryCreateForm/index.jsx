@@ -54,6 +54,7 @@ const CategoryForm = ({ active, category, onCreate, onCancle }) => {
                 <SelectBox>
                     <SelectColor
                         type="button"
+                        aria-label="refresh"
                         color={CATEGORY_COLORS[currentColor]}
                         onClick={changeColor}
                     >
