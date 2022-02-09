@@ -7,9 +7,7 @@ import Header from '.';
 describe('공통 헤더 컴포넌트 테스트', () => {
     it('이전 달, 다음 달로 이동할 수 있는 Arrow 버튼이 2개 표시된다.', () => {
         render(<Header current="main" />);
-
         const arrowButtons = screen.getAllByRole('button', { name: /month/i });
-
         expect(arrowButtons).toHaveLength(2);
     });
 
@@ -25,9 +23,7 @@ describe('공통 헤더 컴포넌트 테스트', () => {
 
     it('내역, 달력, 통계로 이동할 수 있는 Link 요소가 3개 표시된다.', () => {
         render(<Header current="main" />);
-
         const arrowButtons = screen.getAllByRole('link');
-
         expect(arrowButtons).toHaveLength(3);
     });
 
@@ -41,7 +37,6 @@ describe('공통 헤더 컴포넌트 테스트', () => {
         fireEvent.click(prevButton);
 
         const [changedYear, changedMonth] = dateStrong.textContent.split(/[^0-9]+/g);
-
         expect(new Date(changedYear, changedMonth)).toEqual(new Date(year, parseInt(month) - 1));
     });
 
@@ -55,7 +50,6 @@ describe('공통 헤더 컴포넌트 테스트', () => {
         fireEvent.click(nextButton);
 
         const [changedYear, changedMonth] = dateStrong.textContent.split(/[^0-9]+/g);
-
         expect(new Date(changedYear, changedMonth)).toEqual(new Date(year, parseInt(month) + 1));
     });
 

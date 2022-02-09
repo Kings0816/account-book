@@ -48,25 +48,19 @@ describe('하루 단위의 transactions에 대한 DailyTransaction 컴포넌트 
 
     it('props로 내려온 트랜잭션들의 수입이 0원인 경우 수입 총 금액은 표시되지 않는다.', () => {
         render(<DailyTransaction date={TEST_DATE} transactions={[]} />);
-
         const incomeSpan = screen.queryByText('수입');
-
         expect(incomeSpan).not.toBeInTheDocument();
     });
 
     it('props로 내려온 트랜잭션들의 지출이 0원인 경우 지출 총 금액은 표시되지 않는다.', () => {
         render(<DailyTransaction date={TEST_DATE} transactions={[]} />);
-
         const expenditureSpan = screen.queryByText('지출');
-
         expect(expenditureSpan).not.toBeInTheDocument();
     });
 
     it('props로 내려온 트랜잭션들이 모두 표시된다.', () => {
         render(<DailyTransaction date={TEST_DATE} transactions={TEST_DATA} />);
-
         const transactions = screen.getAllByRole('listitem');
-
         expect(transactions).toHaveLength(TEST_DATA.length);
     });
 });
