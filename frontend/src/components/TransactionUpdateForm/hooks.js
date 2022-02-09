@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+import { useModal } from '../../hooks/useModal';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
 import { createCategory, deleteCategory } from '../../lib/category';
@@ -12,6 +13,8 @@ export const useUpdateForm = (transaction, onUpdate) => {
 
     const methods = useRecoilValue(methodState);
     const [categories, setCategories] = useRecoilState(categoryState);
+
+    const { openModal } = useModal();
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
@@ -60,9 +63,8 @@ export const useUpdateForm = (transaction, onUpdate) => {
         complete && setCategories((prev) => prev.filter((_prev) => _prev.id !== id));
     };
 
-    const addCategory = async () => {
-        const newCategory = await createCategory();
-        newCategory && setCategories((prev) => [...prev, newCategory]);
+    const openCategoryCreateModal = () => {
+        openModal('createCategory', { sign: '+', name: '', color: '' });
     };
 
     return [
@@ -81,6 +83,6 @@ export const useUpdateForm = (transaction, onUpdate) => {
         changeMethod,
         changeCost,
         removeCategory,
-        addCategory,
+        openCategoryCreateModal,
     ];
 };

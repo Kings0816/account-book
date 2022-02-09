@@ -31,6 +31,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         changeMethod,
         changeCost,
         removeCategory,
+        openCategoryCreateModal,
         addCategory,
     ] = useUpdateForm(transaction, onUpdate);
 
@@ -87,7 +88,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     active={activeCategory}
                     changeHandler={changeCategory}
                     deleteHandler={removeCategory}
-                    createHandler={addCategory}
+                    createHandler={openCategoryCreateModal}
                 />
             </Element>
             <Element>
