@@ -16,6 +16,10 @@ export const useCreateForm = (transaction, onCreate) => {
 
     const { openModal } = useModal();
 
+    const categoriesInCostType = () => {
+        return categories.filter((category) => category.sign === inputs.sign);
+    };
+
     const handleCreateSubmit = (e) => {
         e.preventDefault();
         onCreate(inputs);
@@ -70,7 +74,7 @@ export const useCreateForm = (transaction, onCreate) => {
         activeMethod,
         inputs,
         methods,
-        categories,
+        categoriesInCostType,
         handleCreateSubmit,
         categoryActiveToggle,
         methodActiveToggle,
