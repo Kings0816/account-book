@@ -6,11 +6,11 @@ import TransactionCreateForm from '.';
 import { categoryState } from '../../recoil/category/atom';
 
 const TEST_DATA = {
-    category: '',
-    content: '',
-    method: '',
-    cost: '',
-    date: '',
+    category: '식비',
+    content: '치킨',
+    method: '토스',
+    cost: '20000',
+    date: '2022-02-11',
     sign: '+',
 };
 
