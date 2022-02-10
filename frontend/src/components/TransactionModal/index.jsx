@@ -1,35 +1,48 @@
 import React from 'react';
 
 import TransactionUpdateForm from '../TransactionUpdateForm';
+import TransactionCreateForm from '../TransactionCreateForm';
 import CategoryForm from '../CategoryCreateForm';
 import { useModal } from '../../hooks/useModal';
-import { useCategory, useTransactionHandler } from './hooks';
+import { useCategory, useUpdateTransactionHandler, useCreateTransactionHandler } from './hooks';
 import { Wrapper, BackgroundDim } from './style';
 
 const TransactionModal = () => {
     const { isOpen, closeModal, getOpenModalByName } = useModal();
     const { addCategory } = useCategory(closeModal);
-    const { changeTransaction, removeTransaction } = useTransactionHandler();
+    const { changeTransaction, removeTransaction } = useUpdateTransactionHandler(closeModal);
+    const { addTransaction } = useCreateTransactionHandler(closeModal);
 
-    const transactionModal = getOpenModalByName('transaction');
+    const transactionUpdateModal = getOpenModalByName('updateTransaction');
+    const transactionCreateModal = getOpenModalByName('createTransaction');
     const categoryModal = getOpenModalByName('createCategory');
-    if (transactionModal == null) return null;
 
     return (
-        <Wrapper active={transactionModal != null} data-testid="modal">
+        <Wrapper active={transactionUpdateModal || transactionCreateModal} data-testid="modal">
             <BackgroundDim data-testid="dim" />
-            <TransactionUpdateForm
-                transaction={transactionModal.props}
-                onUpdate={changeTransaction}
-                onDelete={removeTransaction}
-                onCancle={() => closeModal('transaction')}
-            />
-            <CategoryForm
-                active={isOpen('createCategory')}
-                category={categoryModal?.props}
-                onCreate={addCategory}
-                onCancle={() => closeModal('createCategory')}
-            />
+            {transactionUpdateModal && (
+                <TransactionUpdateForm
+                    transaction={transactionUpdateModal.props}
+                    onUpdate={changeTransaction}
+                    onDelete={removeTransaction}
+                    onCancle={() => closeModal('updateTransaction')}
+                />
+            )}
+            {transactionCreateModal && (
+                <TransactionCreateForm
+                    transaction={transactionCreateModal.props}
+                    onCreate={addTransaction}
+                    onCancle={() => closeModal('createTransaction')}
+                />
+            )}
+            {categoryModal && (
+                <CategoryForm
+                    active={isOpen('createCategory')}
+                    category={categoryModal.props}
+                    onCreate={addCategory}
+                    onCancle={() => closeModal('createCategory')}
+                />
+            )}
         </Wrapper>
     );
 };
