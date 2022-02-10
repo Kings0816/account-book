@@ -3,9 +3,9 @@ import React, { Suspense, useEffect } from 'react';
 import { usefetchMethodAndCategory } from './hooks';
 import Header from '../../components/Header';
 import Summary from '../../components/Summary';
+import TransactionCreator from '../../components/TransactionCreator';
 import Transactions from '../../components/Transactions';
-import fabImg from '../../../public/assets/fab-button.svg';
-import { MainWrapper, TransactionBox, CreatorContainer, Creator, Fab } from './style';
+import { MainWrapper, TransactionBox } from './style';
 
 const Main = () => {
     const [fetchMethod, fetchCategory] = usefetchMethodAndCategory();
@@ -23,16 +23,7 @@ const Main = () => {
                     <Summary />
                 </Suspense>
                 <TransactionBox>
-                    <CreatorContainer>
-                        <Creator type="button" onClick={() => console.log(111)}>
-                            내역 추가하기
-                        </Creator>
-                    </CreatorContainer>
-                    <Fab>
-                        <button type="button" onClick={() => console.log(111)}>
-                            <img src={fabImg} />
-                        </button>
-                    </Fab>
+                    <TransactionCreator />
                     <Suspense fallback={<div>Loading...</div>}>
                         <Transactions />
                     </Suspense>
