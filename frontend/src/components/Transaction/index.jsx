@@ -8,7 +8,7 @@ const Transaction = ({ transaction }) => {
     const { openModal } = useModal();
 
     return (
-        <Wrapper onClick={() => openModal('transaction', transaction)}>
+        <Wrapper onClick={() => openModal('updateTransaction', transaction)}>
             <OuterBox>
                 <Category data-testid="category">{transaction.category || '미분류'}</Category>
                 <InnerBox>
