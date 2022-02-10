@@ -20,6 +20,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         activeMethod,
         inputs,
         methods,
+        isValidInputs,
         categoriesInCostType,
         handleUpdateSubmit,
         categoryActiveToggle,
@@ -135,10 +136,16 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     type="button"
                     action="delete"
                     onClick={() => onDelete(transaction.id, transaction.date)}
+                    active={true}
                 >
                     삭제
                 </DecisionButton>
-                <DecisionButton type="submit" action="update">
+                <DecisionButton
+                    type="submit"
+                    action="update"
+                    active={isValidInputs()}
+                    disabled={!isValidInputs()}
+                >
                     수정
                 </DecisionButton>
             </ButtonContainer>

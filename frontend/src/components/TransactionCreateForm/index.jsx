@@ -20,6 +20,7 @@ const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
         activeMethod,
         inputs,
         methods,
+        isValidateInputs,
         categoriesInCostType,
         handleCreateSubmit,
         categoryActiveToggle,
@@ -131,7 +132,12 @@ const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
                 />
             </Element>
             <ButtonContainer>
-                <DecisionButton type="submit" action="create">
+                <DecisionButton
+                    type="submit"
+                    action="create"
+                    active={isValidateInputs()}
+                    disabled={!isValidateInputs()}
+                >
                     추가
                 </DecisionButton>
             </ButtonContainer>

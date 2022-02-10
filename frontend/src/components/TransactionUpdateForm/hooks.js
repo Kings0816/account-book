@@ -49,10 +49,7 @@ export const useUpdateForm = (transaction, onUpdate) => {
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
-
-        const isValid = isValidateInputs();
-        // TODO null에 토스트창 띄우기
-        isValid ? onUpdate(inputs) : null;
+        onUpdate(inputs);
     };
 
     const categoryActiveToggle = () => {
@@ -104,6 +101,7 @@ export const useUpdateForm = (transaction, onUpdate) => {
         activeMethod,
         inputs,
         methods,
+        isValidateInputs,
         categoriesInCostType,
         handleUpdateSubmit,
         categoryActiveToggle,

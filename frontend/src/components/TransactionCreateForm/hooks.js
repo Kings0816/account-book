@@ -49,10 +49,7 @@ export const useCreateForm = (transaction, onCreate) => {
 
     const handleCreateSubmit = (e) => {
         e.preventDefault();
-
-        const isValid = isValidateInputs();
-        // TODO null에 토스트창 띄우기
-        isValid ? onCreate(inputs) : null;
+        onCreate(inputs);
     };
 
     const categoryActiveToggle = () => {
@@ -104,6 +101,7 @@ export const useCreateForm = (transaction, onCreate) => {
         activeMethod,
         inputs,
         methods,
+        isValidateInputs,
         categoriesInCostType,
         handleCreateSubmit,
         categoryActiveToggle,

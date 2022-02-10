@@ -113,4 +113,5 @@ export const DecisionButton = styled.button`
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSize.default};
     color: ${({ theme }) => theme.color.blue};
+    opacity: ${(props) => (props.active ? 1 : 0.37)};
 `;
