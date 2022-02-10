@@ -19,8 +19,6 @@ export const DailyInfo = styled.div`
     white-space: nowrap;
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
-        margin: 0px 15px;
-
         font-size: ${({ theme }) => theme.fontSize.mini};
     }
 `;
