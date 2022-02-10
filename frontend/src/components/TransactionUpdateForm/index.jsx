@@ -32,7 +32,6 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         changeCost,
         removeCategory,
         openCategoryCreateModal,
-        addCategory,
     ] = useUpdateForm(transaction, onUpdate);
 
     return (
