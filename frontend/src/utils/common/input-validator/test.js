@@ -22,7 +22,7 @@ describe('입력값 검증로직 테스트', () => {
         expect(formatValidator(dateFormat, '2022-222-11')).toEqual(INVALID_DATE);
         expect(formatValidator(dateFormat, '2022-02-0')).toEqual(INVALID_DATE);
         expect(formatValidator(dateFormat, '2022-02-32')).toEqual(INVALID_DATE);
-        expect(formatValidator(dateFormat, '2022-02-333')).toEqual(INVALID_DATE);
+        expect(formatValidator(dateFormat, '2022-02-303')).toEqual(INVALID_DATE);
 
         const validDate = '2022-02-11';
         expect(formatValidator(dateFormat, validDate)).toEqual(VALID_INPUT);
