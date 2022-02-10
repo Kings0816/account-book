@@ -75,7 +75,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 <Input
                     type="text"
                     id="category"
-                    placeholder="입력하세요."
+                    placeholder="선택하세요."
                     autoComplete="off"
                     readOnly
                     value={inputs.category}
@@ -106,7 +106,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 <Input
                     type="text"
                     id="method"
-                    placeholder="입력하세요."
+                    placeholder="선택하세요."
                     autoComplete="off"
                     readOnly
                     value={inputs.method}
