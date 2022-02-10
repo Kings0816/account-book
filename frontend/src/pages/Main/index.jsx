@@ -4,7 +4,8 @@ import { usefetchMethodAndCategory } from './hooks';
 import Header from '../../components/Header';
 import Summary from '../../components/Summary';
 import Transactions from '../../components/Transactions';
-import { MainWrapper } from './style';
+import fabImg from '../../../public/assets/fab-button.svg';
+import { MainWrapper, TransactionBox, CreatorContainer, Creator, Fab } from './style';
 
 const Main = () => {
     const [fetchMethod, fetchCategory] = usefetchMethodAndCategory();
@@ -21,10 +22,22 @@ const Main = () => {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Summary />
                 </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Transactions />
-                </Suspense>
+                <TransactionBox>
+                    <CreatorContainer>
+                        <Creator type="button" onClick={() => console.log(111)}>
+                            내역 추가하기
+                        </Creator>
+                    </CreatorContainer>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Transactions />
+                    </Suspense>
+                </TransactionBox>
             </MainWrapper>
+            <Fab>
+                <button type="button" onClick={() => console.log(111)}>
+                    <img src={fabImg} />
+                </button>
+            </Fab>
         </>
     );
 };
