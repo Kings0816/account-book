@@ -13,6 +13,7 @@ import {
     CostFormat,
     formatValidator,
 } from '../../utils/common/input-validator';
+import { VALID_INPUT } from '../../utils/constant/valid-message';
 
 export const useUpdateForm = (transaction, onUpdate) => {
     const [activeCategory, setActiveCategory] = useState(false);
@@ -43,7 +44,7 @@ export const useUpdateForm = (transaction, onUpdate) => {
         let inValidCount = 0;
         Object.values(targets).forEach((target, index) => {
             const result = formatValidator(validateFormats[index], target);
-            if (result !== '유효한 결과 값입니다.') inValidCount += 1;
+            if (result !== VALID_INPUT) inValidCount += 1;
         });
         // TODO null에 토스트창 띄우기
         inValidCount === 0 ? onUpdate(inputs) : null;
