@@ -5,6 +5,14 @@ import { useModal } from '../../hooks/useModal';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
 import { deleteCategory } from '../../lib/category';
+import {
+    dateFormat,
+    CategoryFormat,
+    ContentFormat,
+    MethodFormat,
+    CostFormat,
+    formatValidator,
+} from '../../utils/common/input-validator';
 
 export const useCreateForm = (transaction, onCreate) => {
     const [activeCategory, setActiveCategory] = useState(false);
@@ -22,7 +30,23 @@ export const useCreateForm = (transaction, onCreate) => {
 
     const handleCreateSubmit = (e) => {
         e.preventDefault();
-        onCreate(inputs);
+
+        const validateFormats = [
+            CategoryFormat,
+            ContentFormat,
+            MethodFormat,
+            CostFormat,
+            dateFormat,
+        ];
+
+        const { color, sign, ...targets } = inputs;
+        let inValidCount = 0;
+        Object.values(targets).forEach((target, index) => {
+            const result = formatValidator(validateFormats[index], target);
+            if (result !== '유효한 결과 값입니다.') inValidCount += 1;
+        });
+        // TODO null에 토스트창 띄우기
+        inValidCount === 0 ? onCreate(inputs) : null;
     };
 
     const categoryActiveToggle = () => {
