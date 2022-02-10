@@ -16,6 +16,10 @@ export const useUpdateForm = (transaction, onUpdate) => {
 
     const { openModal } = useModal();
 
+    const categoriesInCostType = () => {
+        return categories.filter((category) => category.sign === inputs.sign);
+    };
+
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
         onUpdate(inputs);
@@ -70,7 +74,7 @@ export const useUpdateForm = (transaction, onUpdate) => {
         activeMethod,
         inputs,
         methods,
-        categories,
+        categoriesInCostType,
         handleUpdateSubmit,
         categoryActiveToggle,
         methodActiveToggle,

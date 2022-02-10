@@ -20,7 +20,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         activeMethod,
         inputs,
         methods,
-        categories,
+        categoriesInCostType,
         handleUpdateSubmit,
         categoryActiveToggle,
         methodActiveToggle,
@@ -83,7 +83,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
                 <Dropdown
                     name="category"
-                    data={categories}
+                    data={categoriesInCostType()}
                     active={activeCategory}
                     changeHandler={changeCategory}
                     deleteHandler={removeCategory}
