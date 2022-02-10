@@ -29,9 +29,7 @@ export const useUpdateForm = (transaction, onUpdate) => {
         return categories.filter((category) => category.sign === inputs.sign);
     };
 
-    const handleUpdateSubmit = (e) => {
-        e.preventDefault();
-
+    const isValidateInputs = () => {
         const validateFormats = [
             CategoryFormat,
             ContentFormat,
@@ -46,8 +44,15 @@ export const useUpdateForm = (transaction, onUpdate) => {
             const result = formatValidator(validateFormats[index], target);
             if (result !== VALID_INPUT) inValidCount += 1;
         });
+        return inValidCount === 0;
+    };
+
+    const handleUpdateSubmit = (e) => {
+        e.preventDefault();
+
+        const isValid = isValidateInputs();
         // TODO null에 토스트창 띄우기
-        inValidCount === 0 ? onUpdate(inputs) : null;
+        isValid ? onUpdate(inputs) : null;
     };
 
     const categoryActiveToggle = () => {
