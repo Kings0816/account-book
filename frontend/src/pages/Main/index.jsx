@@ -28,16 +28,16 @@ const Main = () => {
                             내역 추가하기
                         </Creator>
                     </CreatorContainer>
+                    <Fab>
+                        <button type="button" onClick={() => console.log(111)}>
+                            <img src={fabImg} />
+                        </button>
+                    </Fab>
                     <Suspense fallback={<div>Loading...</div>}>
                         <Transactions />
                     </Suspense>
                 </TransactionBox>
             </MainWrapper>
-            <Fab>
-                <button type="button" onClick={() => console.log(111)}>
-                    <img src={fabImg} />
-                </button>
-            </Fab>
         </>
     );
 };
