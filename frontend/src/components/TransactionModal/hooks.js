@@ -3,7 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
 import { createCategory } from '../../lib/category';
-import { updateTransaction, deleteTransaction } from '../../lib/transaction';
+import { createTransaction, updateTransaction, deleteTransaction } from '../../lib/transaction';
 
 export const useCategory = (closeModal) => {
     const setCategories = useSetRecoilState(categoryState);
@@ -17,7 +17,7 @@ export const useCategory = (closeModal) => {
     return { addCategory };
 };
 
-export const useTransactionHandler = () => {
+export const useUpdateTransactionHandler = (closeModal) => {
     const methods = useRecoilValue(methodState);
     const categories = useRecoilValue(categoryState);
 
@@ -43,6 +43,7 @@ export const useTransactionHandler = () => {
             (transaction) => transaction.id !== id,
         );
         sessionStorage.setItem(transactionDate, JSON.stringify([...updatedTransactions, result]));
+        closeModal('updateTransaction');
     };
 
     const removeTransaction = async (id, date) => {
@@ -57,7 +58,37 @@ export const useTransactionHandler = () => {
             (transaction) => transaction.id !== id,
         );
         sessionStorage.setItem(transactionDate, JSON.stringify(updatedTransactions));
+        closeModal('updateTransaction');
     };
 
     return { changeTransaction, removeTransaction };
+};
+
+export const useCreateTransactionHandler = (closeModal) => {
+    const methods = useRecoilValue(methodState);
+    const categories = useRecoilValue(categoryState);
+
+    const addTransaction = async ({ method, category, content, cost, sign, date }) => {
+        const [year, month, _] = date.split('-');
+        const transactionDate = `${year}-${month.replace(/(^0)+/i, '')}`;
+
+        const [methodInfo] = methods.filter((_method) => _method.name === method);
+        const [categoryInfo] = categories.filter((_category) => _category.name === category);
+        const result = await createTransaction(
+            methodInfo.id,
+            categoryInfo.id,
+            content,
+            cost,
+            sign,
+            date,
+        );
+        if (!result) return;
+
+        const transactionsInDate = JSON.parse(sessionStorage.getItem(transactionDate));
+        const updatedTransactions = [...transactionsInDate, result];
+        sessionStorage.setItem(transactionDate, JSON.stringify(updatedTransactions));
+        closeModal('createTransaction');
+    };
+
+    return { addTransaction };
 };

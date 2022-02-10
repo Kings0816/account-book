@@ -19,10 +19,6 @@ export const Wrapper = styled.li`
         background: ${({ theme }) => theme.color.brigtenL2Gray};
         cursor: pointer;
     }
-
-    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
-        margin: 0px 15px;
-    }
 `;
 
 export const OuterBox = styled.div`

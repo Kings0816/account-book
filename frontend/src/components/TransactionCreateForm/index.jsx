@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Dropdown from '../Dropdown';
-import { useUpdateForm } from './hooks';
 import back from '../../../public/assets/back-button.svg';
+import { useCreateForm } from './hooks';
 import {
     Wrapper,
     CostType,
@@ -14,14 +14,14 @@ import {
     DecisionButton,
 } from './style';
 
-const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
+const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
     const [
         activeCategory,
         activeMethod,
         inputs,
         methods,
         categories,
-        handleUpdateSubmit,
+        handleCreateSubmit,
         categoryActiveToggle,
         methodActiveToggle,
         changeSign,
@@ -32,10 +32,10 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         changeCost,
         removeCategory,
         openCategoryCreateModal,
-    ] = useUpdateForm(transaction, onUpdate);
+    ] = useCreateForm(transaction, onCreate);
 
     return (
-        <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
+        <Wrapper aria-label="transactionCreate" onSubmit={handleCreateSubmit}>
             <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>
                     <BackImg src={back} />
@@ -131,19 +131,12 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
             </Element>
             <ButtonContainer>
-                <DecisionButton
-                    type="button"
-                    action="delete"
-                    onClick={() => onDelete(transaction.id, transaction.date)}
-                >
-                    삭제
-                </DecisionButton>
-                <DecisionButton type="submit" action="update">
-                    수정
+                <DecisionButton type="submit" action="create">
+                    추가
                 </DecisionButton>
             </ButtonContainer>
         </Wrapper>
     );
 };
 
-export default TransactionUpdateForm;
+export default TransactionCreateForm;

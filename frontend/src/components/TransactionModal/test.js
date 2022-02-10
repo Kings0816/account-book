@@ -22,13 +22,13 @@ describe('TransactionModal 컴포넌트 테스트', () => {
     const initializeState = ({ set }) => {
         set(modalState, [
             {
-                name: 'transaction',
+                name: 'updateTransaction',
                 props: TEST_DATA,
             },
         ]);
     };
 
-    it('배경 Dim, 입력 폼이 표시된다.', () => {
+    it('배경 Dim과 모달 Form이 표시된다.', () => {
         render(
             <RecoilRoot initializeState={initializeState}>
                 <ThemeProvider theme={theme}>
@@ -46,6 +46,6 @@ describe('TransactionModal 컴포넌트 테스트', () => {
     it('현재 선택된 modal의 props 속성이 없으면 모달이 표시되지 않는다.', () => {
         render(<TransactionModal />);
         const modalDiv = screen.queryByTestId('modal');
-        expect(modalDiv).not.toBeInTheDocument();
+        expect(modalDiv).not.toBeVisible();
     });
 });
