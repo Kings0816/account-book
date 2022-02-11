@@ -18,7 +18,7 @@ export const BackgroundDim = styled.div`
 
 export const Items = styled.ul`
     z-index: 4;
-    margin-top: 60px;
+    margin-top: 2px;
     position: absolute;
     width: 250px;
     max-height: 120px;
