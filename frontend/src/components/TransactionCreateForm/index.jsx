@@ -86,6 +86,7 @@ const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
                     name="category"
                     data={categoriesInCostType()}
                     active={activeCategory}
+                    activeToggle={categoryActiveToggle}
                     changeHandler={changeCategory}
                     deleteHandler={removeCategory}
                     createHandler={openCategoryCreateModal}
@@ -117,6 +118,7 @@ const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
                     name="method"
                     data={methods}
                     active={activeMethod}
+                    activeToggle={methodActiveToggle}
                     changeHandler={changeMethod}
                 />
             </Element>

@@ -2,15 +2,27 @@ import styled from 'styled-components';
 
 import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
-export const Wrapper = styled.ul`
+export const Wrapper = styled.div`
+    visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+`;
+
+export const BackgroundDim = styled.div`
+    position: fixed;
     z-index: 3;
+
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+`;
+
+export const Items = styled.ul`
+    z-index: 4;
     margin-top: 60px;
     position: absolute;
     width: 250px;
     max-height: 120px;
     overflow-y: scroll;
-
-    visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
 
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
     background-color: ${({ theme }) => theme.color.white};

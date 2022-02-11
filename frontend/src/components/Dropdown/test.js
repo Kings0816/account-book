@@ -12,11 +12,13 @@ const TEST_DATA = [
 ];
 
 describe('TransactionUpateForm 테스트', () => {
-    it('item 들을 정상적으로 표시한다.', () => {
+    it('배경 dim과 item 들을 정상적으로 표시한다.', () => {
         render(<Dropdown data={TEST_DATA} active={true} />);
 
+        const BackgroundDim = screen.getByTestId('dropdown-dim');
         const items = screen.getAllByRole('listitem');
 
+        expect(BackgroundDim).toBeInTheDocument();
         expect(items).toHaveLength(TEST_DATA.length);
         items.forEach((item, index) => {
             expect(item).toHaveTextContent(TEST_DATA[index].name);
