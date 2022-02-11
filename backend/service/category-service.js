@@ -2,7 +2,7 @@ import pool from '../database/connection.js';
 import UserService from './user-service.js';
 
 const getCategories = async (nickname) => {
-    const COMMON_UID = 0;
+    const COMMON_UID = 1;
     const [userId] = await UserService.getUserId(nickname);
     const sql = `
         SELECT id, name, color, sign 
