@@ -2,12 +2,13 @@ import pool from '../database/connection.js';
 import UserService from './user-service.js';
 
 const getCategories = async (nickname) => {
+    const COMMON_UID = 0;
     const [userId] = await UserService.getUserId(nickname);
     const sql = `
         SELECT id, name, color, sign 
         FROM category 
-        WHERE uid = ?`;
-    const [row] = await pool.query(sql, [userId.id]);
+        WHERE uid IN (?, ?)`;
+    const [row] = await pool.query(sql, [COMMON_UID, userId.id]);
     return row;
 };
 
