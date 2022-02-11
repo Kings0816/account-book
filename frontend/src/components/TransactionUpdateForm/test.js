@@ -189,4 +189,27 @@ describe('TransactionUpateForm 테스트', () => {
             expect(screen.getByText(data)).toBeInTheDocument();
         });
     });
+
+    it('Form의 모든 입력값들이 유효하면, 버튼이 활성화된다.', () => {
+        const INVALID_DATE = '2022-13-30';
+        const VALID_DATE = '2022-12-30';
+        render(
+            <TransactionUpdateForm
+                transaction={{
+                    ...TEST_DATA,
+                    date: INVALID_DATE,
+                }}
+                onUpdate={null}
+                onDelete={null}
+                onCancle={null}
+            />,
+        );
+        const updateButton = screen.getByRole('button', { name: '수정' });
+        expect(updateButton).toBeDisabled();
+
+        const dateInput = screen.getByLabelText('날짜');
+        fireEvent.change(dateInput, { target: { value: VALID_DATE } });
+
+        expect(updateButton).not.toBeDisabled();
+    });
 });
