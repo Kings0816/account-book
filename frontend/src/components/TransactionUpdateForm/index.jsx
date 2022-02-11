@@ -20,7 +20,8 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         activeMethod,
         inputs,
         methods,
-        categories,
+        isValidInputs,
+        categoriesInCostType,
         handleUpdateSubmit,
         categoryActiveToggle,
         methodActiveToggle,
@@ -83,7 +84,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                 />
                 <Dropdown
                     name="category"
-                    data={categories}
+                    data={categoriesInCostType()}
                     active={activeCategory}
                     changeHandler={changeCategory}
                     deleteHandler={removeCategory}
@@ -135,10 +136,16 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     type="button"
                     action="delete"
                     onClick={() => onDelete(transaction.id, transaction.date)}
+                    active={true}
                 >
                     삭제
                 </DecisionButton>
-                <DecisionButton type="submit" action="update">
+                <DecisionButton
+                    type="submit"
+                    action="update"
+                    active={isValidInputs()}
+                    disabled={!isValidInputs()}
+                >
                     수정
                 </DecisionButton>
             </ButtonContainer>

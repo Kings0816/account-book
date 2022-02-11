@@ -17,7 +17,7 @@ export const Wrapper = styled.ul`
     box-shadow: ${({ theme }) => theme.shadow.pale};
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
-        margin-top: ${(props) => (props.name === 'category' ? '47.2vh' : '73.3vh')};
+        margin-top: ${(props) => (props['aria-label'] === 'category' ? '47.2vh' : '73.3vh')};
         width: 80vw;
         top: 0;
     }

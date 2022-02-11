@@ -5,6 +5,15 @@ import { useModal } from '../../hooks/useModal';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
 import { deleteCategory } from '../../lib/category';
+import {
+    dateFormat,
+    CategoryFormat,
+    ContentFormat,
+    MethodFormat,
+    CostFormat,
+    formatValidator,
+} from '../../utils/common/input-validator';
+import { VALID_INPUT } from '../../utils/constant/valid-message';
 
 export const useUpdateForm = (transaction, onUpdate) => {
     const [activeCategory, setActiveCategory] = useState(false);
@@ -15,6 +24,28 @@ export const useUpdateForm = (transaction, onUpdate) => {
     const [categories, setCategories] = useRecoilState(categoryState);
 
     const { openModal } = useModal();
+
+    const categoriesInCostType = () => {
+        return categories.filter((category) => category.sign === inputs.sign);
+    };
+
+    const isValidateInputs = () => {
+        const validateFormats = [
+            CategoryFormat,
+            ContentFormat,
+            MethodFormat,
+            CostFormat,
+            dateFormat,
+        ];
+
+        const { id, color, sign, ...targets } = inputs;
+        let inValidCount = 0;
+        Object.values(targets).forEach((target, index) => {
+            const result = formatValidator(validateFormats[index], target);
+            if (result !== VALID_INPUT) inValidCount += 1;
+        });
+        return inValidCount === 0;
+    };
 
     const handleUpdateSubmit = (e) => {
         e.preventDefault();
@@ -70,7 +101,8 @@ export const useUpdateForm = (transaction, onUpdate) => {
         activeMethod,
         inputs,
         methods,
-        categories,
+        isValidateInputs,
+        categoriesInCostType,
         handleUpdateSubmit,
         categoryActiveToggle,
         methodActiveToggle,

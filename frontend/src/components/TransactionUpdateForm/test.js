@@ -1,7 +1,9 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 import { render, screen, fireEvent } from '../../test-utils';
 
 import TransactionUpdateForm from '.';
+import { categoryState } from '../../recoil/category/atom';
 
 const TEST_DATA = {
     category: '카페/간식',
@@ -12,7 +14,21 @@ const TEST_DATA = {
     sign: '-',
 };
 
+const TEST_CATEGORY_DATA = [
+    { id: 1, name: '미분류', color: '#817DCE', sign: 'all' },
+    { id: 2, name: '카페/간식', color: '#D092E2', sign: '-' },
+    { id: 4, name: '용돈', color: '#E6D267', sign: '+' },
+    { id: 5, name: '교통', color: '#94D3CC', sign: '-' },
+    { id: 10, name: '월급', color: '#B9D58C', sign: '+' },
+    { id: 13, name: '식비', color: '#4CA1DE', sign: '-' },
+    { id: 14, name: '여행/숙박', color: '#E2B765', sign: '-' },
+];
+
 describe('TransactionUpateForm 테스트', () => {
+    const initializeState = ({ set }) => {
+        set(categoryState, TEST_CATEGORY_DATA);
+    };
+
     it('기본 요소들이 표시된다.', () => {
         render(
             <TransactionUpdateForm
@@ -130,5 +146,70 @@ describe('TransactionUpateForm 테스트', () => {
 
         const visibleMethodDropdown = screen.getByRole('list', { name: 'method' });
         expect(visibleMethodDropdown).toBeInTheDocument();
+    });
+
+    it('수입 버튼에 클릭되어 있는 경우, 카테고리 input을 누르면 수입에 해당하는 카테고리들이 표시된다.', () => {
+        render(
+            <RecoilRoot initializeState={initializeState}>
+                <TransactionUpdateForm
+                    transaction={{ ...TEST_DATA, sign: '+' }}
+                    onUpdate={null}
+                    onDelete={null}
+                    onCancle={null}
+                />
+            </RecoilRoot>,
+        );
+
+        const categoryInput = screen.getByLabelText('카테고리');
+        fireEvent.click(categoryInput);
+
+        const datas = ['용돈', '월급'];
+        datas.forEach((data) => {
+            expect(screen.getByText(data)).toBeInTheDocument();
+        });
+    });
+
+    it('지출 버튼에 클릭되어 있는 경우, 카테고리 input을 누르면 지출에 해당하는 카테고리들이 표시된다.', () => {
+        render(
+            <RecoilRoot initializeState={initializeState}>
+                <TransactionUpdateForm
+                    transaction={TEST_DATA}
+                    onUpdate={null}
+                    onDelete={null}
+                    onCancle={null}
+                />
+            </RecoilRoot>,
+        );
+
+        const categoryInput = screen.getByLabelText('카테고리');
+        fireEvent.click(categoryInput);
+
+        const datas = ['카페/간식', '교통', '식비', '여행/숙박'];
+        datas.forEach((data) => {
+            expect(screen.getByText(data)).toBeInTheDocument();
+        });
+    });
+
+    it('Form의 모든 입력값들이 유효하면, 버튼이 활성화된다.', () => {
+        const INVALID_DATE = '2022-13-30';
+        const VALID_DATE = '2022-12-30';
+        render(
+            <TransactionUpdateForm
+                transaction={{
+                    ...TEST_DATA,
+                    date: INVALID_DATE,
+                }}
+                onUpdate={null}
+                onDelete={null}
+                onCancle={null}
+            />,
+        );
+        const updateButton = screen.getByRole('button', { name: '수정' });
+        expect(updateButton).toBeDisabled();
+
+        const dateInput = screen.getByLabelText('날짜');
+        fireEvent.change(dateInput, { target: { value: VALID_DATE } });
+
+        expect(updateButton).not.toBeDisabled();
     });
 });
