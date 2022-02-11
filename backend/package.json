@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start": "cross-env NODE_ENV=development nodemon ./bin/www",
-        "deploy": "cross-env NODE_ENV=production pm2 start node ./bin/www -n account-book",
+        "deploy": "cross-env NODE_ENV=production pm2 start node ./bin/www.js -n account-book",
         "stop": "pm2 kill -n account-book",
         "test": "jest"
     },
