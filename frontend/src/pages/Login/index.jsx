@@ -12,7 +12,7 @@ const Login = () => {
         <Wrapper>
             <Description>JH Account Book</Description>
             <LoginButton type="submit" onClick={requestLogin}>
-                Github로 로그인 테스트 5
+                Github로 로그인 테스트 6
             </LoginButton>
         </Wrapper>
     );
