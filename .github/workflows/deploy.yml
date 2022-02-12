@@ -69,11 +69,11 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ~/deploy/account-book/frontend
-            rm -rf /var/www/account-book
-            mkdir /var/www/account-book
-            rm -rf dist
+            sudo rm -rf /var/www/account-book
+            sudo mkdir /var/www/account-book
+            sudo rm -rf dist
             yarn run build
-            cp -r dist/* /var/www/account-book
+            sudo cp -r dist/* /var/www/account-book
   restart-nginx:
     runs-on: ubuntu-18.04
     needs: build-frontend
@@ -85,7 +85,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            systemctl restart nginx
+            sudo systemctl restart nginx
   restart-pm2:
     runs-on: ubuntu-18.04
     needs: [yarn-backend, restart-nginx]
