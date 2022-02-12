@@ -6,15 +6,21 @@ on:
       - deploy-test
 
 jobs:
-  build:
+  set-node-version:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
         node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
   pull-repository:
     runs-on: ubuntu-18.04
-    needs: build
+    needs: set-node-version
     steps:
       - uses: appleboy/ssh-action@v0.1.4
         with:
