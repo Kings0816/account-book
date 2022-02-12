@@ -1,0 +1,94 @@
+name: integration and deploy
+
+on:
+  push:
+    branches:
+      - deploy-test
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+  pull-repository:
+    runs-on: ubuntu-18.04
+    needs: build
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd deploy/account-book
+            git pull origin deploy-test
+  yarn-backend:
+    runs-on: ubuntu-18.04
+    needs: pull-repository
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd deploy/account-book/backend
+            yarn
+  yarn-frontend:
+    runs-on: ubuntu-18.04
+    needs: pull-repository
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd deploy/account-book/frontend
+            yarn
+  build-frontend:
+    runs-on: ubuntu-18.04
+    needs: yarn-frontend
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd deploy/account-book/frontend
+            rm -rf /var/www/account-book
+            mkdir /var/www/account-book
+            rm -rf dist
+            yarn run build
+            cp -r dist/* /var/www/account-book
+  restart-nginx:
+    runs-on: ubuntu-18.04
+    needs: build-frontend
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            systemctl restart nginx
+  restart-pm2:
+    runs-on: ubuntu-18.04
+    needs: [yarn-backend, restart-nginx]
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            pm2 reload all
