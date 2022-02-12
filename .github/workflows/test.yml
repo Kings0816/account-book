@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install-dependency
+      - name: install dependency
         run: |
           cd frontend
           yarn
@@ -22,3 +22,18 @@ jobs:
         run: |
           cd frontend
           yarn run test
+
+      - name: pr-comment if test failed
+        uses: actions/github-script@4.2.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const ref = "${{github.ref}}"
+            const pull_number = Number(ref.split("/")[2])
+            await github.pulls.createReview({
+              ...context.repo,
+              pull_number,
+              body: "실패한 테스트코드가 존재합니다.",
+              event: "REQUEST_CHANGES"
+            })
+        if: failure()
