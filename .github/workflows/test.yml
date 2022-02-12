@@ -1,8 +1,8 @@
 name: OPEN PR 테스트
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches: [deploy-test]
 
 jobs:
   test:
