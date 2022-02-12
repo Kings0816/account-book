@@ -25,7 +25,7 @@ jobs:
           script: |
             cd deploy/account-book
             git pull origin deploy-test
-  npm-install-backend:
+  yarn-backend:
     runs-on: ubuntu-18.04
     needs: pull-repository
     steps:
@@ -38,7 +38,7 @@ jobs:
           script: |
             cd deploy/account-book/backend
             yarn
-  npm-install-frontend:
+  yarn-frontend:
     runs-on: ubuntu-18.04
     needs: pull-repository
     steps:
@@ -53,7 +53,7 @@ jobs:
             yarn
   build-frontend:
     runs-on: ubuntu-18.04
-    needs: npm-install-frontend
+    needs: yarn-frontend
     steps:
       - uses: appleboy/ssh-action@v0.1.4
         with:
@@ -82,7 +82,7 @@ jobs:
             systemctl restart nginx
   restart-pm2:
     runs-on: ubuntu-18.04
-    needs: [npm-install-backend, restart-nginx]
+    needs: [yarn-backend, restart-nginx]
     steps:
       - uses: appleboy/ssh-action@v0.1.4
         with:
