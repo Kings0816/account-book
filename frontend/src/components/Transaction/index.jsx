@@ -16,9 +16,9 @@ const Transaction = ({ transaction }) => {
                     <Method data-testid="method">{transaction.method}</Method>
                 </InnerBox>
             </OuterBox>
-            <Cost data-testid="cost">
+            {/* <Cost data-testid="cost">
                 {transaction.sign + parseInt(transaction.cost).toLocaleString('ko-KR')}원
-            </Cost>
+            </Cost> */}
         </Wrapper>
     );
 };
