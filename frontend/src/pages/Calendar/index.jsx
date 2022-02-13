@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import moment from 'moment';
+import { nanoid } from 'nanoid';
 
 import Header from '../../components/Header';
 import { dateState } from '../../recoil/date/atom';
@@ -37,11 +38,17 @@ const Calendar = () => {
                             return (
                                 <Day key={currentWeek + index}>
                                     <CostInDate>
-                                        <span>3,880,000</span>
-                                        <span>-2,700,000</span>
-                                        <span>900,000</span>
+                                        <ElementInDay color="blue" size={'3,880,000'.length}>
+                                            3,880,000
+                                        </ElementInDay>
+                                        <ElementInDay color="red" size={'-2,700,000'.length}>
+                                            -2,700,000
+                                        </ElementInDay>
+                                        <ElementInDay color="black" size={'900,000'.length}>
+                                            900,000
+                                        </ElementInDay>
                                     </CostInDate>
-                                    <span>{day.format('D')}</span>
+                                    <ElementInDay color="gray">{day.format('D')}</ElementInDay>
                                 </Day>
                             );
                         })}
@@ -51,7 +58,7 @@ const Calendar = () => {
         return result;
     };
 
-    const dayHeaders = WEEK_DAY.map((day) => <th>{day}</th>);
+    const dayHeaders = WEEK_DAY.map((day) => <th key={nanoid()}>{day}</th>);
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
@@ -174,12 +181,6 @@ const Day = styled.td`
 
     & > span:last-child {
         padding: 0px 7px 7px 0px;
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        color: ${({ theme }) => theme.color.gray};
     }
 `;
 
@@ -194,22 +195,20 @@ const CostInDate = styled.div`
     font-weight: bold;
 
     box-sizing: border-box;
+`;
 
-    & > span {
-        width: 90%;
+const ElementInDay = styled.span`
+    width: 90%;
 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    color: ${({ theme }) =>
+        (props) =>
+            theme.color[props.color]};
 
-        &:nth-child(1) {
-            color: ${({ theme }) => theme.color.blue};
-        }
-        &:nth-child(2) {
-            color: ${({ theme }) => theme.color.red};
-        }
-        &:nth-child(3) {
-            color: ${({ theme }) => theme.color.black};
-        }
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        font-size: calc(100% / ${(props) => props.size});
     }
 `;
