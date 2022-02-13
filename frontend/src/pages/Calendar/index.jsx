@@ -13,8 +13,8 @@ const Calendar = () => {
     const firstWeek = baseDay.clone().startOf('month').week();
     const preLastWeek = baseDay.clone().endOf('month').week();
 
-    const PLUS_WEEK = 53;
-    const lastWeek = preLastWeek === 1 ? PLUS_WEEK : preLastWeek;
+    const OVER_WEEK = 53;
+    const lastWeek = preLastWeek === 1 ? OVER_WEEK : preLastWeek;
 
     const WEEK_LENGTH = 7;
     const days = () => {
