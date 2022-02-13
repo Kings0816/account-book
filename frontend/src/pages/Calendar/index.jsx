@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import Header from '../../components/Header';
 import { dateState } from '../../recoil/date/atom';
+import { WEEK_DAY } from '../../utils/constant/week';
 
 const OVER_WEEK = 53;
 const WEEK_LENGTH = 7;
@@ -49,20 +50,14 @@ const Calendar = () => {
         return result;
     };
 
+    const dayHeaders = WEEK_DAY.map((day) => <th>{day}</th>);
+
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Header current={'calendar'} />
             <MainWrapper>
                 <DayBar>
-                    <DayBox>
-                        <th>일</th>
-                        <th>월</th>
-                        <th>화</th>
-                        <th>수</th>
-                        <th>목</th>
-                        <th>금</th>
-                        <th>토</th>
-                    </DayBox>
+                    <DayBox>{dayHeaders}</DayBox>
                 </DayBar>
                 <MonthContainer>{days()}</MonthContainer>
             </MainWrapper>
@@ -92,7 +87,7 @@ const DayBar = styled.thead`
     background: #fcfcfc;
     border: 1px solid #bbbbbb;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: ${({ theme }) => theme.shadow.pale};
 `;
 
 const DayBox = styled.tr`
@@ -108,24 +103,12 @@ const MonthContainer = styled.tbody`
     width: 60%;
     margin: 20px auto auto;
 
-    tr:first-child {
-        td:nth-child(1) {
-            border-radius: 10px 0px 0px;
-        }
-
-        td:nth-child(7) {
-            border-radius: 0px 10px 0px 0px;
-        }
-    }
+    border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    border-radius: 10px;
+    box-shadow: ${({ theme }) => theme.shadow.thick};
 
     tr:last-child {
-        td:nth-child(1) {
-            border-radius: 0px 0px 0px 10px;
-        }
-
-        td:nth-child(7) {
-            border-radius: 0px 0px 10px;
-        }
+        border-bottom: 0px;
     }
 `;
 
@@ -133,6 +116,12 @@ const Week = styled.tr`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+
+    border-bottom: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
+
+    td:last-child {
+        border-right: 0px;
+    }
 `;
 
 const Day = styled.td`
@@ -143,17 +132,18 @@ const Day = styled.td`
     flex-direction: column;
     justify-content: space-between;
 
-    border: 0.5px solid #bbbbbb;
     text-align: end;
-    font-size: 0.8rem;
+    border-right: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    font-size: ${({ theme }) => theme.fontSize.mini};
 
     & > span:last-child {
-        color: gray;
+        padding: 0px 7px 7px 0px;
+        color: ${({ theme }) => theme.color.gray};
     }
 `;
 
 const CostInDate = styled.div`
-    padding: 3px 0px 0px 3px;
+    padding: 7px 0px 0px 7px;
 
     display: flex;
     flex-direction: column;
@@ -163,13 +153,13 @@ const CostInDate = styled.div`
 
     & > span {
         &:nth-child(1) {
-            color: blue;
+            color: ${({ theme }) => theme.color.blue};
         }
         &:nth-child(2) {
-            color: red;
+            color: ${({ theme }) => theme.color.red};
         }
         &:nth-child(3) {
-            color: black;
+            color: ${({ theme }) => theme.color.black};
         }
     }
 `;
