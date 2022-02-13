@@ -6,6 +6,9 @@ import moment from 'moment';
 import Header from '../../components/Header';
 import { dateState } from '../../recoil/date/atom';
 
+const OVER_WEEK = 53;
+const WEEK_LENGTH = 7;
+
 const Calendar = () => {
     const currentDate = useRecoilValue(dateState);
 
@@ -13,10 +16,8 @@ const Calendar = () => {
     const firstWeek = baseDay.clone().startOf('month').week();
     const preLastWeek = baseDay.clone().endOf('month').week();
 
-    const OVER_WEEK = 53;
     const lastWeek = preLastWeek === 1 ? OVER_WEEK : preLastWeek;
 
-    const WEEK_LENGTH = 7;
     const days = () => {
         let result = [];
         for (let currentWeek = firstWeek; currentWeek <= lastWeek; currentWeek += 1) {
