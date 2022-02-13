@@ -4,6 +4,10 @@ import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 export const Wrapper = styled.div`
     visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        overflow-y: auto;
+    }
 `;
 
 export const BackgroundDim = styled.div`

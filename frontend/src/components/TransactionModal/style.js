@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     display: ${(props) => (props.active ? 'block' : 'none')};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        overflow-y: auto;
+    }
 `;
 
 export const BackgroundDim = styled.div`
