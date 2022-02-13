@@ -6,6 +6,7 @@ import moment from 'moment';
 import Header from '../../components/Header';
 import { dateState } from '../../recoil/date/atom';
 import { WEEK_DAY } from '../../utils/constant/week';
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 const OVER_WEEK = 53;
 const WEEK_LENGTH = 7;
@@ -82,12 +83,22 @@ export const MainWrapper = styled.table`
 const DayBar = styled.thead`
     width: 60%;
     height: 53px;
+    min-height: 53px;
     margin: -20px auto 0px;
 
-    background: #fcfcfc;
-    border: 1px solid #bbbbbb;
+    background: ${({ theme }) => theme.color.white};
+    border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    box-sizing: border-box;
     border-radius: 10px;
     box-shadow: ${({ theme }) => theme.shadow.pale};
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        margin: 0px;
+        width: 100%;
+
+        border: none;
+        border-radius: 0px;
+    }
 `;
 
 const DayBox = styled.tr`
@@ -104,54 +115,93 @@ const MonthContainer = styled.tbody`
     margin: 20px auto auto;
 
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    box-sizing: border-box;
     border-radius: 10px;
     box-shadow: ${({ theme }) => theme.shadow.thick};
 
     tr:last-child {
         border-bottom: 0px;
     }
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        margin: 10px 0px 0px 0px;
+        width: 100%;
+
+        border: none;
+        border-radius: 0px;
+        box-shadow: none;
+
+        tr:last-child {
+            border-bottom: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
+        }
+    }
 `;
 
 const Week = styled.tr`
+    width: 100%;
+
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 
+    box-sizing: border-box;
     border-bottom: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
 
     td:last-child {
         border-right: 0px;
+    }
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        margin-bottom: 10px;
+
+        border-top: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
     }
 `;
 
 const Day = styled.td`
     width: calc(100% / 7);
     height: 12vh;
+    min-height: 75px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     text-align: end;
+    box-sizing: border-box;
     border-right: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
     font-size: ${({ theme }) => theme.fontSize.mini};
 
     & > span:last-child {
         padding: 0px 7px 7px 0px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
         color: ${({ theme }) => theme.color.gray};
     }
 `;
 
 const CostInDate = styled.div`
-    padding: 7px 0px 0px 7px;
+    width: 100%;
+    padding: 7px 7px 0px 0px;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: flex-end;
     font-weight: bold;
 
+    box-sizing: border-box;
+
     & > span {
+        width: 90%;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
         &:nth-child(1) {
             color: ${({ theme }) => theme.color.blue};
         }
