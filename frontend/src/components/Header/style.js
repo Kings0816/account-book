@@ -23,6 +23,8 @@ export const Wrapper = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+
+        border-radius: 0px;
     }
 `;
 
