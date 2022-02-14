@@ -16,20 +16,16 @@ const Main = () => {
     }, []);
 
     return (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
             <Header current={'main'} />
             <MainWrapper>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Summary />
-                </Suspense>
+                <Summary />
                 <TransactionBox>
                     <TransactionCreator />
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <Transactions />
-                    </Suspense>
+                    <Transactions />
                 </TransactionBox>
             </MainWrapper>
-        </>
+        </Suspense>
     );
 };
 

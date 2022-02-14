@@ -10,7 +10,9 @@ const Transaction = ({ transaction }) => {
     return (
         <Wrapper onClick={() => openModal('updateTransaction', transaction)}>
             <OuterBox>
-                <Category data-testid="category">{transaction.category || '미분류'}</Category>
+                <Category data-testid="category" color={transaction.color}>
+                    {transaction.category || '미분류'}
+                </Category>
                 <InnerBox>
                     <Content data-testid="content">{transaction.content}</Content>
                     <Method data-testid="method">{transaction.method}</Method>

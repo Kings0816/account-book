@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+
+import Header from '../../components/Header';
+import CalendarTable from '../../components/CalendarTable';
+import { MainWrapper } from './style';
 
 const Calendar = () => {
-    return <div>달력 페이지 입니다.</div>;
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Header current={'calendar'} />
+            <MainWrapper>
+                <CalendarTable />
+            </MainWrapper>
+        </Suspense>
+    );
 };
 
 export default Calendar;

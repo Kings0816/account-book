@@ -40,7 +40,7 @@ export const Category = styled.span`
     box-sizing: border-box;
 
     color: ${({ theme }) => theme.color.white};
-    background-color: ${({ theme }) => theme.color.mint};
+    background-color: ${(props) => props.color};
 
     overflow: hidden;
     text-overflow: ellipsis;
