@@ -144,6 +144,12 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         border: none;
     }
+
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
 `;
 
 export default GlobalStyle;

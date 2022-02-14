@@ -4,6 +4,7 @@ const fontSize = {
     small: '1.3rem',
     default: '1rem',
     mini: '0.8rem',
+    miniL2: '0.7rem',
 };
 
 const color = {
