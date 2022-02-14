@@ -1,31 +1,19 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import moment from 'moment';
 import { nanoid } from 'nanoid';
 
 import Week from './Week';
-import { dateState } from '../../recoil/date/atom';
 import { transactionsInDateState } from '../../recoil/date/selector';
 import { WEEK_DAY } from '../../utils/constant/week';
 import { makeDailyTransaction } from '../../utils/common/make-daily-transaction';
-import { calculateIncome, calculateExpenditure } from '../../utils/common/calculate-cost';
+import { useWeek, useCost } from './hooks';
 import { DayBar, DayBox, MonthContainer, Footer, SummaryRow } from './style';
 
-const OVER_WEEK = 53;
-
 const CalendarTable = () => {
-    const currentDate = useRecoilValue(dateState);
+    const { baseDay, firstWeek, lastWeek } = useWeek();
+    const { income, expenditure, total } = useCost();
     const rawTransactions = useRecoilValue(transactionsInDateState);
     const dailyTransactions = makeDailyTransaction(rawTransactions);
-
-    const income = calculateIncome(rawTransactions);
-    const expenditure = calculateExpenditure(rawTransactions);
-    const total = income - expenditure;
-
-    const baseDay = moment(`${currentDate.year}-${currentDate.month}-1`);
-    const firstWeek = baseDay.clone().startOf('month').week();
-    const preLastWeek = baseDay.clone().endOf('month').week();
-    const lastWeek = preLastWeek === 1 ? OVER_WEEK : preLastWeek;
 
     const makeWeeks = () => {
         let result = [];
