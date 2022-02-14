@@ -1,20 +1,31 @@
 import React from 'react';
 
+import { calculateIncome, calculateExpenditure } from '../../../utils/common/calculate-cost';
 import { Wrapper, CostBox, ElementInDay } from './style';
 
-const Day = ({ day }) => {
+const Day = ({ day, transactions }) => {
+    const dailyIncome = transactions ? calculateIncome(transactions) : 0;
+    const dailyExpenditure = transactions ? calculateExpenditure(transactions) : 0;
+    const total = dailyIncome - dailyExpenditure;
+
     return (
         <Wrapper>
             <CostBox>
-                <ElementInDay color="blue" size={'3,880,000'.length}>
-                    3,880,000
-                </ElementInDay>
-                <ElementInDay color="red" size={'-2,700,000'.length}>
-                    -2,700,000
-                </ElementInDay>
-                <ElementInDay color="black" size={'900,000'.length}>
-                    900,000
-                </ElementInDay>
+                {dailyIncome !== 0 ? (
+                    <ElementInDay color="blue" size={String(dailyIncome).length}>
+                        {parseInt(dailyIncome).toLocaleString()}
+                    </ElementInDay>
+                ) : null}
+                {dailyExpenditure !== 0 ? (
+                    <ElementInDay color="red" size={String(dailyExpenditure * -1).length}>
+                        {parseInt(dailyExpenditure * -1).toLocaleString()}
+                    </ElementInDay>
+                ) : null}
+                {total !== 0 ? (
+                    <ElementInDay color="black" size={String(total).length}>
+                        {parseInt(total).toLocaleString()}
+                    </ElementInDay>
+                ) : null}
             </CostBox>
             <ElementInDay color="gray">{day.format('D')}</ElementInDay>
         </Wrapper>

@@ -5,13 +5,22 @@ import { nanoid } from 'nanoid';
 
 import Week from './Week';
 import { dateState } from '../../recoil/date/atom';
+import { transactionsInDateState } from '../../recoil/date/selector';
 import { WEEK_DAY } from '../../utils/constant/week';
+import { makeDailyTransaction } from '../../utils/common/make-daily-transaction';
+import { calculateIncome, calculateExpenditure } from '../../utils/common/calculate-cost';
 import { DayBar, DayBox, MonthContainer, Footer, SummaryRow } from './style';
 
 const OVER_WEEK = 53;
 
 const CalendarTable = () => {
     const currentDate = useRecoilValue(dateState);
+    const rawTransactions = useRecoilValue(transactionsInDateState);
+    const dailyTransactions = makeDailyTransaction(rawTransactions);
+
+    const income = calculateIncome(rawTransactions);
+    const expenditure = calculateExpenditure(rawTransactions);
+    const total = income - expenditure;
 
     const baseDay = moment(`${currentDate.year}-${currentDate.month}-1`);
     const firstWeek = baseDay.clone().startOf('month').week();
@@ -22,7 +31,12 @@ const CalendarTable = () => {
         let result = [];
         for (let currentWeek = firstWeek; currentWeek <= lastWeek; currentWeek += 1) {
             result = result.concat(
-                <Week key={currentWeek} baseDay={baseDay} currentWeek={currentWeek} />,
+                <Week
+                    key={currentWeek}
+                    baseDay={baseDay}
+                    currentWeek={currentWeek}
+                    dailyTransactions={dailyTransactions}
+                />,
             );
         }
         return result;
@@ -40,10 +54,10 @@ const CalendarTable = () => {
             <Footer>
                 <SummaryRow>
                     <td>
-                        <span>총 수입 3,880,000 </span>
-                        <span>총 지출 1,775,000</span>
+                        <span>총 수입 {parseInt(income).toLocaleString()} </span>
+                        <span>총 지출 {parseInt(expenditure).toLocaleString()}</span>
                     </td>
-                    <td>총계 2,105,000</td>
+                    <td>총계 {parseInt(total).toLocaleString()}</td>
                 </SummaryRow>
             </Footer>
         </>
