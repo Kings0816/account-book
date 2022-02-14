@@ -37,7 +37,7 @@ const Calendar = () => {
                                 .add(index, 'days');
                             return (
                                 <Day key={currentWeek + index}>
-                                    <CostInDate>
+                                    <CostBox>
                                         <ElementInDay color="blue" size={'3,880,000'.length}>
                                             3,880,000
                                         </ElementInDay>
@@ -47,7 +47,7 @@ const Calendar = () => {
                                         <ElementInDay color="black" size={'900,000'.length}>
                                             900,000
                                         </ElementInDay>
-                                    </CostInDate>
+                                    </CostBox>
                                     <ElementInDay color="gray">{day.format('D')}</ElementInDay>
                                 </Day>
                             );
@@ -68,6 +68,15 @@ const Calendar = () => {
                     <DayBox>{dayHeaders}</DayBox>
                 </DayBar>
                 <MonthContainer>{days()}</MonthContainer>
+                <Footer>
+                    <SummaryRow>
+                        <td>
+                            <span>총 수입 3,880,000 </span>
+                            <span>총 지출 1,775,000</span>
+                        </td>
+                        <td>총계 2,105,000</td>
+                    </SummaryRow>
+                </Footer>
             </MainWrapper>
         </Suspense>
     );
@@ -119,7 +128,7 @@ const DayBox = styled.tr`
 
 const MonthContainer = styled.tbody`
     width: 60%;
-    margin: 20px auto auto;
+    margin: 20px auto;
 
     border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
     box-sizing: border-box;
@@ -184,7 +193,7 @@ const Day = styled.td`
     }
 `;
 
-const CostInDate = styled.div`
+const CostBox = styled.div`
     width: 100%;
     padding: 7px 7px 0px 0px;
 
@@ -210,5 +219,42 @@ const ElementInDay = styled.span`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         font-size: calc(100% / ${(props) => props.size});
+    }
+`;
+
+const Footer = styled.tfoot`
+    width: 60%;
+    margin: 20px auto 0px;
+    height: 50px;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 100%;
+        margin-top: 10px;
+        height: 30px;
+    }
+`;
+
+const SummaryRow = styled.tr`
+    height: 100%;
+    padding: 0px 10px 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    color: ${({ theme }) => theme.color.gray};
+    font-weight: bold;
+
+    & > td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        padding: 0px 5px 0px;
+
+        font-size: ${({ theme }) => theme.fontSize.miniL2};
     }
 `;
