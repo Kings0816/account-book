@@ -1,15 +1,11 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import moment from 'moment';
 
-import { dateState } from '../../../recoil/date/atom';
 import { calculateIncome, calculateExpenditure } from '../../../utils/common/calculate-cost';
 import { Wrapper, CostBox, ElementInDay } from './style';
 
-const Day = ({ day, transactions }) => {
-    const currentDate = useRecoilValue(dateState);
+const Day = ({ day, transactions, isInMonth }) => {
     const isToday = day.format('YYYY-MM-DD') === moment().format('YYYY-MM-DD');
-    const isInMonth = day.format('M') === String(currentDate.month);
 
     const dailyIncome = transactions ? calculateIncome(transactions) : 0;
     const dailyExpenditure = transactions ? calculateExpenditure(transactions) : 0;

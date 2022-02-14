@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Wrapper } from './style';
 import Day from '../Day';
+import { Wrapper } from './style';
 
 const WEEK_LENGTH = 7;
 
-const Week = ({ baseDay, currentWeek, dailyTransactions }) => {
+const Week = ({ currentDate, baseDay, currentWeek, dailyTransactions }) => {
     const days = Array(WEEK_LENGTH)
         .fill()
         .map((_, index) => {
@@ -20,6 +20,7 @@ const Week = ({ baseDay, currentWeek, dailyTransactions }) => {
                     key={currentWeek + index}
                     day={day}
                     transactions={dailyTransactions.get(day.format('YYYY-MM-DD'))}
+                    isInMonth={day.format('M') === String(currentDate.month)}
                 />
             );
         });

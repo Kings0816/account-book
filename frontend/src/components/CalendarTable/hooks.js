@@ -15,7 +15,7 @@ export const useWeek = () => {
     const preLastWeek = baseDay.clone().endOf('month').week();
     const lastWeek = preLastWeek === 1 ? OVER_WEEK : preLastWeek;
 
-    return { baseDay, firstWeek, lastWeek };
+    return { currentDate, baseDay, firstWeek, lastWeek };
 };
 
 export const useCost = () => {

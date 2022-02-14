@@ -10,7 +10,7 @@ import { useWeek, useCost } from './hooks';
 import { DayBar, DayBox, MonthContainer, Footer, SummaryRow } from './style';
 
 const CalendarTable = () => {
-    const { baseDay, firstWeek, lastWeek } = useWeek();
+    const { currentDate, baseDay, firstWeek, lastWeek } = useWeek();
     const { income, expenditure, total } = useCost();
     const rawTransactions = useRecoilValue(transactionsInDateState);
     const dailyTransactions = makeDailyTransaction(rawTransactions);
@@ -21,6 +21,7 @@ const CalendarTable = () => {
             result = result.concat(
                 <Week
                     key={currentWeek}
+                    currentDate={currentDate}
                     baseDay={baseDay}
                     currentWeek={currentWeek}
                     dailyTransactions={dailyTransactions}
