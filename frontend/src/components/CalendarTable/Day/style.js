@@ -15,6 +15,10 @@ export const Wrapper = styled.td`
     box-sizing: border-box;
     border-right: 0.5px solid ${({ theme }) => theme.color.brigtenL1Gray};
     font-size: ${({ theme }) => theme.fontSize.mini};
+    background-color: ${({ theme }) =>
+        (props) =>
+            props.isToday ? theme.color.mint : theme.color.white};
+    ${(props) => (props.isToday ? 'opacity: 0.7' : null)};
 
     & > span:last-child {
         padding: 0px 7px 7px 0px;
