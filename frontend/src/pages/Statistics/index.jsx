@@ -26,10 +26,13 @@ const Statistics = () => {
 
     const [cx, cy, r, width, startAngle] = [50, 50, 30, 15, -90];
     const dashArray = 2 * Math.PI * r;
+    const animationDuration = 1000;
     let accumulatePercent = 0;
     const circles = datas.map((data) => {
         const dashOffset = dashArray - (dashArray * data.percent) / 100;
         const angle = (accumulatePercent * 360) / 100 + startAngle;
+        const currentDuration = (animationDuration * data.percent) / 100;
+        const delay = (animationDuration * accumulatePercent) / 100;
         accumulatePercent += data.percent;
         return (
             <DonutCircle
@@ -43,6 +46,8 @@ const Statistics = () => {
                 dashArray={dashArray}
                 dashOffset={dashOffset}
                 angle={angle}
+                currentDuration={currentDuration}
+                delay={delay}
             />
         );
     });
