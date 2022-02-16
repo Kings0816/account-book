@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
@@ -11,7 +11,9 @@ const App = () => {
         <RecoilRoot>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
-                <Router />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Router />
+                </Suspense>
             </ThemeProvider>
         </RecoilRoot>
     );
