@@ -3,15 +3,16 @@ import { useRecoilValue } from 'recoil';
 import { nanoid } from 'nanoid';
 
 import Week from './Week';
+import { useWeek } from './hooks';
+import { useTransactionSummary } from '../../hooks/useTransactionSummary';
 import { transactionsInDateState } from '../../recoil/date/selector';
 import { WEEK_DAY } from '../../utils/constant/week';
 import { makeDailyTransaction } from '../../utils/common/make-daily-transaction';
-import { useWeek, useCost } from './hooks';
 import { DayBar, DayBox, MonthContainer, Footer, SummaryRow } from './style';
 
 const CalendarTable = () => {
     const { currentDate, baseDay, firstWeek, lastWeek } = useWeek();
-    const { income, expenditure, total } = useCost();
+    const { monthIncome, monthExpenditure, total } = useTransactionSummary();
     const rawTransactions = useRecoilValue(transactionsInDateState);
     const dailyTransactions = makeDailyTransaction(rawTransactions);
 
@@ -43,8 +44,8 @@ const CalendarTable = () => {
             <Footer>
                 <SummaryRow>
                     <td>
-                        <span>총 수입 {parseInt(income).toLocaleString()} </span>
-                        <span>총 지출 {parseInt(expenditure).toLocaleString()}</span>
+                        <span>총 수입 {parseInt(monthIncome).toLocaleString()} </span>
+                        <span>총 지출 {parseInt(monthExpenditure).toLocaleString()}</span>
                     </td>
                     <td>총계 {parseInt(total).toLocaleString()}</td>
                 </SummaryRow>

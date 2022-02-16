@@ -1,4 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
 export const MainWrapper = styled.div`
     width: 100vw;
@@ -11,25 +13,29 @@ export const MainWrapper = styled.div`
     align-items: center;
 `;
 
-const draw = (dashOffset) => keyframes`
-    100% {
-            stroke-dashoffset: ${dashOffset};
+export const DonutBox = styled.div`
+    width: 70%;
+    margin-top: -20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    background: ${({ theme }) => theme.color.white};
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 90%;
+
+        flex-direction: column;
+        justify-content: flex-start;
+
+        border: none;
+        background: none;
+        box-shadow: none;
+        border-radius: none;
     }
-`;
-
-export const DonutCircle = styled.circle`
-    cx: ${(props) => props.cx};
-    cy: ${(props) => props.cy};
-    r: ${(props) => props.r};
-    fill: ${(props) => props.fill};
-
-    stroke: ${(props) => props.color};
-    stroke-width: ${(props) => props.width};
-    stroke-dasharray: ${(props) => props.dashArray};
-    stroke-dashoffset: ${(props) => props.dashArray};
-    transform: rotate(${(props) => props.angle}deg);
-    transform-origin: ${(props) => props.cx}px ${(props) => props.cy}px;
-
-    animation: ${(props) => draw(props.dashOffset)} ${(props) => props.currentDuration}ms
-        ${(props) => props.delay}ms linear forwards;
 `;

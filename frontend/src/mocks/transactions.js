@@ -148,9 +148,9 @@ export const transactionsWithDate = {
             date: '2022-01-28',
         },
         {
-            category: '카페/간식',
-            color: '#D092E2',
-            content: '민트초코라떼',
+            category: '식비',
+            color: '#4CA1DE',
+            content: '우동',
             method: '현금',
             sign: '-',
             cost: '5200',
