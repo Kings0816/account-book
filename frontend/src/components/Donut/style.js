@@ -1,5 +1,15 @@
 import styled, { keyframes } from 'styled-components';
 
+import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
+
+export const Wrapper = styled.div`
+    width: 50%;
+
+    @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 100%;
+    }
+`;
+
 const draw = (dashOffset) => keyframes`
     100% {
             stroke-dashoffset: ${dashOffset};

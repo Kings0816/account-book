@@ -1,7 +1,7 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 
-import { DonutCircle } from './style';
+import { Wrapper, DonutCircle } from './style';
 
 const [CX, CY, R, WIDTH, START_ANGLE] = [50, 50, 30, 15, -90];
 const [CATEGORY_INDEX, COST_INDEX] = [0, 1];
@@ -40,7 +40,11 @@ const Donut = ({ transactionsByCategory }) => {
             );
         });
 
-    return <svg viewBox="0 0 100 100">{circles}</svg>;
+    return (
+        <Wrapper>
+            <svg viewBox="0 0 100 100">{circles}</svg>
+        </Wrapper>
+    );
 };
 
 export default Donut;
