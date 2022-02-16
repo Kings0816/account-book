@@ -16,7 +16,7 @@ export const useTransactionByCategory = () => {
         const expenditureInCategory = calculateExpenditure(transactionsInCategory);
         const percent = (expenditureInCategory / monthExpenditure) * 100;
         transactionsByCategory.set(category, {
-            transaction: transactionsInCategory,
+            transactions: transactionsInCategory,
             percent,
             expenditureInCategory,
         });
