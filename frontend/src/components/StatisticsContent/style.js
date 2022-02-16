@@ -11,7 +11,7 @@ export const Wrapper = styled.ul`
 `;
 
 export const OuterBox = styled.li`
-    width: 100%;
+    width: 90%;
     padding: 10px;
 
     display: flex;
@@ -28,6 +28,7 @@ export const OuterBox = styled.li`
     }
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        width: 100%;
         padding: 10px 0px;
     }
 `;

@@ -15,16 +15,27 @@ export const MainWrapper = styled.div`
 
 export const DonutBox = styled.div`
     width: 70%;
+    margin-top: -20px;
 
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 
+    border: 1px solid ${({ theme }) => theme.color.brigtenL1Gray};
+    background: ${({ theme }) => theme.color.white};
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 90%;
 
         flex-direction: column;
         justify-content: flex-start;
+
+        border: none;
+        background: none;
+        box-shadow: none;
+        border-radius: none;
     }
 `;
