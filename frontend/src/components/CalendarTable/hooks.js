@@ -17,13 +17,3 @@ export const useWeek = () => {
 
     return { currentDate, baseDay, firstWeek, lastWeek };
 };
-
-export const useCost = () => {
-    const rawTransactions = useRecoilValue(transactionsInDateState);
-
-    const income = calculateIncome(rawTransactions);
-    const expenditure = calculateExpenditure(rawTransactions);
-    const total = income - expenditure;
-
-    return { income, expenditure, total };
-};

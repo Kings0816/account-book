@@ -4,7 +4,7 @@ import { render, screen } from '../../test-utils';
 import { renderHook } from '@testing-library/react-hooks';
 
 import CalendarTable from './index';
-import { useWeek, useCost } from './hooks';
+import { useWeek } from './hooks';
 import { dateState } from '../../recoil/date/atom';
 import { WEEK_DAY } from '../../utils/constant/week';
 import { transactionsWithDate } from '../../mocks/transactions';
@@ -42,16 +42,5 @@ describe('달력을 표시하는 CalendarTable 컴포넌트 테스트', () => {
         const { firstWeek, lastWeek } = result.current;
         expect(firstWeek).toEqual(FIRST_WEEK);
         expect(lastWeek).toEqual(LAST_WEEK);
-    });
-
-    it('useCost - 현재 날짜에 해당하는 거래내역의 수입, 지출, 총계를 반환한다.', async () => {
-        const { result, waitForNextUpdate } = renderHook(() => useCost(), { wrapper: Wrapper });
-
-        await waitForNextUpdate();
-
-        const { income, expenditure, total } = result.current;
-        expect(income).toEqual(INCOME);
-        expect(expenditure).toEqual(EXPENDITURE);
-        expect(total).toEqual(TOTAL);
     });
 });
