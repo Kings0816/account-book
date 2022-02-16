@@ -9,7 +9,7 @@ import { calculateExpenditure } from '../../utils/common/calculate-cost';
 import { MainWrapper, DonutCircle } from './style';
 
 const CATEGORY_INDEX = 0;
-const PERCENT_INDEX = 1;
+const COST_INDEX = 1;
 
 const Statistics = () => {
     const categories = useRecoilValue(filteredCategoryState);
@@ -22,7 +22,7 @@ const Statistics = () => {
         );
         const expenditureInCategory = calculateExpenditure(transactionsInCategory);
         const percent = (expenditureInCategory / monthExpenditure) * 100;
-        transactionsByCategory.set(category, percent);
+        transactionsByCategory.set(category, { percent, expenditureInCategory });
     });
 
     const [cx, cy, r, width, startAngle] = [50, 50, 30, 15, -90];
@@ -30,10 +30,10 @@ const Statistics = () => {
     const animationDuration = 1000;
     let accumulatePercent = 0;
     const circles = Array.from(transactionsByCategory.entries())
-        .sort((a, b) => b[PERCENT_INDEX] - a[PERCENT_INDEX])
+        .sort((a, b) => b[COST_INDEX].percent - a[COST_INDEX].percent)
         .map((percentWithCategory) => {
             const color = percentWithCategory[CATEGORY_INDEX].color;
-            const percent = percentWithCategory[PERCENT_INDEX];
+            const percent = percentWithCategory[COST_INDEX].percent;
 
             const dashOffset = dashArray - (dashArray * percent) / 100;
             const angle = (accumulatePercent * 360) / 100 + startAngle;
