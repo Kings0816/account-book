@@ -5,7 +5,13 @@ import { renderHook } from '@testing-library/react-hooks';
 import { useTransactionByCategory } from './hooks';
 import { dateState } from '../../recoil/date/atom';
 import { categoryState } from '../../recoil/category/atom';
+import { transactionsWithDate } from '../../mocks/transactions';
 
+const TEST_TRANSACTION = transactionsWithDate['2022-1'];
+const CAFE_TRANSACTION = TEST_TRANSACTION.filter(
+    (transaction) => transaction.category === '카페/간식',
+);
+const EAT_TRANSACTION = TEST_TRANSACTION.filter((transaction) => transaction.category === '식비');
 const TEST_CATEGORY = [
     { id: 1, name: '카페/간식', color: '#D092E2', sign: '-' },
     { id: 2, name: '식비', color: '#4CA1DE', sign: '-' },
@@ -14,11 +20,11 @@ const TEST_CATEGORY = [
 const TEST_DATA = new Map();
 TEST_DATA.set(
     { id: 1, name: '카페/간식', color: '#D092E2', sign: '-' },
-    { percent: 67.90123456790124, expenditureInCategory: 11000 },
+    { transactions: CAFE_TRANSACTION, percent: 67.90123456790124, expenditureInCategory: 11000 },
 );
 TEST_DATA.set(
     { id: 2, name: '식비', color: '#4CA1DE', sign: '-' },
-    { percent: 32.098765432098766, expenditureInCategory: 5200 },
+    { transactions: EAT_TRANSACTION, percent: 32.098765432098766, expenditureInCategory: 5200 },
 );
 
 describe('통계페이지에 사용되는 커스텀 hooks 테스트', () => {

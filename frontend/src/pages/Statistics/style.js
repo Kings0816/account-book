@@ -29,6 +29,7 @@ export const DonutBox = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 90%;
+        margin-top: 0px;
 
         flex-direction: column;
         justify-content: flex-start;
