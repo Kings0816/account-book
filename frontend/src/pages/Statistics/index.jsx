@@ -6,11 +6,12 @@ import StatisticsContent from '../../components/StatisticsContent';
 import Transactions from '../../components/Transactions';
 import { useModal } from '../../hooks/useModal';
 import { useTransactionByCategory } from './hooks';
-import { MainWrapper, DonutBox } from './style';
+import { MainWrapper, DonutBox, EmptyBox, Logo } from './style';
+import emptyImg from '../../../public/assets/empty.svg';
 
 const Statistics = () => {
     const { getOpenModalByName } = useModal();
-    const { transactionsByCategory } = useTransactionByCategory();
+    const { transactionsByCategory, expenditures } = useTransactionByCategory();
 
     const categoryTransaction = getOpenModalByName('categoryTransaction');
 
@@ -18,10 +19,16 @@ const Statistics = () => {
         <Suspense fallback={<div>Loading...</div>}>
             <Header current={'statistics'} />
             <MainWrapper>
-                <DonutBox>
-                    <Donut transactionsByCategory={transactionsByCategory} />
-                    <StatisticsContent transactionsByCategory={transactionsByCategory} />
-                </DonutBox>
+                {expenditures !== 0 ? (
+                    <DonutBox>
+                        <Donut transactionsByCategory={transactionsByCategory} />
+                        <StatisticsContent transactionsByCategory={transactionsByCategory} />
+                    </DonutBox>
+                ) : (
+                    <EmptyBox>
+                        <Logo src={emptyImg} />
+                    </EmptyBox>
+                )}
                 {categoryTransaction ? (
                     <Transactions transactions={categoryTransaction.props} width={75} />
                 ) : null}

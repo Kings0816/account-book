@@ -40,3 +40,14 @@ export const DonutBox = styled.div`
         border-radius: none;
     }
 `;
+
+export const EmptyBox = styled.div`
+    width: 70%;
+    height: 100%;
+    margin: 0px auto;
+`;
+
+export const Logo = styled.img`
+    width: 100%;
+    height: 100%;
+`;
