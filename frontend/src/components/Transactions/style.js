@@ -9,5 +9,6 @@ export const TransactionsContainer = styled.ul`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         max-height: calc(100% - 50px);
+        width: 100%;
     }
 `;
