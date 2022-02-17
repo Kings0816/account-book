@@ -26,7 +26,7 @@ const Transactions = ({ transactions, width }) => {
                 <TransactionsContainer width={width}>{shapedTransactions}</TransactionsContainer>
             ) : (
                 <EmptyBox>
-                    <Logo src={emptyImg} />
+                    <Logo aria-label="empty" src={emptyImg} />
                 </EmptyBox>
             )}
             <TransactionModal />

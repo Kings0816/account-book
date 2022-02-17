@@ -20,13 +20,13 @@ const Statistics = () => {
             <Header current={'statistics'} />
             <MainWrapper>
                 {expenditures !== 0 ? (
-                    <DonutBox>
+                    <DonutBox data-testid="donut">
                         <Donut transactionsByCategory={transactionsByCategory} />
                         <StatisticsContent transactionsByCategory={transactionsByCategory} />
                     </DonutBox>
                 ) : (
                     <EmptyBox>
-                        <Logo src={emptyImg} />
+                        <Logo aria-label="empty" src={emptyImg} />
                     </EmptyBox>
                 )}
                 {categoryTransaction ? (

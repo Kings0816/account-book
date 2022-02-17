@@ -11,4 +11,11 @@ describe('해당 날짜(월 단위)의 모든 거래내역을 표시하는 Trans
         const transactionItems = await screen.findAllByRole('listitem');
         expect(transactionItems).toHaveLength(transactions.length);
     });
+
+    it('거래내역이 없는 경우 empty 이미지가 표시된다.', () => {
+        const EMPTY_DATA = [];
+        render(<Transactions transactions={EMPTY_DATA} />);
+        const emptyImg = screen.getByRole('img', { name: 'empty' });
+        expect(emptyImg).toBeInTheDocument();
+    });
 });

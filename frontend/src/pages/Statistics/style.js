@@ -44,7 +44,7 @@ export const DonutBox = styled.div`
 export const EmptyBox = styled.div`
     width: 70%;
     height: 100%;
-    margin: 0px auto;
+    margin: 20px auto;
 `;
 
 export const Logo = styled.img`
