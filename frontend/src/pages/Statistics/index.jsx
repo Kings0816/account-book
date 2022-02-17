@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import Header from '../../components/Header';
 import Donut from '../../components/Donut';
 import StatisticsContent from '../../components/StatisticsContent';
-import TransactionByCategory from '../../components/TransactionByCategory';
+import Transactions from '../../components/Transactions';
 import { useModal } from '../../hooks/useModal';
 import { useTransactionByCategory } from './hooks';
 import { MainWrapper, DonutBox } from './style';
@@ -23,7 +23,7 @@ const Statistics = () => {
                     <StatisticsContent transactionsByCategory={transactionsByCategory} />
                 </DonutBox>
                 {categoryTransaction ? (
-                    <TransactionByCategory transactions={categoryTransaction.props} />
+                    <Transactions transactions={categoryTransaction.props} width={75} />
                 ) : null}
             </MainWrapper>
         </Suspense>
