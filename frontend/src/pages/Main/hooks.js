@@ -34,5 +34,5 @@ export const useFilterdTransactions = (check) => {
         ? filterdTransactions.filter((transaction) => transaction.sign !== '-')
         : filterdTransactions;
 
-    return filterdTransactions;
+    return { filterdTransactions };
 };

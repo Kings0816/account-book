@@ -11,7 +11,7 @@ import { MainWrapper, TransactionBox } from './style';
 
 const Main = () => {
     const check = useRecoilValue(checkState);
-    const filterdTransactions = useFilterdTransactions(check);
+    const { filterdTransactions } = useFilterdTransactions(check);
     const [fetchMethod, fetchCategory] = usefetchMethodAndCategory();
 
     useEffect(() => {
