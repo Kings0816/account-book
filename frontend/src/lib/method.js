@@ -9,7 +9,7 @@ export const getMethods = async () => {
         const response = await instance.get('/');
         return response.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('결제수단을 가져오는데 실패했습니다.');
     }
 };

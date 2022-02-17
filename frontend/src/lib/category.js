@@ -11,8 +11,8 @@ export const getCategories = async () => {
 
         return response.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('카테고리를 불러오는데 실패했습니다.');
     }
 };
 
@@ -28,8 +28,13 @@ export const createCategory = async (name, color, sign) => {
 
         return response.data.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기(409인 경우 중복된 name이라고 띄우기)
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        const statusCode = e.response.status;
+        if (statusCode === 409) {
+            alert('중복된 카테고리입니다.');
+            return;
+        }
+        alert('카테고리를 추가하는데 실패했습니다.');
     }
 };
 
@@ -39,7 +44,7 @@ export const deleteCategory = async (id) => {
         const COMPLETE = result.status === 200;
         return COMPLETE;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('카테고리를 삭제하는데 실패했습니다.');
     }
 };
