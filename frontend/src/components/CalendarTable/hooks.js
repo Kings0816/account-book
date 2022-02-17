@@ -2,8 +2,6 @@ import { useRecoilValue } from 'recoil';
 import moment from 'moment';
 
 import { dateState } from '../../recoil/date/atom';
-import { transactionsInDateState } from '../../recoil/date/selector';
-import { calculateIncome, calculateExpenditure } from '../../utils/common/calculate-cost';
 
 const OVER_WEEK = 53;
 
