@@ -12,14 +12,3 @@ export const TransactionsContainer = styled.ul`
         width: 100%;
     }
 `;
-
-export const EmptyBox = styled.div`
-    width: 70%;
-    height: 100%;
-    margin: 20px auto 0px;
-`;
-
-export const Logo = styled.img`
-    width: 100%;
-    height: 100%;
-`;

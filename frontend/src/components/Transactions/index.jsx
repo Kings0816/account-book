@@ -3,9 +3,9 @@ import { nanoid } from 'nanoid';
 
 import DailyTransaction from '../DailyTransaction';
 import TransactionModal from '../TransactionModal';
-import { TransactionsContainer, EmptyBox, Logo } from './style';
+import EmptyBox from '../EmptyBox';
+import { TransactionsContainer } from './style';
 import { makeDailyTransaction } from '../../utils/common/make-daily-transaction';
-import emptyImg from '../../../public/assets/empty.svg';
 
 const Transactions = ({ transactions, width }) => {
     const dailyTransactions = makeDailyTransaction(transactions);
@@ -25,9 +25,7 @@ const Transactions = ({ transactions, width }) => {
             {transactions.length !== 0 ? (
                 <TransactionsContainer width={width}>{shapedTransactions}</TransactionsContainer>
             ) : (
-                <EmptyBox>
-                    <Logo aria-label="empty" src={emptyImg} />
-                </EmptyBox>
+                <EmptyBox />
             )}
             <TransactionModal />
         </>

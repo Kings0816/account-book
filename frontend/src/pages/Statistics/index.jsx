@@ -4,10 +4,10 @@ import Header from '../../components/Header';
 import Donut from '../../components/Donut';
 import StatisticsContent from '../../components/StatisticsContent';
 import Transactions from '../../components/Transactions';
+import EmptyBox from '../../components/EmptyBox';
 import { useModal } from '../../hooks/useModal';
 import { useTransactionByCategory } from './hooks';
-import { MainWrapper, DonutBox, EmptyBox, Logo } from './style';
-import emptyImg from '../../../public/assets/empty.svg';
+import { MainWrapper, DonutBox } from './style';
 
 const Statistics = () => {
     const { getOpenModalByName } = useModal();
@@ -25,9 +25,7 @@ const Statistics = () => {
                         <StatisticsContent transactionsByCategory={transactionsByCategory} />
                     </DonutBox>
                 ) : (
-                    <EmptyBox>
-                        <Logo aria-label="empty" src={emptyImg} />
-                    </EmptyBox>
+                    <EmptyBox />
                 )}
                 {categoryTransaction ? (
                     <Transactions transactions={categoryTransaction.props} width={75} />
