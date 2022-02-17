@@ -12,7 +12,7 @@ export const postLogin = async (code) => {
         });
         return response.data.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('로그인에 실패했습니다.');
     }
 };

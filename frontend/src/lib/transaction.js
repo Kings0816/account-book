@@ -11,8 +11,8 @@ export const getTransactionsInDate = async (year, month) => {
         const response = await instance.get(`?year=${year}&month=${month}&nickname=${nickname}`);
         return response.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('거래내역을 가져오는데 실패했습니다.');
     }
 };
 
@@ -30,8 +30,8 @@ export const createTransaction = async (mid, cid, content, cost, sign, date) => 
         });
         return response.data.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('거래내역을 추가하는데 실패했습니다.');
     }
 };
 
@@ -48,8 +48,8 @@ export const updateTransaction = async (id, mid, cid, content, cost, sign, date)
         });
         return response.data.data;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('거래내역을 수정하는데 실패했습니다.');
     }
 };
 
@@ -59,7 +59,7 @@ export const deleteTransaction = async (id) => {
         const COMPLETE = result.status === 200;
         return COMPLETE;
     } catch (e) {
-        // TODO 에러 발생 알림창 띄우기
-        console.log(e);
+        // TODO UX를 고려해서 토스트 띄우는 것으로 변경하기
+        alert('거래내역을 삭제하는데 실패했습니다.');
     }
 };
