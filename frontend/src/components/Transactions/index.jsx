@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 
 import DailyTransaction from '../DailyTransaction';
 import TransactionModal from '../TransactionModal';
+import EmptyBox from '../EmptyBox';
 import { TransactionsContainer } from './style';
 import { makeDailyTransaction } from '../../utils/common/make-daily-transaction';
 
@@ -21,7 +22,11 @@ const Transactions = ({ transactions, width }) => {
 
     return (
         <>
-            <TransactionsContainer width={width}>{shapedTransactions}</TransactionsContainer>
+            {transactions.length !== 0 ? (
+                <TransactionsContainer width={width}>{shapedTransactions}</TransactionsContainer>
+            ) : (
+                <EmptyBox />
+            )}
             <TransactionModal />
         </>
     );

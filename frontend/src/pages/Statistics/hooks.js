@@ -22,5 +22,10 @@ export const useTransactionByCategory = () => {
         });
     });
 
-    return { transactionsByCategory };
+    const expenditures = Array.from(transactionsByCategory.values()).reduce(
+        (acc, value) => acc + value.expenditureInCategory,
+        0,
+    );
+
+    return { transactionsByCategory, expenditures };
 };
