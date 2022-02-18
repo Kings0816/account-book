@@ -42,7 +42,9 @@ export const useTransactionHandler = (closeModal) => {
         const transactionsInDate = JSON.parse(sessionStorage.getItem(transactionDate));
         const updatedTransactions = [...transactionsInDate, result];
         sessionStorage.setItem(transactionDate, JSON.stringify(updatedTransactions));
+
         closeModal('createTransaction');
+        closeModal('categoryTransaction');
         refreshTransaction();
     };
 
@@ -68,7 +70,9 @@ export const useTransactionHandler = (closeModal) => {
             (transaction) => transaction.id !== id,
         );
         sessionStorage.setItem(transactionDate, JSON.stringify([...updatedTransactions, result]));
+
         closeModal('updateTransaction');
+        closeModal('categoryTransaction');
         refreshTransaction();
     };
 
@@ -84,7 +88,9 @@ export const useTransactionHandler = (closeModal) => {
             (transaction) => transaction.id !== id,
         );
         sessionStorage.setItem(transactionDate, JSON.stringify(updatedTransactions));
+
         closeModal('updateTransaction');
+        closeModal('categoryTransaction');
         refreshTransaction();
     };
 
