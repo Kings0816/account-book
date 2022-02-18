@@ -4,8 +4,10 @@ import { useTransactionSummary } from '../../hooks/useTransactionSummary';
 import { filteredCategoryState } from '../../recoil/category/selector';
 import { calculateExpenditure } from '../../utils/common/calculate-cost';
 
+const INCOME = '-';
+
 export const useTransactionByCategory = () => {
-    const categories = useRecoilValue(filteredCategoryState);
+    const categories = useRecoilValue(filteredCategoryState(INCOME));
     const { transactions, monthExpenditure } = useTransactionSummary();
 
     const transactionsByCategory = new Map();
