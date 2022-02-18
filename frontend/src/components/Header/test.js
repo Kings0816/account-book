@@ -52,6 +52,4 @@ describe('공통 헤더 컴포넌트 테스트', () => {
         const [changedYear, changedMonth] = dateStrong.textContent.split(/[^0-9]+/g);
         expect(new Date(changedYear, changedMonth)).toEqual(new Date(year, parseInt(month) + 1));
     });
-
-    // TODO 각 페이지(3개)로 이동하는 라우터 테스트 작성하기
 });

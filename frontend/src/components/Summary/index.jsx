@@ -11,7 +11,6 @@ const Summary = () => {
     const [check, setCheck] = useRecoilState(checkState);
     const { transactionCount, monthIncome, monthExpenditure } = useTransactionSummary();
 
-    // TODO 체크박스 전역 상태관리 필요할듯함 + label 안에 input 넣는 식으로 변경?
     return (
         <SummaryContainer>
             <SummaryBox color={'gray'}>
