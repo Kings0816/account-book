@@ -1,12 +1,14 @@
-import { selector } from 'recoil';
+import { selectorFamily } from 'recoil';
 
 import { categoryState } from './atom';
 
-export const filteredCategoryState = selector({
+export const filteredCategoryState = selectorFamily({
     key: 'filteredCategoryState',
-    get: ({ get }) => {
-        const categories = get(categoryState);
-        const filterdCategories = categories.filter((category) => category.sign === '-');
-        return filterdCategories;
-    },
+    get:
+        (sign) =>
+        ({ get }) => {
+            const categories = get(categoryState);
+            const filterdCategories = categories.filter((category) => category.sign === sign);
+            return filterdCategories;
+        },
 });
