@@ -21,5 +21,5 @@ export const useModal = () => {
         return getOpenModalByName(name) != null;
     };
 
-    return { modals, isOpen, openModal, closeModal, getOpenModalByName };
+    return { isOpen, openModal, closeModal, getOpenModalByName };
 };
