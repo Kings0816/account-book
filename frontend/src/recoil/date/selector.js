@@ -24,7 +24,6 @@ export const transactionsInDateState = selector({
 
         const currentDate = `${year}-${month}`;
 
-        // TODO recoil은 기본적으로 캐싱도 지원하기 때문에, sessionStorage 로직을 추가적으로 다듬기(제거 할 수도 있음)
         const cachedTransactions = JSON.parse(sessionStorage.getItem(currentDate));
         if (cachedTransactions == null) {
             const result = await getTransactionsInDate(year, month);

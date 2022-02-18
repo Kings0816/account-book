@@ -2,7 +2,6 @@ import { useRecoilState } from 'recoil';
 
 import { modalState } from '../recoil/modal/atom';
 
-// TODO selector로 옮길 수 있는 로직은 옮기자(ex. selectFamily)
 export const useModal = () => {
     const [modals, setModal] = useRecoilState(modalState);
 
