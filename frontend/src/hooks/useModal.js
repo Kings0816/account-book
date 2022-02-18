@@ -11,7 +11,7 @@ export const useModal = () => {
     };
 
     const closeModal = (name) => {
-        setModal(modals.filter((modal) => modal.name !== name));
+        setModal((prev) => prev.filter((_prev) => _prev.name !== name));
     };
 
     const getOpenModalByName = (name) => {

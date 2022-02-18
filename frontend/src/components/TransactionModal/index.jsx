@@ -4,14 +4,14 @@ import TransactionUpdateForm from '../TransactionUpdateForm';
 import TransactionCreateForm from '../TransactionCreateForm';
 import CategoryForm from '../CategoryCreateForm';
 import { useModal } from '../../hooks/useModal';
-import { useCategory, useUpdateTransactionHandler, useCreateTransactionHandler } from './hooks';
+import { useCategory, useTransactionHandler } from './hooks';
 import { Wrapper, BackgroundDim } from './style';
 
 const TransactionModal = () => {
     const { isOpen, closeModal, getOpenModalByName } = useModal();
     const { addCategory } = useCategory(closeModal);
-    const { changeTransaction, removeTransaction } = useUpdateTransactionHandler(closeModal);
-    const { addTransaction } = useCreateTransactionHandler(closeModal);
+    const { addTransaction, changeTransaction, removeTransaction } =
+        useTransactionHandler(closeModal);
 
     const transactionUpdateModal = getOpenModalByName('updateTransaction');
     const transactionCreateModal = getOpenModalByName('createTransaction');
