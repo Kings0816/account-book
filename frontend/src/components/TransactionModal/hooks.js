@@ -1,5 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { useRefreshTransaction } from '../../hooks/useRefreshTransaction';
 import { methodState } from '../../recoil/method/atom';
 import { categoryState } from '../../recoil/category/atom';
 import { createCategory } from '../../lib/category';
@@ -20,6 +21,7 @@ export const useCategory = (closeModal) => {
 export const useTransactionHandler = (closeModal) => {
     const methods = useRecoilValue(methodState);
     const categories = useRecoilValue(categoryState);
+    const { refreshTransaction } = useRefreshTransaction();
 
     const addTransaction = async ({ method, category, content, cost, sign, date }) => {
         const [year, month, _] = date.split('-');
@@ -41,6 +43,7 @@ export const useTransactionHandler = (closeModal) => {
         const updatedTransactions = [...transactionsInDate, result];
         sessionStorage.setItem(transactionDate, JSON.stringify(updatedTransactions));
         closeModal('createTransaction');
+        refreshTransaction();
     };
 
     const changeTransaction = async ({ id, method, category, content, cost, sign, date }) => {
@@ -66,6 +69,7 @@ export const useTransactionHandler = (closeModal) => {
         );
         sessionStorage.setItem(transactionDate, JSON.stringify([...updatedTransactions, result]));
         closeModal('updateTransaction');
+        refreshTransaction();
     };
 
     const removeTransaction = async (id, date) => {
@@ -81,6 +85,7 @@ export const useTransactionHandler = (closeModal) => {
         );
         sessionStorage.setItem(transactionDate, JSON.stringify(updatedTransactions));
         closeModal('updateTransaction');
+        refreshTransaction();
     };
 
     return { addTransaction, changeTransaction, removeTransaction };
