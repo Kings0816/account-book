@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Dropdown from '../Dropdown';
+import { useResizeHeight } from '../../hooks/useResizeHeight';
 import { useUpdateForm } from './hooks';
 import back from '../../../public/assets/back-button.svg';
 import {
@@ -15,6 +16,7 @@ import {
 } from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
+    const { resizeHeight } = useResizeHeight();
     const [
         activeCategory,
         activeMethod,
@@ -35,28 +37,11 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         openCategoryCreateModal,
     ] = useUpdateForm(transaction, onUpdate);
 
-    const [customHeight, setComstomHeight] = useState(null);
-
-    const updateHieght = () => {
-        if (customHeight == null) {
-            setComstomHeight(window.screen.availHeight);
-            return;
-        }
-        setComstomHeight(null);
-    };
-
-    useEffect(() => {
-        window.addEventListener('resize', updateHieght);
-        return () => {
-            window.removeEventListener('resize', updateHieght);
-        };
-    });
-
     return (
         <Wrapper
             aria-label="transactionUpdate"
             onSubmit={handleUpdateSubmit}
-            mobileHeight={customHeight}
+            mobileHeight={resizeHeight}
         >
             <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>
