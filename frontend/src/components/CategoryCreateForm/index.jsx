@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { useResizeHeight } from '../../hooks/useResizeHeight';
 import { useColor, useSumbit } from './hooks';
 import { CATEGORY_COLORS } from '../../utils/constant/category-color';
 import refreshImg from '../../../public/assets/refresh-button.svg';
@@ -18,6 +19,7 @@ import {
 
 const CategoryForm = ({ active, category, onCreate, onCancle }) => {
     const [sign, setSign] = useState(category ? category.sign : '+');
+    const { resizeHeight } = useResizeHeight();
     const { currentColor, changeColor } = useColor();
     const { handleUpdateSubmit } = useSumbit(onCreate);
 
@@ -26,6 +28,7 @@ const CategoryForm = ({ active, category, onCreate, onCancle }) => {
             aria-label="categoryCreate"
             active={active}
             onSubmit={(e) => handleUpdateSubmit(sign, e)}
+            mobileHeight={resizeHeight}
         >
             <CostType>
                 <TypeButton

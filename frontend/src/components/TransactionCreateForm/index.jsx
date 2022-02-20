@@ -1,8 +1,9 @@
 import React from 'react';
 
 import Dropdown from '../Dropdown';
-import back from '../../../public/assets/back-button.svg';
+import { useResizeHeight } from '../../hooks/useResizeHeight';
 import { useCreateForm } from './hooks';
+import back from '../../../public/assets/back-button.svg';
 import {
     Wrapper,
     CostType,
@@ -15,6 +16,7 @@ import {
 } from './style';
 
 const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
+    const { resizeHeight } = useResizeHeight();
     const [
         activeCategory,
         activeMethod,
@@ -36,7 +38,11 @@ const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
     ] = useCreateForm(transaction, onCreate);
 
     return (
-        <Wrapper aria-label="transactionCreate" onSubmit={handleCreateSubmit}>
+        <Wrapper
+            aria-label="transactionCreate"
+            onSubmit={handleCreateSubmit}
+            mobileHeight={resizeHeight}
+        >
             <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>
                     <BackImg src={back} />

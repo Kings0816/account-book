@@ -22,8 +22,10 @@ export const Wrapper = styled.form`
     box-shadow: ${({ theme }) => theme.shadow.thick};
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        position: absolute;
+
         width: 100vw;
-        height: 100vh;
+        height: ${(props) => (props.mobileHeight ? props.mobileHeight + 'px' : '100vh')};
         top: 0;
         left: 0;
         transform: none;
@@ -43,7 +45,7 @@ export const CostType = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: 8vh;
+        height: 8%;
     }
 `;
 
@@ -73,7 +75,7 @@ export const Element = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: 11vh;
+        height: 11%;
 
         justify-content: center;
     }
@@ -105,7 +107,7 @@ export const ButtonContainer = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: 11vh;
+        height: 11%;
     }
 `;
 

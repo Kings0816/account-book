@@ -29,7 +29,6 @@ export const Wrapper = styled.form`
         top: 0;
         left: 0;
         transform: none;
-        overflow-y: auto;
 
         justify-content: space-evenly;
 
@@ -47,7 +46,6 @@ export const CostType = styled.div`
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
         height: 8%;
-        min-height: 8%;
     }
 `;
 
@@ -78,7 +76,6 @@ export const Element = styled.div`
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
         height: 11%;
-        min-height: 11%;
 
         justify-content: center;
     }
@@ -111,7 +108,6 @@ export const ButtonContainer = styled.div`
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
         height: 11%;
-        min-height: 11%;
     }
 `;
 
