@@ -22,13 +22,13 @@ export const Wrapper = styled.form`
     box-shadow: ${({ theme }) => theme.shadow.thick};
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
+        position: absolute;
+
         width: 100vw;
-        height: 100vh;
-        max-height: 100vh;
+        height: ${(props) => (props.mobileHeight ? props.mobileHeight + 'px' : '100vh')};
         top: 0;
         left: 0;
         transform: none;
-        overflow-y: auto;
 
         justify-content: space-evenly;
 
@@ -45,8 +45,7 @@ export const CostType = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: ${(props) => (props.mobileHeight * 8) / 100}px;
-        min-height: ${(props) => (props.mobileHeight * 8) / 100}px;
+        height: 8%;
     }
 `;
 
@@ -76,8 +75,7 @@ export const Element = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: ${(props) => (props.mobileHeight * 11) / 100}px;
-        min-height: ${(props) => (props.mobileHeight * 11) / 100}px;
+        height: 11%;
 
         justify-content: center;
     }
@@ -109,8 +107,7 @@ export const ButtonContainer = styled.div`
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         width: 80vw;
-        height: ${(props) => (props.mobileHeight * 11) / 100}px;
-        min-height: ${(props) => (props.mobileHeight * 11) / 100}px;
+        height: 11%;
     }
 `;
 

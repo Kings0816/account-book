@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Dropdown from '../Dropdown';
+import { useResizeHeight } from '../../hooks/useResizeHeight';
 import { useUpdateForm } from './hooks';
 import back from '../../../public/assets/back-button.svg';
 import {
@@ -15,6 +16,7 @@ import {
 } from './style';
 
 const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) => {
+    const { resizeHeight } = useResizeHeight();
     const [
         activeCategory,
         activeMethod,
@@ -36,13 +38,17 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
     ] = useUpdateForm(transaction, onUpdate);
 
     return (
-        <Wrapper aria-label="transactionUpdate" onSubmit={handleUpdateSubmit}>
-            <Element mobileHeight={window.screen.height}>
+        <Wrapper
+            aria-label="transactionUpdate"
+            onSubmit={handleUpdateSubmit}
+            mobileHeight={resizeHeight}
+        >
+            <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>
                     <BackImg src={back} />
                 </button>
             </Element>
-            <CostType mobileHeight={window.screen.height}>
+            <CostType>
                 <TypeButton
                     type="button"
                     aria-label="income"
@@ -60,7 +66,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     지출
                 </TypeButton>
             </CostType>
-            <Element mobileHeight={window.screen.height}>
+            <Element>
                 <label htmlFor="date">날짜</label>
                 <Input
                     type="text"
@@ -71,7 +77,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     onChange={changeDate}
                 />
             </Element>
-            <Element mobileHeight={window.screen.height}>
+            <Element>
                 <label htmlFor="category">카테고리</label>
                 <Input
                     type="text"
@@ -92,7 +98,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     createHandler={openCategoryCreateModal}
                 />
             </Element>
-            <Element mobileHeight={window.screen.height}>
+            <Element>
                 <label htmlFor="content">내용</label>
                 <Input
                     type="text"
@@ -103,7 +109,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     onChange={changeContent}
                 />
             </Element>
-            <Element mobileHeight={window.screen.height}>
+            <Element>
                 <label htmlFor="method">결제수단</label>
                 <Input
                     type="text"
@@ -122,7 +128,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     changeHandler={changeMethod}
                 />
             </Element>
-            <Element mobileHeight={window.screen.height}>
+            <Element>
                 <label htmlFor="cost">금액</label>
                 <Input
                     type="text"
@@ -133,7 +139,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
                     onChange={changeCost}
                 />
             </Element>
-            <ButtonContainer mobileHeight={window.screen.height}>
+            <ButtonContainer>
                 <DecisionButton
                     type="button"
                     action="delete"
