@@ -1,7 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '../../test-utils';
+import { renderHook, act } from '@testing-library/react-hooks';
 
 import CategoryForm from '.';
+import { useColor } from './hooks';
 
 const DEFAULT_DATA = {
     name: '',
@@ -50,5 +52,16 @@ describe('CategoryForm 테스트', () => {
         const createButton = screen.getByRole('button', { name: '추가' });
         fireEvent.click(createButton);
         expect(onCreate).toHaveBeenCalledWith(DEFAULT_DATA);
+    });
+
+    it('useColor - 색깔 변경 이벤트 발생 시 다음 색상을 반환한다.', () => {
+        const { result } = renderHook(() => useColor());
+        expect(result.current.currentColor).toEqual(0);
+
+        act(() => {
+            result.current.changeColor();
+        });
+
+        expect(result.current.currentColor).toEqual(1);
     });
 });
