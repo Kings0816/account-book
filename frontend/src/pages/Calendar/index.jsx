@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-import Header from '../../components/Header';
 import CalendarTable from '../../components/CalendarTable';
 import { MainWrapper } from './style';
 
