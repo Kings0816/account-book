@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-import Header from '../../components/Header';
 import Donut from '../../components/Donut';
 import StatisticsContent from '../../components/StatisticsContent';
 import Transactions from '../../components/Transactions';
@@ -27,7 +26,6 @@ const Statistics = () => {
                     <EmptyBox />
                 )}
             </Suspense>
-
             {categoryTransaction ? (
                 <Transactions transactions={categoryTransaction.props} width={75} />
             ) : null}

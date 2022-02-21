@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import Header from '../../components/Header';
 import Summary from '../../components/Summary';
 import TransactionCreator from '../../components/TransactionCreator';
 import Transactions from '../../components/Transactions';
