@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Main from './pages/Main';
@@ -19,15 +19,17 @@ const Router = () => {
                 <Route
                     path="/"
                     element={
-                        <AuthRoute>
-                            <Main />
+                        <AuthRoute current={'main'}>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Main />
+                            </Suspense>
                         </AuthRoute>
                     }
                 />
                 <Route
                     path="/calendar"
                     element={
-                        <AuthRoute>
+                        <AuthRoute current={'calendar'}>
                             <Calendar />
                         </AuthRoute>
                     }
@@ -35,8 +37,10 @@ const Router = () => {
                 <Route
                     path="/statistics"
                     element={
-                        <AuthRoute>
-                            <Statistics />
+                        <AuthRoute current={'statistics'}>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Statistics />
+                            </Suspense>
                         </AuthRoute>
                     }
                 />
