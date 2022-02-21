@@ -47,4 +47,17 @@ const Donut = ({ transactionsByCategory }) => {
     );
 };
 
-export default Donut;
+const isTransactionsEqual = (prevTransactions, nextTransactions) => {
+    const prev = prevTransactions.transactionsByCategory;
+    const next = nextTransactions.transactionsByCategory;
+
+    if (Object.is(prev, next)) return true;
+    if (prev.size !== next.size) return false;
+
+    const prevEntryArray = Array.from(prev.entries());
+    const nextEntryArray = Array.from(next.entries());
+
+    return JSON.stringify(prevEntryArray) === JSON.stringify(nextEntryArray);
+};
+
+export default React.memo(Donut, isTransactionsEqual);
