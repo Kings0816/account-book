@@ -11,9 +11,7 @@ const App = () => {
         <RecoilRoot>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Router />
-                </Suspense>
+                <Router />
             </ThemeProvider>
         </RecoilRoot>
     );

@@ -16,9 +16,8 @@ const Statistics = () => {
     const categoryTransaction = getOpenModalByName('categoryTransaction');
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <Header current={'statistics'} />
-            <MainWrapper>
+        <MainWrapper>
+            <Suspense fallback={<div>Loading...</div>}>
                 {expenditures !== 0 ? (
                     <DonutBox data-testid="donut">
                         <Donut transactionsByCategory={transactionsByCategory} />
@@ -27,11 +26,12 @@ const Statistics = () => {
                 ) : (
                     <EmptyBox />
                 )}
-                {categoryTransaction ? (
-                    <Transactions transactions={categoryTransaction.props} width={75} />
-                ) : null}
-            </MainWrapper>
-        </Suspense>
+            </Suspense>
+
+            {categoryTransaction ? (
+                <Transactions transactions={categoryTransaction.props} width={75} />
+            ) : null}
+        </MainWrapper>
     );
 };
 
