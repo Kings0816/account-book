@@ -6,12 +6,14 @@ import { MainWrapper } from './style';
 
 const Calendar = () => {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <>
             <Header current={'calendar'} />
             <MainWrapper>
-                <CalendarTable />
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CalendarTable />
+                </Suspense>
             </MainWrapper>
-        </Suspense>
+        </>
     );
 };
 
