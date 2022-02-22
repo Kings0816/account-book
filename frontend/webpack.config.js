@@ -2,6 +2,7 @@ const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: process.env.NODE_ENV || 'development',
@@ -39,6 +40,19 @@ module.exports = {
         new Dotenv({ path: './.env' }),
         new BundleAnalyzerPlugin(),
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            `...`,
+            new TerserPlugin({
+                terserOptions: {
+                    compress: {
+                        drop_console: true,
+                    },
+                },
+            }),
+        ],
+    },
     devServer: {
         port: 9000,
         historyApiFallback: true,
