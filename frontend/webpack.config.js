@@ -57,6 +57,16 @@ module.exports = {
                 },
             }),
         ],
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/](react|react-dom|recoil)[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all',
+                    filename: `[name].[chunkhash].js`,
+                },
+            },
+        },
     },
     devServer: {
         port: 9000,
