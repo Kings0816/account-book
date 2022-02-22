@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -39,6 +40,10 @@ module.exports = {
         }),
         new Dotenv({ path: './.env' }),
         new BundleAnalyzerPlugin(),
+        new webpack.IgnorePlugin({
+            resourceRegExp: /^\.\/locale$/,
+            contextRegExp: /moment$/,
+        }),
     ],
     optimization: {
         minimize: true,
