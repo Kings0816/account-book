@@ -68,6 +68,10 @@ module.exports = {
             },
         },
     },
+    externals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+    },
     devServer: {
         port: 9000,
         historyApiFallback: true,
