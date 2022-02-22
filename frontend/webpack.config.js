@@ -1,16 +1,18 @@
 const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
+    mode: process.env.NODE_ENV || 'development',
     entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         clean: true,
     },
-    devtool: 'inline-source-map',
+    devtool: process.env.NODE_ENV ? false : 'inline-source-map',
     module: {
         rules: [
             {
@@ -36,7 +38,21 @@ module.exports = {
             template: './public/index.html',
         }),
         new Dotenv({ path: './.env' }),
+        new BundleAnalyzerPlugin(),
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            `...`,
+            new TerserPlugin({
+                terserOptions: {
+                    compress: {
+                        drop_console: true,
+                    },
+                },
+            }),
+        ],
+    },
     devServer: {
         port: 9000,
         historyApiFallback: true,
