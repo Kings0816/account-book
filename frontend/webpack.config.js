@@ -4,14 +4,14 @@ const Dotenv = require('dotenv-webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-    mode: 'development',
+    mode: process.env.NODE_ENV || 'development',
     entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         clean: true,
     },
-    devtool: 'inline-source-map',
+    devtool: process.env.NODE_ENV ? false : 'inline-source-map',
     module: {
         rules: [
             {
