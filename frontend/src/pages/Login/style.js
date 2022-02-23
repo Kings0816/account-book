@@ -34,7 +34,7 @@ export const LoginButton = styled.button`
     height: 15%;
 
     border-radius: 3px;
-    background-color: ${({ theme }) => theme.color.mint};
+    background-color: ${({ theme }) => theme.color.darkBlue};
 
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSize.small};

@@ -58,10 +58,10 @@ export const TypeButton = styled.button`
     border: 2px solid
         ${({ theme }) =>
             (props) =>
-                props.active ? theme.color.mint : theme.color.brigtenL1Gray};
+                props.active ? theme.color.darkBlue : theme.color.brigtenL1Gray};
     color: ${({ theme }) =>
         (props) =>
-            props.active ? theme.color.mint : theme.color.brigtenL1Gray};
+            props.active ? theme.color.darkBlue : theme.color.brigtenL1Gray};
 `;
 
 export const Element = styled.div`

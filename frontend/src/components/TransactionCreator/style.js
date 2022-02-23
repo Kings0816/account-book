@@ -18,9 +18,9 @@ export const Creator = styled.button`
 
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSize.default};
-    border: 2px solid ${({ theme }) => theme.color.mint};
+    border: 2px solid ${({ theme }) => theme.color.darkBlue};
     color: ${({ theme }) => theme.color.white};
-    background-color: ${({ theme }) => theme.color.mint};
+    background-color: ${({ theme }) => theme.color.darkBlue};
 `;
 
 export const Fab = styled.div`

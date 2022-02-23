@@ -8,7 +8,7 @@ const fontSize = {
 };
 
 const color = {
-    mint: '#06d6a0',
+    darkBlue: '#0489B1',
     blue: '#0990d6',
     black: '#000000',
     red: '#f45452',
