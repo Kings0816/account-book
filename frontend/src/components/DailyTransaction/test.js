@@ -58,9 +58,10 @@ describe('하루 단위의 transactions에 대한 DailyTransaction 컴포넌트 
         expect(expenditureSpan).not.toBeInTheDocument();
     });
 
-    it('props로 내려온 트랜잭션들이 모두 표시된다.', () => {
+    it('props로 트랜잭션들이 모두 표시된다.', () => {
+        const DATE_ITEM = 1;
         render(<DailyTransaction date={TEST_DATE} transactions={TEST_DATA} />);
         const transactions = screen.getAllByRole('listitem');
-        expect(transactions).toHaveLength(TEST_DATA.length);
+        expect(transactions).toHaveLength(TEST_DATA.length + DATE_ITEM);
     });
 });
