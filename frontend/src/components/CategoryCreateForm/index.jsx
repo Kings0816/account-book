@@ -61,7 +61,7 @@ const CategoryForm = ({ active, category, onCreate, onCancle }) => {
                         color={CATEGORY_COLORS[currentColor]}
                         onClick={changeColor}
                     >
-                        <img src={refreshImg} />
+                        <img src={refreshImg} alt="새로운 색상" />
                     </SelectColor>
                     <ColorInput
                         type="text"

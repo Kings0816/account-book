@@ -26,7 +26,7 @@ const TransactionCreator = () => {
             </CreatorContainer>
             <Fab>
                 <button type="button" onClick={() => openModal('createTransaction', initData)}>
-                    <img src={fabImg} />
+                    <img src={fabImg} alt="거래내역 추가" />
                 </button>
             </Fab>
         </>

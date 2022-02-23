@@ -14,11 +14,11 @@ const Header = ({ current }) => {
             <Title>JH Account Book</Title>
             <DateBox>
                 <ArrowButton aria-label="prev-month" onClick={() => changeDate('-')}>
-                    <img src={previous} />
+                    <img src={previous} alt="이전 달" />
                 </ArrowButton>
                 <Date data-testid="date">{shapedDate}</Date>
                 <ArrowButton aria-label="next-month" onClick={() => changeDate('+')}>
-                    <img src={next} />
+                    <img src={next} alt="다음 달" />
                 </ArrowButton>
             </DateBox>
             <PageBox>
