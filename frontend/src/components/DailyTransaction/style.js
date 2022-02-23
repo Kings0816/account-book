@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
-export const DailyInfo = styled.div`
+export const DailyInfo = styled.li`
     width: 90%;
     margin: 0px auto;
     padding: 10px 0px;

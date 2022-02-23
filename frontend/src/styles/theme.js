@@ -8,15 +8,16 @@ const fontSize = {
 };
 
 const color = {
-    mint: '#06d6a0',
-    blue: '#0990d6',
+    darkBlue: '#0489B1',
+    blue: '#086A87',
     black: '#000000',
     red: '#f45452',
+    green: '#088A08',
 
     white: '#FFFFFF',
     whiteSmoke: '#F5F5F5',
 
-    gray: '#808080',
+    gray: '#6E6E6E',
     brigtenL1Gray: '#d7d7d7',
     brigtenL2Gray: '#f5f5f5',
 };

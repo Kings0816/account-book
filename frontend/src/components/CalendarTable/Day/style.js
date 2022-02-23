@@ -17,7 +17,7 @@ export const Wrapper = styled.td`
     font-size: ${({ theme }) => theme.fontSize.mini};
     background-color: ${({ theme }) =>
         (props) =>
-            props.isToday ? theme.color.mint : theme.color.white};
+            props.isToday ? theme.color.darkBlue : theme.color.white};
     ${(props) => (props.isToday ? 'opacity: 0.7' : null)};
 
     & > span:last-child {

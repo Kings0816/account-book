@@ -39,7 +39,7 @@ const Summary = () => {
                 </span>
                 <span data-testid="income">{parseInt(monthIncome).toLocaleString('ko-KR')}원</span>
             </SummaryBox>
-            <SummaryBox color={'mint'}>
+            <SummaryBox color={'green'}>
                 <span>
                     <input
                         type="checkbox"

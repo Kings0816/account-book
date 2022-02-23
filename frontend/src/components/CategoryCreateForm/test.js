@@ -7,7 +7,7 @@ import { useColor } from './hooks';
 
 const DEFAULT_DATA = {
     name: '',
-    color: '#817DCE',
+    color: '#975a97',
     sign: '+',
 };
 

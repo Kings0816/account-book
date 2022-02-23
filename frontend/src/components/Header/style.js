@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
     box-sizing: border-box;
     box-shadow: ${({ theme }) => theme.shadow.pale};
 
-    background-color: ${({ theme }) => theme.color.mint};
+    background-color: ${({ theme }) => theme.color.darkBlue};
 
     @media screen and (max-width: ${MAX_MOBILE_DEVICE}px) {
         flex-direction: column;
