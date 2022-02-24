@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export const useResizeHeight = () => {
-    const [resizeHeight, setResizeHeight] = useState(null);
+    const normalHeight = useRef(window.innerHeight);
+    const [resizeHeight, setResizeHeight] = useState(window.innerHeight);
 
     const updateHieght = () => {
-        if (resizeHeight == null) {
-            setResizeHeight(window.screen.availHeight);
+        if (normalHeight.current !== window.innerHeight) {
+            setResizeHeight(window.screen.height);
             return;
         }
-        setResizeHeight(null);
+        setResizeHeight(normalHeight.current);
     };
 
     useEffect(() => {
@@ -16,7 +17,7 @@ export const useResizeHeight = () => {
         return () => {
             window.removeEventListener('resize', updateHieght);
         };
-    });
+    }, []);
 
     return { resizeHeight };
 };

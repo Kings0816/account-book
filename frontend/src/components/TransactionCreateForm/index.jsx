@@ -41,7 +41,7 @@ const TransactionCreateForm = ({ transaction, onCreate, onCancle }) => {
         <Wrapper
             aria-label="transactionCreate"
             onSubmit={handleCreateSubmit}
-            mobileHeight={resizeHeight}
+            heightOnKeyboard={resizeHeight === window.innerHeight ? null : resizeHeight}
         >
             <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>

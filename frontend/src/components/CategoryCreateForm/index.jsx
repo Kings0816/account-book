@@ -28,7 +28,7 @@ const CategoryForm = ({ active, category, onCreate, onCancle }) => {
             aria-label="categoryCreate"
             active={active}
             onSubmit={(e) => handleUpdateSubmit(sign, e)}
-            mobileHeight={resizeHeight}
+            heightOnKeyboard={resizeHeight === window.innerHeight ? null : resizeHeight}
         >
             <CostType>
                 <TypeButton

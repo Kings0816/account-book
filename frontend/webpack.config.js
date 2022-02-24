@@ -39,7 +39,7 @@ module.exports = {
             template: './public/index.html',
         }),
         new Dotenv({ path: './.env' }),
-        new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
         new webpack.IgnorePlugin({
             resourceRegExp: /^\.\/locale$/,
             contextRegExp: /moment$/,
