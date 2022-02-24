@@ -25,7 +25,7 @@ export const Wrapper = styled.form`
         position: absolute;
 
         width: 100vw;
-        height: ${(props) => (props.mobileHeight ? props.mobileHeight + 'px' : '100vh')};
+        height: ${(props) => (props.heightOnKeyboard ? props.heightOnKeyboard + 'px' : '100vh')};
         top: 0;
         left: 0;
         transform: none;

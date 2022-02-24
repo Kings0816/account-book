@@ -41,7 +41,7 @@ const TransactionUpdateForm = ({ transaction, onUpdate, onDelete, onCancle }) =>
         <Wrapper
             aria-label="transactionUpdate"
             onSubmit={handleUpdateSubmit}
-            mobileHeight={resizeHeight}
+            heightOnKeyboard={resizeHeight === window.innerHeight ? null : resizeHeight}
         >
             <Element>
                 <button type="button" aria-label="back" onClick={onCancle}>
