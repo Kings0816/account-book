@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.header`
     width: 100vw;
     min-width: 228px;
     height: 100px;

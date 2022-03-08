@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { MAX_MOBILE_DEVICE } from '../../utils/constant/device-size';
 
-export const SummaryContainer = styled.div`
+export const SummaryContainer = styled.section`
     width: 300px;
     height: 150px;
 
